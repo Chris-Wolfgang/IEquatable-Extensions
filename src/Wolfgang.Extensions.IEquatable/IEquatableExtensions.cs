@@ -70,7 +70,7 @@ public static class IEquatableExtensions
     /// Determines if the item is in the specified set of items.
     /// </summary>
     /// <param name="item">The item to search for.</param>
-    /// <param name="set">The set of items to search.</param>
+    /// <param name="set">The items in the set.</param>
     /// <typeparam name="T">The type of the items in the set.</typeparam>
     /// <returns>True if the item is in the set; otherwise, false.</returns>
     /// <exception cref="ArgumentNullException">set is null</exception>
@@ -94,7 +94,7 @@ public static class IEquatableExtensions
     /// Determines if the item is in the specified set of items.
     /// </summary>
     /// <param name="item">The item to search for.</param>
-    /// <param name="set">The set of items to search.</param>
+    /// <param name="set">The items in the set.</param>
     /// <typeparam name="T">The type of the items in the set.</typeparam>
     /// <returns>True if the item is in the set; otherwise, false.</returns>
     /// <exception cref="ArgumentNullException">set is null</exception>
@@ -118,7 +118,7 @@ public static class IEquatableExtensions
     /// Determines if the item is in the specified set of items.
     /// </summary>
     /// <param name="item">The item to search for.</param>
-    /// <param name="set">The set of items to search.</param>
+    /// <param name="set">The items in the set.</param>
     /// <typeparam name="T">The type of the items in the set.</typeparam>
     /// <returns>True if the item is in the set; otherwise, false.</returns>
     /// <exception cref="ArgumentNullException">set is null</exception>
