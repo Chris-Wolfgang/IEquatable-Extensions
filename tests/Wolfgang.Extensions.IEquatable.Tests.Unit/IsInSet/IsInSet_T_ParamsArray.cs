@@ -59,6 +59,15 @@ public class IsInSet_T_ParamsArray
 
 
     [Fact]
+    public void IsInSet_T_ParamsArray_when_T_is_int_and_no_arguments_passed_returns_false()
+    {
+        var sut = 12345678;
+        Assert.False(sut.IsInSet());
+    }
+
+
+
+    [Fact]
     public void IsInSet_T_ParamsArray_when_T_is_int_and_values_passed_as_individual_params_returns_true()
     {
         var sut = 12345678;
@@ -318,7 +327,7 @@ public class IsInSet_T_ParamsArray
     public void IsInSet_T_ParamsArray_when_T_is_Class_and_values_passed_as_individual_params_with_null_returns_true()
     {
         IEquatableTestClass sut = null!;
-        Assert.True(sut.IsInSet(new IEquatableTestClass(1111), null!, new IEquatableTestClass(2222)));
+        Assert.True(sut.IsInSet(new IEquatableTestClass(1111), null!, new IEquatableTestClass(2222), new IEquatableTestClass(4444)));
     }
 
 
@@ -327,7 +336,7 @@ public class IsInSet_T_ParamsArray
     public void IsInSet_T_ParamsArray_when_T_is_Class_and_values_passed_as_individual_params_returns_true()
     {
         IEquatableTestClass sut = new IEquatableTestClass(3333);
-        Assert.True(sut.IsInSet(new IEquatableTestClass(1111), new IEquatableTestClass(3333), new IEquatableTestClass(2222)));
+        Assert.True(sut.IsInSet(new IEquatableTestClass(1111), new IEquatableTestClass(3333), new IEquatableTestClass(2222), new IEquatableTestClass(4444)));
     }
 
 
