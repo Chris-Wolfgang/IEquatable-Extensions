@@ -56,9 +56,9 @@ public static class IEquatableExtensions
     /// <typeparam name="T">The type of the items in the set.</typeparam>
     /// <returns>True if the item is in the set; otherwise, false.</returns>
 #if NET5_0_OR_GREATER
-        public static bool IsInSet<T>(this T? item, T? t1, T? t2, T? t3) where T : IEquatable<T>
+        public static bool IsInSet<T>(this T? item, T? t1, T? t2, T? t3) 
 #else
-    public static bool IsInSet<T>(this T item, T t1, T t2, T t3) where T : IEquatable<T>
+    public static bool IsInSet<T>(this T item, T t1, T t2, T t3) 
 #endif
     {
         return Equals(item, t1) || Equals(item, t2) || Equals(item, t3);
@@ -75,9 +75,9 @@ public static class IEquatableExtensions
     /// <returns>True if the item is in the set; otherwise, false.</returns>
     /// <exception cref="ArgumentNullException">set is null</exception>
 #if NET5_0_OR_GREATER
-        public static bool IsInSet<T>(this T? item, params T?[] set) where T : IEquatable<T>
+        public static bool IsInSet<T>(this T? item, params T?[] set) 
 #else
-    public static bool IsInSet<T>(this T item, params T[] set) where T : IEquatable<T>
+    public static bool IsInSet<T>(this T item, params T[] set) 
 #endif
     {
         if (set == null)
@@ -99,9 +99,9 @@ public static class IEquatableExtensions
     /// <returns>True if the item is in the set; otherwise, false.</returns>
     /// <exception cref="ArgumentNullException">set is null</exception>
 #if NET5_0_OR_GREATER
-        public static bool IsInSet<T>(this T? item, IEnumerable<T?> set) where T : IEquatable<T>
+        public static bool IsInSet<T>(this T? item, IEnumerable<T?> set) 
 #else
-    public static bool IsInSet<T>(this T item, IEnumerable<T> set) where T : IEquatable<T>
+    public static bool IsInSet<T>(this T item, IEnumerable<T> set) 
 #endif
     {
         if (set == null)
@@ -123,9 +123,9 @@ public static class IEquatableExtensions
     /// <returns>True if the item is in the set; otherwise, false.</returns>
     /// <exception cref="ArgumentNullException">set is null</exception>
 #if NET5_0_OR_GREATER
-        public static bool IsInSet<T>(this T? item, ICollection<T?> set) where T : IEquatable<T>
+        public static bool IsInSet<T>(this T? item, ICollection<T?> set) 
 #else
-    public static bool IsInSet<T>(this T item, ICollection<T> set) where T : IEquatable<T>
+    public static bool IsInSet<T>(this T item, ICollection<T> set) 
 #endif
     {
         if (set == null)
@@ -147,9 +147,9 @@ public static class IEquatableExtensions
     /// <typeparam name="T">The type of the items in the set.</typeparam>
     /// <returns>True if the item is in the set; otherwise, false.</returns>
 #if NET5_0_OR_GREATER
-        public static bool IsNotInSet<T>(this T? item, T? t1, T? t2) where T : IEquatable<T>
+        public static bool IsNotInSet<T>(this T? item, T? t1, T? t2) 
 #else
-    public static bool IsNotInSet<T>(this T item, T t1, T t2) where T : IEquatable<T>
+    public static bool IsNotInSet<T>(this T item, T t1, T t2) 
 #endif
     {
         return !IsInSet(item, t1, t2);
@@ -167,9 +167,9 @@ public static class IEquatableExtensions
     /// <typeparam name="T">The type of the items in the set.</typeparam>
     /// <returns>True if the item is in the set; otherwise, false.</returns>
 #if NET5_0_OR_GREATER
-        public static bool IsNotInSet<T>(this T? item, T? t1, T? t2, T? t3) where T : IEquatable<T>
+        public static bool IsNotInSet<T>(this T? item, T? t1, T? t2, T? t3) 
 #else
-    public static bool IsNotInSet<T>(this T item, T t1, T t2, T t3) where T : IEquatable<T>
+    public static bool IsNotInSet<T>(this T item, T t1, T t2, T t3) 
 #endif
     {
         return !IsInSet(item, t1, t2, t3);
@@ -186,9 +186,9 @@ public static class IEquatableExtensions
     /// <returns>True if the item is in the set; otherwise, false.</returns>
     /// <exception cref="ArgumentNullException">set is null</exception>
 #if NET5_0_OR_GREATER
-        public static bool IsNotInSet<T>(this T? item, params T?[] set) where T : IEquatable<T>
+        public static bool IsNotInSet<T>(this T? item, params T?[] set) 
 #else
-    public static bool IsNotInSet<T>(this T item, params T[] set) where T : IEquatable<T>
+    public static bool IsNotInSet<T>(this T item, params T[] set) 
 #endif
     {
         return !IsInSet(item, set);
@@ -205,9 +205,9 @@ public static class IEquatableExtensions
     /// <returns>True if the item is not in the set; otherwise, false.</returns>
     /// <exception cref="ArgumentNullException">set is null</exception>
 #if NET5_0_OR_GREATER
-        public static bool IsNotInSet<T>(this T? item, IEnumerable<T?> set) where T : IEquatable<T>
+        public static bool IsNotInSet<T>(this T? item, IEnumerable<T?> set) 
 #else
-    public static bool IsNotInSet<T>(this T item, IEnumerable<T> set) where T : IEquatable<T>
+    public static bool IsNotInSet<T>(this T item, IEnumerable<T> set) 
 #endif
     {
         return !IsInSet(item, set);
@@ -224,9 +224,9 @@ public static class IEquatableExtensions
     /// <returns>True if the item is not in the set; otherwise, false.</returns>
     /// <exception cref="ArgumentNullException">set is null</exception>
 #if NET5_0_OR_GREATER
-        public static bool IsNotInSet<T>(this T? item, ICollection<T?> set) where T : IEquatable<T>
+        public static bool IsNotInSet<T>(this T? item, ICollection<T?> set) 
 #else
-    public static bool IsNotInSet<T>(this T item, ICollection<T> set) where T : IEquatable<T>
+    public static bool IsNotInSet<T>(this T item, ICollection<T> set) 
 #endif
     {
         return !IsInSet(item, set);
