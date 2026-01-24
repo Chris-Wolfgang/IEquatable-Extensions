@@ -75,7 +75,7 @@ public class IsInSet_T_ICollection
     [Fact]
     public void IsInSet_T_ICollection_when_T_is_nullable_int_and_T_is_null_and_set_is_empty_returns_false()
     {
-        int? sut = null!;
+        int? sut = null;
         ICollection<int?> set = new List<int?>();
         Assert.False(sut.IsInSet(set));
     }
@@ -85,7 +85,7 @@ public class IsInSet_T_ICollection
     [Fact]
     public void IsInSet_T_ICollection_when_T_is_nullable_int_and_T_is_null_and_set_contains_null_returns_true()
     {
-        int? sut = null!;
+        int? sut = null;
         ICollection<int?> set = new List<int?> { null };
         Assert.True(sut.IsInSet(set));
     }
@@ -95,7 +95,7 @@ public class IsInSet_T_ICollection
     [Fact]
     public void IsInSet_T_ICollection_when_T_is_nullable_int_and_T_is_null_and_set_does_not_contain_null_returns_false()
     {
-        int? sut = null!;
+        int? sut = null;
         ICollection<int?> set = new List<int?> { 11111, 22222 };
         Assert.False(sut.IsInSet(set));
     }
