@@ -197,12 +197,12 @@ public static class IEquatableExtensions
 
 
     /// <summary>
-    /// Determines if the item is not in the specified set of set.
+    /// Determines if the item is not in the specified set of items.
     /// </summary>
     /// <param name="item">The item to search for.</param>
-    /// <param name="set">The set in the set.</param>
-    /// <typeparam name="T">The type of the set in the set.</typeparam>
-    /// <returns>True if the item is in the set; otherwise, false.</returns>
+    /// <param name="set">The items in the set.</param>
+    /// <typeparam name="T">The type of the items in the set.</typeparam>
+    /// <returns>True if the item is not in the set; otherwise, false.</returns>
     /// <exception cref="ArgumentNullException">set is null</exception>
 #if NET5_0_OR_GREATER
         public static bool IsNotInSet<T>(this T? item, IEnumerable<T?> set) where T : IEquatable<T>
