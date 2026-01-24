@@ -12,7 +12,7 @@
 		<Version>1.0.0-rc1</Version>
 		<Title>$(AssemblyName)</Title>
 		<Authors>Chris Wolfgang</Authors>
-		<Description>A collection of extension methods for types that implement IEquatablelt;T&gt;</Description>
+		<Description>A collection of extension methods for types that implement IEquatable&lt;T&gt;</Description>
 		<Copyright>Copyright 2026 Chris Wolfgang </Copyright>
 		<PackageProjectUrl>https://github.com/Chris-Wolfgang/Wolfgang.Extensions.IComparable</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
