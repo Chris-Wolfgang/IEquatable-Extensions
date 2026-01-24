@@ -426,7 +426,7 @@ public class IsInSet_T_T1_T2_T3
         Assert.False(sut.IsInSet(t1, t2, t3));
     }
 
-    
+
 
     [Fact]
     public void IsInSet_T_T1_T2_T3_when_T_is_Class_and_T_is_not_null_and_T1_is_same_value_returns_true()
