@@ -26,6 +26,10 @@
   </Folder>
   <Folder Name="/benchmarks/" />
   <Folder Name="/examples/" />
-  <Folder Name="/src/" />
-  <Folder Name="/tests/" />
+  <Folder Name="/src/">
+    <Project Path="src/Wolfgang.Extensions.IEquatable/Wolfgang.Extensions.IEquatable.csproj" Id="2bbcac92-0d1d-4f3d-95b3-9c6f35ea528a" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Wolfgang.Extensions.IEquatable.Tests.Unit/Wolfgang.Extensions.IEquatable.Tests.Unit.csproj" Id="3f0ff8d1-bd9d-47cd-b731-973bb5183309" />
+  </Folder>
 </Solution>
