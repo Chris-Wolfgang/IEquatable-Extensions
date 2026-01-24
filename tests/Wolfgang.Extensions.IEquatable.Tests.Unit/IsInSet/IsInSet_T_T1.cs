@@ -73,7 +73,7 @@ public class IsInSet_T_T1
 
 
     [Fact]
-    public void IsInSet_T_T1_when_T_is_nullable_int_and_T_is_not_null_and_T1_has_different_value_returns_true()
+    public void IsInSet_T_T1_when_T_is_nullable_int_and_T_is_not_null_and_T1_has_different_value_returns_false()
     {
         int? sut = 5;
         int? t1 = 10;
