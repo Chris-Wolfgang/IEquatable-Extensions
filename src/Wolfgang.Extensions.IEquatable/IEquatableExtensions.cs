@@ -183,7 +183,7 @@ public static class IEquatableExtensions
     /// <param name="item">The item to search for.</param>
     /// <param name="set">The items in the set.</param>
     /// <typeparam name="T">The type of the items in the set.</typeparam>
-    /// <returns>True if the item is in the set; otherwise, false.</returns>
+    /// <returns>True if the item is not in the set; otherwise, false.</returns>
     /// <exception cref="ArgumentNullException">set is null</exception>
 #if NET5_0_OR_GREATER
         public static bool IsNotInSet<T>(this T? item, params T?[] set) 
