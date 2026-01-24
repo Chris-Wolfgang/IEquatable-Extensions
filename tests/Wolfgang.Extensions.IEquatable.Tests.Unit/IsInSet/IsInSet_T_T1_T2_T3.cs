@@ -361,13 +361,4 @@ public class IsInSet_T_T1_T2_T3
         IEquatableTestClass t3 = new IEquatableTestClass(6666);
         Assert.False(sut.IsInSet(t1, t2, t3));
     }
-
-
-
-
-
-
-
-
-
 }
