@@ -240,7 +240,7 @@ public static class IEquatableExtensions
     /// <param name="item">The item to search for.</param>
     /// <param name="other">The other item to compare with.</param>
     /// <typeparam name="T">The type of the items in the set.</typeparam>
-    /// <returns>True if the item is in the set; otherwise, false.</returns>
+    /// <returns>True if the items are not equal; otherwise, false.</returns>
 #if NET5_0_OR_GREATER
         public static bool NotEqual<T>(this T? item, T? other)
 #else
