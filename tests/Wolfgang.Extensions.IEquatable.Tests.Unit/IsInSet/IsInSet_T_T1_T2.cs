@@ -2,7 +2,7 @@
 namespace Wolfgang.Extensions.IEquatable.Tests.Unit.IsInSet;
 
 // ReSharper disable once InconsistentNaming
-public class IsInSet_T_T1_T2_T2
+public class IsInSet_T_T1_T2
 {
 
     // ---------------------------------   int   ----------------------------------
@@ -23,8 +23,8 @@ public class IsInSet_T_T1_T2_T2
     public void IsInSet_T_T1_T2_when_T_is_int_and_T_and_T2_are_the_same_value_returns_true()
     {
         var sut = 12345678;
-        var t1 = 12345678;
-        var t2 = 99999999;
+        var t1 = 99999999;
+        var t2 = 12345678;
         Assert.True(sut.IsInSet(t1,t2));
     }
 
