@@ -2,7 +2,7 @@
 namespace Wolfgang.Extensions.IEquatable.Tests.Unit.IsInSet;
 
 // ReSharper disable once InconsistentNaming
-public class IsInSet_T_T1_T2_T2
+public class IsInSet_T_T1_T2
 {
 
     // ---------------------------------   int   ----------------------------------
