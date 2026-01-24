@@ -50,7 +50,119 @@ public class IsInSet_T_T1_T2_T3
         var sut = 12345678;
         var t1 = 0;
         var t2 = 6;
-        var t3 = 7;
+        var t3 = 9;
+        Assert.False(sut.IsInSet(t1, t2, t3));
+    }
+
+
+
+    // ---------------------------------   Nullable<int>   ----------------------------------
+
+
+
+    [Fact]
+    public void IsInSet_T_T1_T2_T3_when_T_is_nullable_int_and_T_and_T1_are_both_null_returns_true()
+    {
+        int? sut = null!;
+        int? t1 = null!;
+        int? t2 = 1111;
+        int? t3 = 2222;
+        Assert.True(sut.IsInSet(t1, t2, t3));
+    }
+
+
+
+    [Fact]
+    public void IsInSet_T_T1_T2_T3_when_T_is_nullable_int_and_T_and_T2_are_both_null_returns_true()
+    {
+        int? sut = null!;
+        int? t1 = 1111;
+        int? t2 = null!;
+        int? t3 = 2222;
+        Assert.True(sut.IsInSet(t1, t2, t3));
+    }
+
+
+
+    [Fact]
+    public void IsInSet_T_T1_T2_T3_when_T_is_nullable_int_and_T_and_T3_are_both_null_returns_true()
+    {
+        int? sut = null!;
+        int? t1 = 1111;
+        int? t2 = 2222;
+        int? t3 = null!;
+        Assert.True(sut.IsInSet(t1, t2, t3));
+    }
+
+
+
+    [Fact]
+    public void IsInSet_T_T1_T2_T3_when_T_is_nullable_int_and_T_is_null_and_T1_and_T2_and_T3_are_not_null_returns_false()
+    {
+        int? sut = null!;
+        int? t1 = 11111;
+        int? t2 = 88888;
+        int? t3 = 99999;
+        Assert.False(sut.IsInSet(t1, t2, t3));
+    }
+
+
+
+    [Fact]
+    public void IsInSet_T_T1_T2_T3_when_T_is_nullable_int_and_T_is_not_null_and_T1_and_T2_and_T3_are_null_returns_false()
+    {
+        int? sut = 55555;
+        int? t1 = null;
+        int? t2 = null;
+        int? t3 = null;
+        Assert.False(sut.IsInSet(t1, t2, t3));
+    }
+
+
+
+    [Fact]
+    public void IsInSet_T_T1_T2_T3_when_T_is_nullable_int_and_T_is_not_null_and_T1_is_same_value_returns_true()
+    {
+        int? sut = 5;
+        int? t1 = 5;
+        int? t2 = 10;
+        int? t3 = 15;
+        Assert.True(sut.IsInSet(t1, t2, t3));
+    }
+
+
+
+    [Fact]
+    public void IsInSet_T_T1_T2_T3_when_T_is_nullable_int_and_T_is_not_null_and_T2_is_same_value_returns_true()
+    {
+        int? sut = 1111;
+        int? t1 = 9999;
+        int? t2 = 1111;
+        int? t3 = 8888;
+        Assert.True(sut.IsInSet(t1, t2, t3));
+    }
+
+
+
+    [Fact]
+    public void IsInSet_T_T1_T2_T3_when_T_is_nullable_int_and_T_is_not_null_and_T3_is_same_value_returns_true()
+    {
+        int? sut = 1111;
+        int? t1 = 9999;
+        int? t2 = 8888;
+        int? t3 = 1111;
+        Assert.True(sut.IsInSet(t1, t2, t3));
+    }
+
+
+
+    [Fact]
+    public void IsInSet_T_T1_T2_T3_when_T_is_nullable_int_and_T_is_not_null_and_T1_and_T2_and_T3_are_different_value_returns_false()
+    {
+        int? sut = 1111;
+        int? t1 = 10;
+        int? t2 = 20;
+        int? t3 = 30;
         Assert.False(sut.IsInSet(t1, t2, t3));
     }
 
@@ -314,7 +426,6 @@ public class IsInSet_T_T1_T2_T3
         Assert.False(sut.IsInSet(t1, t2, t3));
     }
 
-    
 
     [Fact]
     public void IsInSet_T_T1_T2_T3_when_T_is_Class_and_T_is_not_null_and_T1_is_same_value_returns_true()
