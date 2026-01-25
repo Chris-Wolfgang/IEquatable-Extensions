@@ -70,7 +70,7 @@ public static class IEquatableExtensions
     /// Determines if the item is in the specified set of items.
     /// </summary>
     /// <param name="item">The item to search for.</param>
-    /// <param name="set">The set of items to search.</param>
+    /// <param name="set">The items in the set.</param>
     /// <typeparam name="T">The type of the items in the set.</typeparam>
     /// <returns>True if the item is in the set; otherwise, false.</returns>
     /// <exception cref="ArgumentNullException">set is null</exception>
@@ -94,7 +94,7 @@ public static class IEquatableExtensions
     /// Determines if the item is in the specified set of items.
     /// </summary>
     /// <param name="item">The item to search for.</param>
-    /// <param name="set">The set of items to search.</param>
+    /// <param name="set">The items in the set.</param>
     /// <typeparam name="T">The type of the items in the set.</typeparam>
     /// <returns>True if the item is in the set; otherwise, false.</returns>
     /// <exception cref="ArgumentNullException">set is null</exception>
@@ -118,7 +118,7 @@ public static class IEquatableExtensions
     /// Determines if the item is in the specified set of items.
     /// </summary>
     /// <param name="item">The item to search for.</param>
-    /// <param name="set">The set of items to search.</param>
+    /// <param name="set">The items in the set.</param>
     /// <typeparam name="T">The type of the items in the set.</typeparam>
     /// <returns>True if the item is in the set; otherwise, false.</returns>
     /// <exception cref="ArgumentNullException">set is null</exception>
@@ -143,9 +143,27 @@ public static class IEquatableExtensions
     /// </summary>
     /// <param name="item">The item to search for.</param>
     /// <param name="t1">The first item in the set.</param>
-    /// <param name="t2">The second item in the set.</param>
     /// <typeparam name="T">The type of the items in the set.</typeparam>
     /// <returns>True if the item is not in the set; otherwise, false.</returns>
+#if NET5_0_OR_GREATER
+    public static bool IsNotInSet<T>(this T? item, T? t1)
+#else
+    public static bool IsNotInSet<T>(this T item, T t1)
+#endif
+    {
+        return !IsInSet(item, t1);
+    }
+
+
+
+    /// <summary>
+    /// Determines if the item is not in the specified set of items.
+    /// </summary>
+    /// <param name="item">The item to search for.</param>
+    /// <param name="t1">The first item in the set.</param>
+    /// <param name="t2">The second item in the set.</param>
+    /// <typeparam name="T">The type of the items in the set.</typeparam>
+    /// <returns>True if the item is NOT in the set; otherwise, false.</returns>
 #if NET5_0_OR_GREATER
         public static bool IsNotInSet<T>(this T? item, T? t1, T? t2) 
 #else
@@ -165,7 +183,7 @@ public static class IEquatableExtensions
     /// <param name="t2">The second item in the set.</param>
     /// <param name="t3">The third item in the set.</param>
     /// <typeparam name="T">The type of the items in the set.</typeparam>
-    /// <returns>True if the item is not in the set; otherwise, false.</returns>
+    /// <returns>True if the item is in the set; otherwise, false.</returns>
 #if NET5_0_OR_GREATER
         public static bool IsNotInSet<T>(this T? item, T? t1, T? t2, T? t3) 
 #else
@@ -183,7 +201,7 @@ public static class IEquatableExtensions
     /// <param name="item">The item to search for.</param>
     /// <param name="set">The items in the set.</param>
     /// <typeparam name="T">The type of the items in the set.</typeparam>
-    /// <returns>True if the item is not in the set; otherwise, false.</returns>
+    /// <returns>True if the item is in the set; otherwise, false.</returns>
     /// <exception cref="ArgumentNullException">set is null</exception>
 #if NET5_0_OR_GREATER
         public static bool IsNotInSet<T>(this T? item, params T?[] set) 
@@ -202,7 +220,7 @@ public static class IEquatableExtensions
     /// <param name="item">The item to search for.</param>
     /// <param name="set">The items in the set.</param>
     /// <typeparam name="T">The type of the items in the set.</typeparam>
-    /// <returns>True if the item is not in the set; otherwise, false.</returns>
+    /// <returns>True if the item is NOT in the set; otherwise, false.</returns>
     /// <exception cref="ArgumentNullException">set is null</exception>
 #if NET5_0_OR_GREATER
         public static bool IsNotInSet<T>(this T? item, IEnumerable<T?> set) 
@@ -221,7 +239,7 @@ public static class IEquatableExtensions
     /// <param name="item">The item to search for.</param>
     /// <param name="set">The items in the set.</param>
     /// <typeparam name="T">The type of the items in the set.</typeparam>
-    /// <returns>True if the item is not in the set; otherwise, false.</returns>
+    /// <returns>True if the item is in the set; otherwise, false.</returns>
     /// <exception cref="ArgumentNullException">set is null</exception>
 #if NET5_0_OR_GREATER
         public static bool IsNotInSet<T>(this T? item, ICollection<T?> set) 
@@ -235,11 +253,11 @@ public static class IEquatableExtensions
 
 
     /// <summary>
-    /// Determines if the item is not in the specified set of items.
+    /// Determines whether the specified item is not equal to another value.
     /// </summary>
-    /// <param name="item">The item to search for.</param>
+    /// <param name="item">The item to compare.</param>
     /// <param name="other">The other item to compare with.</param>
-    /// <typeparam name="T">The type of the items in the set.</typeparam>
+    /// <typeparam name="T">The type of the items being compared.</typeparam>
     /// <returns>True if the item is not equal to other; otherwise, false.</returns>
 #if NET5_0_OR_GREATER
         public static bool NotEqual<T>(this T? item, T? other)

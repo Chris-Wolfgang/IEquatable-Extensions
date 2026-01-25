@@ -14,7 +14,6 @@ public class IsNotInSet_T_T1_T2_T3
         var sut = 12345678;
         var t1 = 12345678;
         var t2 = 99999999;
-        var t3 = 11111111;
         Assert.False(sut.IsNotInSet(t1, t2, t3));
     }
 
@@ -26,7 +25,6 @@ public class IsNotInSet_T_T1_T2_T3
         var sut = 12345678;
         var t1 = 99999999;
         var t2 = 12345678;
-        var t3 = 11111111;
         Assert.False(sut.IsNotInSet(t1, t2, t3));
     }
 
@@ -37,7 +35,6 @@ public class IsNotInSet_T_T1_T2_T3
     {
         var sut = 12345678;
         var t1 = 99999999;
-        var t2 = 11111111;
         var t3 = 12345678;
         Assert.False(sut.IsNotInSet(t1, t2, t3));
     }
@@ -50,7 +47,6 @@ public class IsNotInSet_T_T1_T2_T3
         var sut = 12345678;
         var t1 = 0;
         var t2 = 6;
-        var t3 = 9;
         Assert.True(sut.IsNotInSet(t1, t2, t3));
     }
 
@@ -417,7 +413,6 @@ public class IsNotInSet_T_T1_T2_T3
 
 
     [Fact]
-    public void IsNotInSet_T_T1_T2_T3_when_T_is_Class_and_T_is_not_null_and_T1_and_T2_and_T3_are_null_returns_true()
     {
         IEquatableTestClass sut = new IEquatableTestClass(3);
         IEquatableTestClass t1 = null!;
@@ -425,7 +420,6 @@ public class IsNotInSet_T_T1_T2_T3
         IEquatableTestClass t3 = null!;
         Assert.True(sut.IsNotInSet(t1, t2, t3));
     }
-
 
 
     [Fact]
@@ -473,4 +467,7 @@ public class IsNotInSet_T_T1_T2_T3
         IEquatableTestClass t3 = new IEquatableTestClass(6666);
         Assert.True(sut.IsNotInSet(t1, t2, t3));
     }
+
+
+
 }

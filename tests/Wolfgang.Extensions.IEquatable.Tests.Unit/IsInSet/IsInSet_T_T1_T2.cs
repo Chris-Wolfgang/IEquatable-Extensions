@@ -25,7 +25,7 @@ public class IsInSet_T_T1_T2
         var sut = 12345678;
         var t1 = 99999999;
         var t2 = 12345678;
-        Assert.True(sut.IsInSet(t1,t2));
+        Assert.True(sut.IsInSet(t1, t2));
     }
 
 
@@ -51,7 +51,7 @@ public class IsInSet_T_T1_T2
         int? sut = null!;
         int? t1 = null!;
         int? t2 = 1111;
-        Assert.True(sut.IsInSet(t1,t2));
+        Assert.True(sut.IsInSet(t1, t2));
     }
 
 
@@ -242,7 +242,7 @@ public class IsInSet_T_T1_T2
         string sut = "test string";
         string t1 = "test string";
         string t2 = "different string";
-        Assert.True(sut.IsInSet(t1,t2));
+        Assert.True(sut.IsInSet(t1, t2));
     }
 
 
@@ -290,7 +290,7 @@ public class IsInSet_T_T1_T2
         IEquatableTestClass sut = null!;
         IEquatableTestClass t1 = new IEquatableTestClass(3333);
         IEquatableTestClass t2 = new IEquatableTestClass(6666);
-        Assert.False(sut.IsInSet(t1,t2));
+        Assert.False(sut.IsInSet(t1, t2));
     }
 
 
@@ -301,7 +301,7 @@ public class IsInSet_T_T1_T2
         IEquatableTestClass sut = new IEquatableTestClass(3);
         IEquatableTestClass t1 = null!;
         IEquatableTestClass t2 = null!;
-        Assert.False(sut.IsInSet(t1,t2));
+        Assert.False(sut.IsInSet(t1, t2));
     }
 
     
