@@ -11,7 +11,7 @@ internal class IEquatableTestClass(int value) : IEquatable<IEquatableTestClass>
 #if NET5_0_OR_GREATER
     public bool Equals(IEquatableTestClass? other)
 #else
-    public bool Equals(IEquatableTestClass other)
+    public bool Equals(IEquatableTestClass? other)
 #endif
     {
         if (ReferenceEquals(null, other))
