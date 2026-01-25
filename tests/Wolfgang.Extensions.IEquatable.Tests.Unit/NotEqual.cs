@@ -1,5 +1,3 @@
-using Wolfgang.Extensions.IEquatable.Tests.Unit.IsInSet;
-
 namespace Wolfgang.Extensions.IEquatable.Tests.Unit;
 
 public class NotEqual
