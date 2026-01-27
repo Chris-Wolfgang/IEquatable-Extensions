@@ -187,6 +187,16 @@ public class IsNotInSet_T_T1
 
 
 
+    [Fact]
+    public void IsNotInSet_T_T1_when_T_is_string_and_T_has_value_and_T1_has_different_case_returns_true()
+    {
+        string sut = "test string";
+        string t1 = "TEST STRING";
+        Assert.True(sut.IsNotInSet(t1));
+    }
+
+
+
     // ---------------------------------   Class   ----------------------------------
 
 
@@ -238,5 +248,15 @@ public class IsNotInSet_T_T1
         IEquatableTestClass sut = new IEquatableTestClass(3333);
         IEquatableTestClass t1 = new IEquatableTestClass(4444);
         Assert.True(sut.IsNotInSet(t1));
+    }
+
+
+
+    [Fact]
+    public void IsNotInSet_T_T1_when_T_is_Class_and_T_and_T1_are_same_reference_returns_false()
+    {
+        IEquatableTestClass sut = new IEquatableTestClass(3333);
+        IEquatableTestClass t1 = sut;
+        Assert.False(sut.IsNotInSet(t1));
     }
 }

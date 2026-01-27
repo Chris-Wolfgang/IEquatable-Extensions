@@ -248,6 +248,17 @@ public class IsInSet_T_T1_T2
 
 
     [Fact]
+    public void IsInSet_T_T1_T2_when_T_is_string_and_T_has_value_and_T2_has_same_value_returns_true()
+    {
+        string sut = "test string";
+        string t1 = "different string";
+        string t2 = "test string";
+        Assert.True(sut.IsInSet(t1, t2));
+    }
+
+
+
+    [Fact]
     public void IsInSet_T_T1_T2_when_T_is_string_and_T_has_value_and_T1_and_T2_have_different_values_returns_false()
     {
         string sut = "test string";
