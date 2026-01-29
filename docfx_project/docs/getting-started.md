@@ -39,9 +39,10 @@ The library provides extension methods for null-safe equality comparisons:
 ```csharp
 using IEquatableExtensions;
 
+// Assuming you have a Person class with IEquatable implementation
 var person1 = new Person { Name = "Alice", Age = 30 };
 var person2 = new Person { Name = "Alice", Age = 30 };
-var person3 = null;
+Person? person3 = null;
 
 // Null-safe equality check - no need to check for null manually
 bool areEqual = person1.EqualsNullSafe(person2); // true
@@ -147,7 +148,7 @@ using IEquatableExtensions;
 
 var list1 = new List<int> { 1, 2, 3 };
 var list2 = new List<int> { 1, 2, 3 };
-var list3 = null;
+List<int>? list3 = null;
 
 bool sequenceEqual = list1.SequenceEqualsNullSafe(list2);  // true
 bool nullSafe = list1.SequenceEqualsNullSafe(list3);       // false (no exception!)
@@ -160,10 +161,12 @@ Compare objects by specific properties:
 ```csharp
 using IEquatableExtensions.Comparers;
 
+// Create a comparer that only looks at Email property
 var comparer = new PropertyEqualityComparer<Person>(p => p.Email);
 
-var person1 = new Person { Email = "alice@example.com", Name = "Alice" };
-var person2 = new Person { Email = "alice@example.com", Name = "Alicia" };
+// These two Person instances have same email but different names
+var person1 = new Person { Email = "alice@example.com", Name = "Alice Smith" };
+var person2 = new Person { Email = "alice@example.com", Name = "Alice Johnson" };
 
 bool areEqual = comparer.Equals(person1, person2); // true - same email
 ```
@@ -175,13 +178,23 @@ Build consistent hash codes with fluent API:
 ```csharp
 using IEquatableExtensions;
 
-public override int GetHashCode()
+// Example: In your class that implements IEquatable
+public class Employee : IEquatable<Employee>
 {
-    return new HashCodeBuilder()
-        .Add(FirstName)
-        .Add(LastName)
-        .Add(DateOfBirth)
-        .Build();
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public DateTime DateOfBirth { get; set; }
+    
+    public override int GetHashCode()
+    {
+        return new HashCodeBuilder()
+            .Add(FirstName)
+            .Add(LastName)
+            .Add(DateOfBirth)
+            .Build();
+    }
+    
+    // ... other equality members
 }
 ```
 
