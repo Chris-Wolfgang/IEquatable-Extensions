@@ -42,8 +42,10 @@ dotnet add package IEquatable-Extensions
 
 ### PackageReference
 ```xml
-<PackageReference Include="IEquatable-Extensions" Version="*" />
+<PackageReference Include="IEquatable-Extensions" Version="1.0.0" />
 ```
+
+> **Note**: Replace with the specific version you need. Check [NuGet.org](https://www.nuget.org/packages/IEquatable-Extensions/) for available versions.
 
 ## 🚀 Quick Start
 
@@ -154,7 +156,7 @@ This project is licensed under the MIT License - see the [LICENSE](../../LICENSE
 ## 🙏 Acknowledgments
 
 - Inspired by common patterns in the .NET ecosystem
-- Built with modern .NET features (Source Generators, C# 12+)
+- Built with modern .NET features (Source Generators, C# 10+)
 - Follows Microsoft's design guidelines for .NET libraries
 
 ## 📞 Support
