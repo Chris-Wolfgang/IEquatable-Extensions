@@ -47,6 +47,18 @@ dotnet add package IEquatable-Extensions
 
 > **Note**: Replace with the specific version you need. Check [NuGet.org](https://www.nuget.org/packages/IEquatable-Extensions/) for available versions.
 
+## 🎯 Requirements
+
+**Supported Frameworks:**
+- .NET Framework 4.6.2 or higher
+- .NET Core 2.0 or higher
+- .NET 5.0, 6.0, 7.0, 8.0, 9.0, 10.0
+
+**Language Version:**
+- C# 7.3 or higher (C# 10.0+ recommended for source generators)
+
+The library is designed to work across a wide range of .NET platforms, making it suitable for both legacy and modern applications.
+
 ## 🚀 Quick Start
 
 ### Example 1: Using Extension Methods
@@ -156,7 +168,8 @@ This project is licensed under the MIT License - see the [LICENSE](../../LICENSE
 ## 🙏 Acknowledgments
 
 - Inspired by common patterns in the .NET ecosystem
-- Built with modern .NET features (Source Generators, C# 10+)
+- Compatible with .NET Framework 4.6.2 through .NET 10
+- Built with modern features including Source Generators (when available)
 - Follows Microsoft's design guidelines for .NET libraries
 
 ## 📞 Support
