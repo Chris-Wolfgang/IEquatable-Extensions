@@ -1,30 +1,27 @@
-# IEquatable-Extensions
+# Wolfgang.Extensions.IEquatable
 
-[![NuGet](https://img.shields.io/nuget/v/IEquatable-Extensions.svg)](https://www.nuget.org/packages/IEquatable-Extensions/)
+[![NuGet](https://img.shields.io/nuget/v/Wolfgang.Extensions.IEquatable.svg)](https://www.nuget.org/packages/Wolfgang.Extensions.IEquatable/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://github.com/Chris-Wolfgang/IEquatable-Extensions/workflows/PR/badge.svg)](https://github.com/Chris-Wolfgang/IEquatable-Extensions/actions)
 
-A powerful .NET library that simplifies implementing equality comparison by providing extension methods, helpers, and source generators for `IEquatable<T>`.
+A lightweight .NET library that provides extension methods to simplify common equality comparison patterns.
 
-## 🌟 Why IEquatable-Extensions?
+## 🌟 Why Wolfgang.Extensions.IEquatable?
 
-Implementing `IEquatable<T>` correctly is crucial for value semantics in .NET, but it involves significant boilerplate and potential pitfalls. This library eliminates the repetitive work while ensuring best practices.
+Writing clean, readable equality comparisons often involves repetitive boilerplate code. This library eliminates that repetition with simple, expressive extension methods.
 
 ### Problems This Library Solves
 
-- ❌ **Boilerplate Code**: Writing `Equals`, `GetHashCode`, and operators repeatedly
-- ❌ **Inconsistency**: Forgetting to update all equality methods when adding properties
-- ❌ **Null Handling**: Missing null checks leading to NullReferenceExceptions
-- ❌ **Performance**: Inefficient equality implementations causing bottlenecks
-- ❌ **Errors**: Copy-paste mistakes in equality logic
+- ❌ **Verbose OR Chains**: `if (x == a || x == b || x == c || x == d)`
+- ❌ **Verbose AND Chains**: `if (x != a && x != b && x != c && x != d)`
+- ❌ **Null Reference Errors**: Forgetting null checks in inequality comparisons
+- ❌ **Readability**: Hard to parse complex conditional logic at a glance
 
 ### Our Solution
 
-- ✅ **Extension Methods**: Convenient null-safe equality extensions
-- ✅ **Helper Classes**: Utility classes for common equality patterns
-- ✅ **Source Generators**: Automatic code generation with attributes
-- ✅ **Comparers**: Reusable equality comparers for collections and LINQ
-- ✅ **Best Practices**: Built-in correctness guarantees
+- ✅ **IsInSet**: Check if a value matches any of a set of values
+- ✅ **IsNotInSet**: Check if a value doesn't match any of a set of values
+- ✅ **NotEqual**: Null-safe inequality comparison
 
 ## 📦 Installation
 
@@ -32,103 +29,104 @@ Choose your preferred installation method:
 
 ### NuGet Package Manager
 ```powershell
-Install-Package IEquatable-Extensions
+Install-Package Wolfgang.Extensions.IEquatable
 ```
 
 ### .NET CLI
 ```bash
-dotnet add package IEquatable-Extensions
+dotnet add package Wolfgang.Extensions.IEquatable
 ```
 
 ### PackageReference
 ```xml
-<PackageReference Include="IEquatable-Extensions" Version="1.0.0" />
+<PackageReference Include="Wolfgang.Extensions.IEquatable" Version="1.0.0" />
 ```
 
-> **Note**: Replace with the specific version you need. Check [NuGet.org](https://www.nuget.org/packages/IEquatable-Extensions/) for available versions.
+> **Note**: Replace with the specific version you need. Check [NuGet.org](https://www.nuget.org/packages/Wolfgang.Extensions.IEquatable/) for available versions.
 
 ## 🎯 Requirements
 
 **Supported Frameworks:**
 - .NET Framework 4.6.2 or higher
-- .NET Core 2.0 or higher
-- .NET 5.0, 6.0, 7.0, 8.0, 9.0, 10.0
+- .NET Standard 2.0
+- .NET 8.0
+- .NET 10.0
 
 **Language Version:**
-- C# 7.3 or higher (C# 10.0+ recommended for source generators)
+- C# 7.3 or higher
 
 The library is designed to work across a wide range of .NET platforms, making it suitable for both legacy and modern applications.
 
 ## 🚀 Quick Start
 
-### Example 1: Using Extension Methods
+### Example 1: IsInSet
 
 ```csharp
-using IEquatableExtensions;
+using Wolfgang.Extensions.IEquatable;
 
-var person1 = new Person { Name = "Alice" };
-var person2 = new Person { Name = "Alice" };
-
-// Null-safe equality check
-bool areEqual = person1.EqualsNullSafe(person2);
-```
-
-### Example 2: Using Equality Helpers
-
-```csharp
-using IEquatableExtensions.Helpers;
-
-public class Product : IEquatable<Product>
+// Before: Verbose OR chain
+if (status == "active" || status == "pending" || status == "approved")
 {
-    public string Sku { get; set; }
-    public decimal Price { get; set; }
+    // Process valid status
+}
 
-    public bool Equals(Product? other) =>
-        EqualityHelper.AreEqual(this, other, p => p.Sku, p => p.Price);
-
-    public override int GetHashCode() =>
-        EqualityHelper.GetHashCode(Sku, Price);
+// After: Clean and readable
+if (status.IsInSet("active", "pending", "approved"))
+{
+    // Process valid status
 }
 ```
 
-### Example 3: Using Source Generators
+### Example 2: IsNotInSet
 
 ```csharp
-using IEquatableExtensions.Attributes;
+using Wolfgang.Extensions.IEquatable;
 
-[GenerateEquality]
-public partial class Customer
+// Before: Verbose AND chain
+if (role != "admin" && role != "moderator" && role != "owner")
 {
-    [EqualityProperty] public string Email { get; set; }
-    [EqualityProperty] public string Name { get; set; }
-    
-    // Not included in equality
-    public DateTime CreatedAt { get; set; }
+    throw new UnauthorizedAccessException();
+}
+
+// After: Clean and readable
+if (role.IsNotInSet("admin", "moderator", "owner"))
+{
+    throw new UnauthorizedAccessException();
 }
 ```
 
-The source generator creates all equality methods automatically!
+### Example 3: NotEqual
+
+```csharp
+using Wolfgang.Extensions.IEquatable;
+
+// Null-safe inequality check
+string? value1 = GetValue();
+string? value2 = GetOtherValue();
+
+if (value1.NotEqual(value2))
+{
+    // Values are different (handles null safely)
+}
+```
 
 ## 🎯 Key Features
 
-### Extension Methods
-- `EqualsNullSafe<T>`: Null-safe equality comparison
-- `SequenceEqualsNullSafe<T>`: Collection equality with null handling
-- `GetHashCodeSafe`: Safe hash code generation
+### IsInSet Extension Methods
+Check if a value matches any value in a set. Multiple overloads available:
+- Single value: `item.IsInSet(value1)`
+- Multiple values: `item.IsInSet(value1, value2, value3)`
+- Collections: `item.IsInSet(array)` or `item.IsInSet(collection)`
 
-### Helper Classes
-- `EqualityHelper`: Simplify equality implementation
-- `HashCodeBuilder`: Fluent hash code generation
-- `PropertyEqualityComparer<T>`: Compare objects by specific properties
+### IsNotInSet Extension Methods
+Check if a value doesn't match any value in a set. Same overloads as IsInSet.
 
-### Source Generators
-- `[GenerateEquality]`: Auto-generate all equality members
-- `[EqualityProperty]`: Mark properties to include in comparison
-- `[IgnoreEquality]`: Exclude properties from comparison
+### NotEqual Extension Method
+Null-safe inequality comparison with proper reference equality checks.
 
 ### Performance
-- Zero-allocation where possible
-- Optimized hash code generation
+- Minimal overhead with optimized implementations
+- No allocations for simple value comparisons
 - Efficient null checking
 
 ## 📚 Documentation
@@ -138,12 +136,12 @@ The source generator creates all equality methods automatically!
 - **[Setup](setup.md)**: Advanced configuration and customization
 - **API Reference**: Detailed API documentation (generated by DocFX)
 
-## 🏗️ Project Structure
+## ��️ Project Structure
 
 ```
 IEquatable-Extensions/
 ├── src/                    # Source code
-│   └── IEquatable-Extensions/
+│   └── Wolfgang.Extensions.IEquatable/
 ├── tests/                  # Unit tests
 ├── benchmarks/            # Performance benchmarks
 ├── examples/              # Usage examples
@@ -169,7 +167,6 @@ This project is licensed under the MIT License - see the [LICENSE](../../LICENSE
 
 - Inspired by common patterns in the .NET ecosystem
 - Compatible with .NET Framework 4.6.2 through .NET 10
-- Built with modern features including Source Generators (when available)
 - Follows Microsoft's design guidelines for .NET libraries
 
 ## 📞 Support
@@ -186,12 +183,6 @@ If you find this library useful, please consider:
 - 🐛 Reporting bugs or requesting features
 - 🤝 Contributing to the codebase
 
-## 🔗 Related Projects
-
-- [FluentAssertions](https://fluentassertions.com/) - For testing equality
-- [AutoFixture](https://github.com/AutoFixture/AutoFixture) - For generating test data
-- [Benchmark.NET](https://benchmarkdotnet.org/) - For performance testing
-
 ---
 
-Made with ❤️ by the IEquatable-Extensions team
+Made with ❤️ by Chris Wolfgang

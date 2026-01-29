@@ -2,41 +2,37 @@
 
 ## Overview
 
-IEquatable-Extensions is a .NET library that provides extension methods and utilities to simplify working with the `IEquatable<T>` interface. This library helps developers write cleaner, more maintainable equality comparison code while following best practices.
+IEquatable-Extensions (Wolfgang.Extensions.IEquatable) is a lightweight .NET library that provides extension methods to simplify common equality comparison patterns when working with types that implement `IEquatable<T>`.
 
 ## What is IEquatable?
 
 The `IEquatable<T>` interface in .NET is used to define type-specific equality comparison. When a class implements `IEquatable<T>`, it provides a strongly-typed `Equals` method that avoids boxing and provides better performance than the default `Object.Equals` method.
 
-## Why Use IEquatable-Extensions?
+## What This Library Provides
 
-Implementing `IEquatable<T>` correctly involves several considerations:
-- Overriding `Object.Equals` and `Object.GetHashCode`
-- Implementing the `==` and `!=` operators
-- Handling null references properly
-- Ensuring consistency across all equality methods
+IEquatable-Extensions adds convenient extension methods for common equality comparison scenarios:
 
-IEquatable-Extensions simplifies this process by providing:
-- **Helper Methods**: Utility methods for common equality comparison patterns
-- **Extension Methods**: Convenient extensions for working with equatable types
-- **Code Generators**: Attributes and source generators to reduce boilerplate
-- **Best Practices**: Built-in enforcement of equality contract requirements
+- **IsInSet**: Check if a value matches any of a set of values
+- **IsNotInSet**: Check if a value doesn't match any of a set of values
+- **NotEqual**: Null-safe inequality comparison
+
+These extension methods help reduce boilerplate code and make your equality checks more readable and maintainable.
 
 ## Key Features
 
-- 🚀 **Easy to Use**: Simple API that integrates seamlessly with existing code
-- ⚡ **High Performance**: Optimized implementations with minimal overhead
-- 🔒 **Type Safe**: Leverages generic type constraints for compile-time safety
-- 📦 **Lightweight**: Minimal dependencies, suitable for any .NET project
+- 🚀 **Simple API**: Easy-to-use extension methods that work with any type
+- ⚡ **High Performance**: Minimal overhead with optimized implementations
+- 📦 **Lightweight**: Single file library with no external dependencies
+- 🔒 **Null-safe**: Built-in null handling in extension methods
 - ✅ **Well Tested**: Comprehensive test coverage ensuring reliability
 
-## Target Audience
+## Use Cases
 
-This library is designed for:
-- .NET developers who frequently implement value types or data objects
-- Teams looking to standardize equality implementation patterns
-- Projects that require consistent and reliable equality comparisons
-- Anyone seeking to reduce boilerplate code in their .NET applications
+This library is particularly useful for:
+- Simplifying conditional logic with multiple equality comparisons
+- Validating input against a set of acceptable values
+- Writing cleaner switch-like comparison logic
+- Checking membership in collections or sets
 
 ## Prerequisites
 

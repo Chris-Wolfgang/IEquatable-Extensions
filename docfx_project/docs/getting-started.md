@@ -1,6 +1,6 @@
 # Getting Started
 
-This guide will help you quickly integrate IEquatable-Extensions into your .NET project and start using its features.
+This guide will help you quickly integrate IEquatable-Extensions (Wolfgang.Extensions.IEquatable) into your .NET project and start using its features.
 
 ## Installation
 
@@ -9,7 +9,7 @@ This guide will help you quickly integrate IEquatable-Extensions into your .NET 
 Install the package using the NuGet Package Manager Console:
 
 ```powershell
-Install-Package IEquatable-Extensions
+Install-Package Wolfgang.Extensions.IEquatable
 ```
 
 ### .NET CLI
@@ -17,7 +17,7 @@ Install-Package IEquatable-Extensions
 Use the .NET CLI to add the package to your project:
 
 ```bash
-dotnet add package IEquatable-Extensions
+dotnet add package Wolfgang.Extensions.IEquatable
 ```
 
 ### Package Reference
@@ -25,184 +25,203 @@ dotnet add package IEquatable-Extensions
 Alternatively, add the following to your `.csproj` file (replace `1.0.0` with the latest version):
 
 ```xml
-<PackageReference Include="IEquatable-Extensions" Version="1.0.0" />
+<PackageReference Include="Wolfgang.Extensions.IEquatable" Version="1.0.0" />
 ```
 
-> **Note**: Check [NuGet.org](https://www.nuget.org/packages/IEquatable-Extensions/) for the latest stable version.
+> **Note**: Check [NuGet.org](https://www.nuget.org/packages/Wolfgang.Extensions.IEquatable/) for the latest stable version.
 
 ## Basic Usage
 
-### Using Extension Methods
-
-The library provides extension methods for null-safe equality comparisons:
+Once installed, add the using directive to your C# file:
 
 ```csharp
-using IEquatableExtensions;
-
-// Assuming you have a Person class with IEquatable implementation
-var person1 = new Person { Name = "Alice", Age = 30 };
-var person2 = new Person { Name = "Alice", Age = 30 };
-Person? person3 = null;
-
-// Null-safe equality check - no need to check for null manually
-bool areEqual = person1.EqualsNullSafe(person2); // true
-bool isNull = person1.EqualsNullSafe(person3);    // false (no NullReferenceException!)
-
-// Works with collections too
-var list1 = new List<int> { 1, 2, 3 };
-var list2 = new List<int> { 1, 2, 3 };
-bool sequenceEqual = list1.SequenceEqualsNullSafe(list2); // true
+using Wolfgang.Extensions.IEquatable;
 ```
 
-### Using Helper Classes
+The extension methods are now available for all types.
 
-Simplify implementing equality in your types with helper methods:
+### IsInSet Extension Method
+
+Check if a value matches any value in a set:
 
 ```csharp
-using IEquatableExtensions.Helpers;
+// Simple value comparison
+string status = "active";
+bool isValid = status.IsInSet("active", "pending", "approved");  // true
 
-public class Product : IEquatable<Product>
+// Works with any type
+int value = 5;
+bool inRange = value.IsInSet(1, 2, 3, 4, 5);  // true
+
+// Works with collections
+string[] validStatuses = { "active", "pending", "approved" };
+bool isValidStatus = status.IsInSet(validStatuses);  // true
+
+// Works with IEnumerable
+List<int> numbers = new List<int> { 1, 2, 3, 4, 5 };
+bool found = value.IsInSet(numbers);  // true
+```
+
+This replaces verbose code like:
+```csharp
+// Before
+if (status == "active" || status == "pending" || status == "approved")
 {
-    public string Sku { get; set; }
-    public decimal Price { get; set; }
+    // ...
+}
 
-    // Use EqualityHelper to compare properties easily
-    public bool Equals(Product? other) =>
-        EqualityHelper.AreEqual(this, other, p => p.Sku, p => p.Price);
-
-    public override bool Equals(object? obj) => Equals(obj as Product);
-    
-    // Use EqualityHelper for consistent hash codes
-    public override int GetHashCode() => EqualityHelper.GetHashCode(Sku, Price);
+// After
+if (status.IsInSet("active", "pending", "approved"))
+{
+    // ...
 }
 ```
 
-### Using Attributes (Source Generators)
+### IsNotInSet Extension Method
 
-The library's most powerful feature - automatically generate all equality code with attributes:
+Check if a value doesn't match any value in a set (inverse of IsInSet):
 
 ```csharp
-using IEquatableExtensions.Attributes;
+string status = "rejected";
+bool isInvalid = status.IsNotInSet("active", "pending", "approved");  // true
 
-// Just add attributes - no manual implementation needed!
-[GenerateEquality]
-public partial class Customer
-{
-    [EqualityProperty]
-    public string Email { get; set; }
-    
-    [EqualityProperty]
-    public string CustomerId { get; set; }
-    
-    // Properties without [EqualityProperty] are ignored in equality
-    public DateTime LastLoginDate { get; set; }
-}
-
-// The library automatically generates:
-// - IEquatable<Customer> implementation
-// - Equals(Customer? other) method
-// - Equals(object? obj) override
-// - GetHashCode() override
-// - == and != operators
+// Works with arrays and collections
+string[] validStatuses = { "active", "pending", "approved" };
+bool isInvalidStatus = status.IsNotInSet(validStatuses);  // true
 ```
 
-**Benefits:**
-- **Zero Boilerplate**: No manual equality code to write
-- **Always Correct**: Generated code follows best practices
-- **Maintainable**: Add/remove properties by just adding/removing attributes
-- **Performance**: Optimized generated code with no overhead
+This replaces verbose code like:
+```csharp
+// Before
+if (status != "active" && status != "pending" && status != "approved")
+{
+    // ...
+}
+
+// After
+if (status.IsNotInSet("active", "pending", "approved"))
+{
+    // ...
+}
+```
+
+### NotEqual Extension Method
+
+Null-safe inequality comparison:
+
+```csharp
+string value1 = "hello";
+string value2 = "world";
+string? value3 = null;
+
+bool different = value1.NotEqual(value2);   // true
+bool differentFromNull = value1.NotEqual(value3);  // true (null-safe)
+```
+
+The NotEqual method handles null references safely, avoiding NullReferenceExceptions.
 
 ## Common Patterns
 
-### Value Objects with Source Generators
-
-Create immutable value objects with zero boilerplate:
+### Validating Input Against Allowed Values
 
 ```csharp
-[GenerateEquality]
-public partial class Address
+public void SetStatus(string status)
 {
-    [EqualityProperty]
-    public string Street { get; init; }
-    
-    [EqualityProperty]
-    public string City { get; init; }
-    
-    [EqualityProperty]
-    public string PostalCode { get; init; }
-}
-
-// Usage - equality just works!
-var address1 = new Address { Street = "123 Main St", City = "Boston", PostalCode = "02101" };
-var address2 = new Address { Street = "123 Main St", City = "Boston", PostalCode = "02101" };
-
-bool areSame = address1 == address2; // true - operators automatically generated
-```
-
-### Collection Equality
-
-Safe collection comparisons without null checks:
-
-```csharp
-using IEquatableExtensions;
-
-var list1 = new List<int> { 1, 2, 3 };
-var list2 = new List<int> { 1, 2, 3 };
-List<int>? list3 = null;
-
-bool sequenceEqual = list1.SequenceEqualsNullSafe(list2);  // true
-bool nullSafe = list1.SequenceEqualsNullSafe(list3);       // false (no exception!)
-```
-
-### Custom Property Comparers
-
-Compare objects by specific properties:
-
-```csharp
-using IEquatableExtensions.Comparers;
-
-// Create a comparer that only looks at Email property
-var comparer = new PropertyEqualityComparer<Person>(p => p.Email);
-
-// These two Person instances have same email but different names
-var person1 = new Person { Email = "alice@example.com", Name = "Alice Smith" };
-var person2 = new Person { Email = "alice@example.com", Name = "Alice Johnson" };
-
-bool areEqual = comparer.Equals(person1, person2); // true - same email
-```
-
-### Hash Code Building
-
-Build consistent hash codes with fluent API:
-
-```csharp
-using IEquatableExtensions;
-
-// Example: In your class that implements IEquatable
-public class Employee : IEquatable<Employee>
-{
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public DateTime DateOfBirth { get; set; }
-    
-    public override int GetHashCode()
+    if (status.IsNotInSet("draft", "published", "archived"))
     {
-        return new HashCodeBuilder()
-            .Add(FirstName)
-            .Add(LastName)
-            .Add(DateOfBirth)
-            .Build();
+        throw new ArgumentException("Invalid status value");
     }
     
-    // ... other equality members
+    // Status is valid, continue processing...
 }
 ```
+
+### Switch-like Comparisons
+
+```csharp
+public string GetPriority(int level)
+{
+    if (level.IsInSet(1, 2, 3))
+        return "High";
+    else if (level.IsInSet(4, 5, 6))
+        return "Medium";
+    else
+        return "Low";
+}
+```
+
+### Collection Membership Checks
+
+```csharp
+HashSet<string> allowedUsers = new HashSet<string> { "admin", "manager", "supervisor" };
+
+public bool CanAccessResource(string username)
+{
+    return username.IsInSet(allowedUsers);
+}
+```
+
+### Enum Validation
+
+```csharp
+public enum OrderStatus
+{
+    Pending,
+    Processing,
+    Shipped,
+    Delivered,
+    Cancelled
+}
+
+public bool IsFinalStatus(OrderStatus status)
+{
+    return status.IsInSet(OrderStatus.Delivered, OrderStatus.Cancelled);
+}
+```
+
+## Method Overloads
+
+The library provides multiple overloads for flexibility:
+
+### IsInSet Overloads
+
+```csharp
+// Single value
+item.IsInSet(value1)
+
+// Two values
+item.IsInSet(value1, value2)
+
+// Three values
+item.IsInSet(value1, value2, value3)
+
+// Variable number of values (params array)
+item.IsInSet(value1, value2, value3, value4, ...)
+
+// IEnumerable<T>
+item.IsInSet(collection)
+
+// ICollection<T>
+item.IsInSet(hashSet)
+```
+
+All IsNotInSet overloads mirror the IsInSet overloads.
+
+## Framework Compatibility
+
+The library supports a wide range of .NET frameworks:
+
+- .NET Framework 4.6.2
+- .NET Standard 2.0
+- .NET 8.0
+- .NET 10.0
+
+The library uses conditional compilation to provide nullable reference type support on .NET 5.0 and later.
 
 ## Next Steps
 
 - Review the [Setup](setup.md) guide for advanced configuration options
 - Explore the API documentation for detailed method descriptions
-- Check out the [examples](../../examples/) folder for more usage scenarios
 - Read the [README](readme.md) for additional information about the project
 
 ## Need Help?
