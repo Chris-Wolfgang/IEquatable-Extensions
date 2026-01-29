@@ -16,9 +16,9 @@ This guide covers advanced setup options, configuration, and integration scenari
 
 ### Minimum Requirements
 
-- **.NET SDK**: 8.0 or higher
-- **C# Version**: 10.0 or higher (for source generators and modern language features)
-- **IDE**: Visual Studio 2022, Visual Studio Code, or JetBrains Rider
+- **.NET**: .NET Framework 4.6.2 or higher, .NET Core 2.0+, .NET 5.0+, or any version up to .NET 10
+- **C# Version**: 7.3 or higher (C# 10.0+ recommended for source generators and modern language features)
+- **IDE**: Visual Studio 2017 or higher, Visual Studio Code, or JetBrains Rider
 
 ### Optional Tools
 
@@ -156,7 +156,7 @@ Generated files will appear in the `obj/Generated` directory.
 
 ### Visual Studio 2022
 
-1. Install the latest version of Visual Studio 2022
+1. Install Visual Studio 2017 or higher (Visual Studio 2022 recommended)
 2. Ensure the ".NET desktop development" workload is installed
 3. The package will provide IntelliSense automatically
 
@@ -164,7 +164,7 @@ Generated files will appear in the `obj/Generated` directory.
 
 1. Install the C# extension by Microsoft
 2. Install the C# Dev Kit (optional but recommended)
-3. Ensure .NET SDK 8.0+ is installed and in PATH
+3. Ensure a compatible .NET SDK is installed and in PATH (4.6.2+ or .NET Core 2.0+)
 
 ```json
 // .vscode/settings.json
@@ -197,7 +197,9 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: | 
+          6.0.x
+          8.0.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -205,6 +207,8 @@ jobs:
     - name: Test
       run: dotnet test --no-build --configuration Release
 ```
+
+> **Note**: Adjust the `dotnet-version` to match your project's target frameworks. The library supports .NET Framework 4.6.2 through .NET 10.
 
 #### Azure Pipelines
 
@@ -219,6 +223,9 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: UseDotNet@2
+  inputs:
+    version: '6.0.x'
 - task: UseDotNet@2
   inputs:
     version: '8.0.x'
@@ -237,6 +244,8 @@ steps:
     command: 'test'
     arguments: '--configuration $(buildConfiguration) --no-build'
 ```
+
+> **Note**: Adjust the .NET SDK versions based on your target frameworks. The library supports .NET Framework 4.6.2 through .NET 10.
 
 ### Package Reference Options
 
@@ -362,8 +371,11 @@ If your library needs to target multiple frameworks:
 
 ```xml
 <PropertyGroup>
-  <TargetFrameworks>net8.0;net7.0;net6.0</TargetFrameworks>
+  <TargetFrameworks>net462;net6.0;net8.0;net10.0</TargetFrameworks>
 </PropertyGroup>
+```
+
+> **Note**: The library supports .NET Framework 4.6.2 through .NET 10, so you can target any combination of frameworks in this range.
 ```
 
 ### Custom Equality Strategies

@@ -40,7 +40,7 @@ This library is designed for:
 
 ## Prerequisites
 
-- .NET 8.0 or higher
+- .NET Framework 4.6.2 or higher, or .NET Core 2.0+ / .NET 5.0+ (supports up to .NET 10)
 - Basic understanding of C# and object-oriented programming
 - Familiarity with equality comparison concepts in .NET
 
