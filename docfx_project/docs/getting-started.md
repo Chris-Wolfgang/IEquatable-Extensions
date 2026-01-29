@@ -34,40 +34,28 @@ Alternatively, add the following to your `.csproj` file (replace `1.0.0` with th
 
 ### Using Extension Methods
 
-Once installed, the extension methods are automatically available for any type implementing `IEquatable<T>`:
+The library provides extension methods for null-safe equality comparisons:
 
 ```csharp
 using IEquatableExtensions;
 
-public class Person : IEquatable<Person>
-{
-    public string Name { get; set; }
-    public int Age { get; set; }
-
-    public bool Equals(Person? other)
-    {
-        if (other is null) return false;
-        if (ReferenceEquals(this, other)) return true;
-        return Name == other.Name && Age == other.Age;
-    }
-
-    public override bool Equals(object? obj) 
-        => Equals(obj as Person);
-
-    public override int GetHashCode() 
-        => HashCode.Combine(Name, Age);
-}
-
-// Using the extensions
 var person1 = new Person { Name = "Alice", Age = 30 };
 var person2 = new Person { Name = "Alice", Age = 30 };
+var person3 = null;
 
+// Null-safe equality check - no need to check for null manually
 bool areEqual = person1.EqualsNullSafe(person2); // true
+bool isNull = person1.EqualsNullSafe(person3);    // false (no NullReferenceException!)
+
+// Works with collections too
+var list1 = new List<int> { 1, 2, 3 };
+var list2 = new List<int> { 1, 2, 3 };
+bool sequenceEqual = list1.SequenceEqualsNullSafe(list2); // true
 ```
 
 ### Using Helper Classes
 
-IEquatable-Extensions provides helper classes for common scenarios:
+Simplify implementing equality in your types with helper methods:
 
 ```csharp
 using IEquatableExtensions.Helpers;
@@ -77,28 +65,25 @@ public class Product : IEquatable<Product>
     public string Sku { get; set; }
     public decimal Price { get; set; }
 
-    public bool Equals(Product? other)
-    {
-        return EqualityHelper.AreEqual(this, other,
-            p => p.Sku,
-            p => p.Price);
-    }
+    // Use EqualityHelper to compare properties easily
+    public bool Equals(Product? other) =>
+        EqualityHelper.AreEqual(this, other, p => p.Sku, p => p.Price);
 
-    public override bool Equals(object? obj) 
-        => Equals(obj as Product);
-
-    public override int GetHashCode() 
-        => EqualityHelper.GetHashCode(Sku, Price);
+    public override bool Equals(object? obj) => Equals(obj as Product);
+    
+    // Use EqualityHelper for consistent hash codes
+    public override int GetHashCode() => EqualityHelper.GetHashCode(Sku, Price);
 }
 ```
 
 ### Using Attributes (Source Generators)
 
-For even simpler implementation, use the provided attributes:
+The library's most powerful feature - automatically generate all equality code with attributes:
 
 ```csharp
 using IEquatableExtensions.Attributes;
 
+// Just add attributes - no manual implementation needed!
 [GenerateEquality]
 public partial class Customer
 {
@@ -108,16 +93,29 @@ public partial class Customer
     [EqualityProperty]
     public string CustomerId { get; set; }
     
-    // This property will be ignored in equality comparison
+    // Properties without [EqualityProperty] are ignored in equality
     public DateTime LastLoginDate { get; set; }
 }
+
+// The library automatically generates:
+// - IEquatable<Customer> implementation
+// - Equals(Customer? other) method
+// - Equals(object? obj) override
+// - GetHashCode() override
+// - == and != operators
 ```
 
-The source generator will automatically implement `IEquatable<Customer>`, override `Equals` and `GetHashCode`, and implement equality operators.
+**Benefits:**
+- **Zero Boilerplate**: No manual equality code to write
+- **Always Correct**: Generated code follows best practices
+- **Maintainable**: Add/remove properties by just adding/removing attributes
+- **Performance**: Optimized generated code with no overhead
 
 ## Common Patterns
 
-### Value Objects
+### Value Objects with Source Generators
+
+Create immutable value objects with zero boilerplate:
 
 ```csharp
 [GenerateEquality]
@@ -132,26 +130,59 @@ public partial class Address
     [EqualityProperty]
     public string PostalCode { get; init; }
 }
+
+// Usage - equality just works!
+var address1 = new Address { Street = "123 Main St", City = "Boston", PostalCode = "02101" };
+var address2 = new Address { Street = "123 Main St", City = "Boston", PostalCode = "02101" };
+
+bool areSame = address1 == address2; // true - operators automatically generated
 ```
 
-### Collections
+### Collection Equality
+
+Safe collection comparisons without null checks:
 
 ```csharp
 using IEquatableExtensions;
 
 var list1 = new List<int> { 1, 2, 3 };
 var list2 = new List<int> { 1, 2, 3 };
+var list3 = null;
 
-bool sequenceEqual = list1.SequenceEqualsNullSafe(list2); // true
+bool sequenceEqual = list1.SequenceEqualsNullSafe(list2);  // true
+bool nullSafe = list1.SequenceEqualsNullSafe(list3);       // false (no exception!)
 ```
 
-### Custom Comparers
+### Custom Property Comparers
+
+Compare objects by specific properties:
 
 ```csharp
 using IEquatableExtensions.Comparers;
 
-var comparer = new PropertyEqualityComparer<Person>(p => p.Name);
-bool areEqual = comparer.Equals(person1, person2);
+var comparer = new PropertyEqualityComparer<Person>(p => p.Email);
+
+var person1 = new Person { Email = "alice@example.com", Name = "Alice" };
+var person2 = new Person { Email = "alice@example.com", Name = "Alicia" };
+
+bool areEqual = comparer.Equals(person1, person2); // true - same email
+```
+
+### Hash Code Building
+
+Build consistent hash codes with fluent API:
+
+```csharp
+using IEquatableExtensions;
+
+public override int GetHashCode()
+{
+    return new HashCodeBuilder()
+        .Add(FirstName)
+        .Add(LastName)
+        .Add(DateOfBirth)
+        .Build();
+}
 ```
 
 ## Next Steps
