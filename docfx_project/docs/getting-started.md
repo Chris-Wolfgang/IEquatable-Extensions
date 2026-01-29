@@ -22,11 +22,13 @@ dotnet add package IEquatable-Extensions
 
 ### Package Reference
 
-Alternatively, add the following to your `.csproj` file:
+Alternatively, add the following to your `.csproj` file (replace `1.0.0` with the latest version):
 
 ```xml
-<PackageReference Include="IEquatable-Extensions" Version="*" />
+<PackageReference Include="IEquatable-Extensions" Version="1.0.0" />
 ```
+
+> **Note**: Check [NuGet.org](https://www.nuget.org/packages/IEquatable-Extensions/) for the latest stable version.
 
 ## Basic Usage
 

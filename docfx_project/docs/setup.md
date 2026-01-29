@@ -17,7 +17,7 @@ This guide covers advanced setup options, configuration, and integration scenari
 ### Minimum Requirements
 
 - **.NET SDK**: 8.0 or higher
-- **C# Version**: 10.0 or higher (for source generators and new language features)
+- **C# Version**: 10.0 or higher (for source generators and modern language features)
 - **IDE**: Visual Studio 2022, Visual Studio Code, or JetBrains Rider
 
 ### Optional Tools
@@ -193,9 +193,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
@@ -250,10 +250,10 @@ For production applications, pin to a specific version:
 
 #### Floating Versions
 
-For development or when you want automatic updates:
+For development or when you want automatic updates (use with caution in production):
 
 ```xml
-<!-- Latest stable -->
+<!-- Latest stable (not recommended for production) -->
 <PackageReference Include="IEquatable-Extensions" Version="*" />
 
 <!-- Latest 1.x version -->
@@ -262,6 +262,8 @@ For development or when you want automatic updates:
 <!-- Latest preview -->
 <PackageReference Include="IEquatable-Extensions" Version="*-*" />
 ```
+
+> **Warning**: Floating versions can introduce breaking changes unexpectedly. Always pin to specific versions in production builds.
 
 ## Troubleshooting
 
@@ -278,7 +280,7 @@ For development or when you want automatic updates:
 
 2. Restart your IDE
 
-3. Check that `LangVersion` is set to `latest` or `11.0`+
+3. Check that `LangVersion` is set to `latest` or `10.0` or higher
 
 4. Verify the package is properly installed:
    ```bash
