@@ -6,9 +6,13 @@ This guide covers installation, configuration, and integration scenarios for Wol
 
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
+- [Configuration](#configuration)
 - [IDE Integration](#ide-integration)
 - [Build Configuration](#build-configuration)
 - [Troubleshooting](#troubleshooting)
+- [Advanced Scenarios](#advanced-scenarios)
+- [Next Steps](#next-steps)
+- [Getting Help](#getting-help)
 
 ## Prerequisites
 

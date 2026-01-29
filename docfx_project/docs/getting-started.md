@@ -216,7 +216,7 @@ The library supports a wide range of .NET frameworks:
 - .NET 8.0
 - .NET 10.0
 
-The library uses conditional compilation to provide nullable reference type support on .NET 5.0 and later.
+The library uses conditional compilation to provide nullable reference type support on .NET 5.0 and later (when running on compatible runtimes through .NET Standard 2.0 compatibility).
 
 ## Next Steps
 
