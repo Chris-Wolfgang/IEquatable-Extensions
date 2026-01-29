@@ -376,7 +376,6 @@ If your library needs to target multiple frameworks:
 ```
 
 > **Note**: The library supports .NET Framework 4.6.2 through .NET 10, so you can target any combination of frameworks in this range.
-```
 
 ### Custom Equality Strategies
 
