@@ -36,10 +36,10 @@ This library is particularly useful for:
 
 ## Prerequisites
 
-- .NET Framework 4.6.2 or higher, or .NET Core 2.0+ / .NET 5.0+ (supports up to .NET 10)
+- .NET Framework 4.6.2, .NET Standard 2.0, .NET 8.0, or .NET 10.0
 - Basic understanding of C# and object-oriented programming
 - Familiarity with equality comparison concepts in .NET
 
 ## Next Steps
 
-Ready to get started? Head over to the [Getting Started](getting-started.md) guide to learn how to install and use IEquatable-Extensions in your project.
+Ready to get started? Head over to the [Getting Started](getting-started.md) guide to learn how to install and use Wolfgang.Extensions.IEquatable in your project.
