@@ -2,7 +2,7 @@
 
 [![NuGet](https://img.shields.io/nuget/v/Wolfgang.Extensions.IEquatable.svg)](https://www.nuget.org/packages/Wolfgang.Extensions.IEquatable/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://github.com/Chris-Wolfgang/IEquatable-Extensions/workflows/PR/badge.svg)](https://github.com/Chris-Wolfgang/IEquatable-Extensions/actions)
+[![Build Status](https://github.com/Chris-Wolfgang/IEquatable-Extensions/actions/workflows/pr.yaml/badge.svg)](https://github.com/Chris-Wolfgang/IEquatable-Extensions/actions)
 
 A lightweight .NET library that provides extension methods to simplify common equality comparison patterns.
 
