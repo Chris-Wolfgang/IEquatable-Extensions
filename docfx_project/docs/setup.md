@@ -287,7 +287,7 @@ The library provides extension methods only, so no DI registration is needed. Si
 ## Next Steps
 
 - Read the [Getting Started](getting-started.md) guide for usage examples
-- Explore the [API Reference](../api/index.md) for detailed documentation
+- Explore the [API Reference](../api/) for detailed documentation
 - Visit the [GitHub repository](https://github.com/Chris-Wolfgang/IEquatable-Extensions) for source code
 
 ## Getting Help
