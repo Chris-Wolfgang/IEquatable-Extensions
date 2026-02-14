@@ -275,7 +275,7 @@ jobs:
         run: |
           $testProjects = Get-ChildItem -Path './tests' -Recurse -Filter '*.csproj' -ErrorAction SilentlyContinue
           
-          if ($testProjects.Count -eq 0) {
+          if (-not $testProjects -or $testProjects.Count -eq 0) {
             Write-Host "==========================================" -ForegroundColor Cyan
             Write-Host "ℹ️  No test projects found in ./tests directory" -ForegroundColor Yellow
             Write-Host "==========================================" -ForegroundColor Cyan
