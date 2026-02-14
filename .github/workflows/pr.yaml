@@ -212,7 +212,7 @@ jobs:
           fi
 
       - name: Confirm Stage 1 completion
-        if: hashFiles('TestResults/**/coverage.cobertura.xml') == '' && hashFiles('**/*.csproj', '**/*.vbproj', '**/*.fsproj') == ''
+        if: hashFiles('**/*.csproj', '**/*.vbproj', '**/*.fsproj') == ''
         run: |
           echo ""
           echo "=========================================="
