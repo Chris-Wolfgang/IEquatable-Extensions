@@ -20,16 +20,36 @@ on:
   pull_request:
     branches:
       - main
-      - develop
     paths-ignore:
       - '**.md'
       - 'docs/**'
+      - '.github/workflows/**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
+  # SECRETS SCAN: Detect leaked credentials before merge
+  # ============================================================================
+  secrets-scan:
+    name: "Secrets Scan (gitleaks)"
+    runs-on: ubuntu-latest
+    if: github.repository != 'Chris-Wolfgang/repo-template'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: refs/pull/${{ github.event.pull_request.number }}/head
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Run gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ============================================================================
   # ============================================================================
   # SECRETS SCAN: Detect leaked credentials before merge
   # ============================================================================
@@ -286,6 +306,13 @@ jobs:
           echo "Coverage Summary:"
           cat CoverageReport/Summary.txt
           echo ""
+
+          # Validate that the report contains expected content
+          if ! grep -q "Summary" CoverageReport/Summary.txt; then
+            echo "❌ Coverage report format is invalid!"
+            exit 1
+          fi
+
 
           failed_projects=""
           threshold=${CODECOV_MINIMUM:-90}
