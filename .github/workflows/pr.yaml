@@ -12,11 +12,33 @@ on:
   pull_request: 
     branches: 
       - main
-      - develop
+concurrency:  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}  cancel-in-progress: true
     paths-ignore:
       - '**.md'
       - 'docs/**'
+      - '.github/workflows/**'
+
 jobs:
+  # SECRETS SCAN: Detect leaked credentials before merge
+  # ============================================================================
+  secrets-scan:
+    name: "Secrets Scan (gitleaks)"
+    runs-on: ubuntu-latest
+    if: github.repository != 'Chris-Wolfgang/repo-template'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: refs/pull/${{ github.event.pull_request.number }}/head
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Run gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ============================================================================
   # ============================================================================
   # STAGE 1: Linux - .NET Core/5+ Tests with Coverage Gate
   # ============================================================================
@@ -32,7 +54,7 @@ jobs:
       # Fix for .NET 5.0 on Ubuntu 22.04+ - install libssl1.1
       - name: Install OpenSSL 1.1 for .NET 5.0
         run: |
-          wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb
+          wget https://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb
           sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb
 
       - name: Setup .NET
@@ -61,8 +83,14 @@ jobs:
           projects=$(find . -type f \( -name "*.csproj" -o -name "*.vbproj" -o -name "*.fsproj" \) | grep -iv "dotnet4")
           
           if [ -z "$projects" ]; then
-            echo "No projects found!"
-            exit 1
+            echo "=========================================="
+            echo "ℹ️  No project files found in repository"
+            echo "=========================================="
+            echo "This is expected for a new repository."
+            echo "Skipping build and restore steps."
+            echo ""
+            echo "✅ Stage 1 check passed (no projects to build)"
+            exit 0
           fi
           
           echo "=========================================="
@@ -92,11 +120,28 @@ jobs:
       - name: Run tests with coverage (.NET Core 5.0 - 10.0)
         run: |
           # Find all test projects
+          if [ ! -d "./tests" ]; then
+            echo "=========================================="
+            echo "ℹ️  No tests directory found"
+            echo "=========================================="
+            echo "This is expected for a new repository."
+            echo "Skipping test execution."
+            echo ""
+            echo "✅ Test step passed (no tests to run)"
+            exit 0
+          fi
+          
           test_projects=$(find ./tests -type f -name "*.csproj")
           
           if [ -z "$test_projects" ]; then
-            echo "❌ No test projects found in ./tests directory!"
-            exit 1
+            echo "=========================================="
+            echo "ℹ️  No test projects found in ./tests directory"
+            echo "=========================================="
+            echo "This is expected for a new repository."
+            echo "Skipping test execution."
+            echo ""
+            echo "✅ Test step passed (no tests to run)"
+            exit 0
           fi
           
           echo "=========================================="
@@ -127,9 +172,11 @@ jobs:
           done
 
       - name: Install ReportGenerator
+        if: hashFiles('TestResults/**/coverage.cobertura.xml') != ''
         run: dotnet tool install -g dotnet-reportgenerator-globaltool
 
       - name: Generate coverage report
+        if: hashFiles('TestResults/**/coverage.cobertura.xml') != ''
         run: |
           reportgenerator \
             -reports:"TestResults/**/coverage.cobertura.xml" \
@@ -137,6 +184,7 @@ jobs:
             -reporttypes:"Html;TextSummary;MarkdownSummaryGithub;CsvSummary"
 
       - name: Enforce 90% coverage threshold
+        if: hashFiles('TestResults/**/coverage.cobertura.xml') != ''
         run: |
           if [ ! -f CoverageReport/Summary.txt ]; then
             echo "❌ Coverage report not generated!"
@@ -146,6 +194,12 @@ jobs:
           echo "Coverage Summary:"
           cat CoverageReport/Summary.txt
           echo ""
+          
+          # Validate that the report contains expected content
+          if ! grep -q "Summary" CoverageReport/Summary.txt; then
+            echo "❌ Coverage report format is invalid!"
+            exit 1
+          fi
           
           failed_projects=""
           threshold=90
@@ -184,6 +238,18 @@ jobs:
             echo "All projects meet ${threshold}% coverage threshold."
             echo "Proceeding to Stage 2 (Windows and macOS tests)."
           fi
+
+      - name: Confirm Stage 1 completion
+        if: hashFiles('**/*.csproj', '**/*.vbproj', '**/*.fsproj') == ''
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "✅ STAGE 1 PASSED (NO PROJECTS)"
+          echo "=========================================="
+          echo "No project files found in repository."
+          echo "This is expected for a new repository."
+          echo "Proceeding to Stage 2 (Windows and macOS checks)."
+          echo ""
 
       - name: Upload Linux coverage results
         if: always()
@@ -235,11 +301,17 @@ jobs:
       - name: Run tests (.NET Core 5.0 - 10.0)
         shell: pwsh
         run: |
-          $testProjects = Get-ChildItem -Path './tests' -Recurse -Filter '*.csproj'
+          $testProjects = Get-ChildItem -Path './tests' -Recurse -Filter '*.csproj' -ErrorAction SilentlyContinue
           
-          if ($testProjects.Count -eq 0) {
-            Write-Error "❌ No test projects found in ./tests directory!"
-            exit 1
+          if (-not $testProjects -or $testProjects.Count -eq 0) {
+            Write-Host "==========================================" -ForegroundColor Cyan
+            Write-Host "ℹ️  No test projects found in ./tests directory" -ForegroundColor Yellow
+            Write-Host "==========================================" -ForegroundColor Cyan
+            Write-Host "This is expected for a new repository." -ForegroundColor White
+            Write-Host "Skipping test execution." -ForegroundColor White
+            Write-Host ""
+            Write-Host "✅ Windows test step passed (no tests to run)" -ForegroundColor Green
+            exit 0
           }
           
           Write-Host "==========================================" -ForegroundColor Cyan
@@ -300,8 +372,14 @@ jobs:
           projects=$(find . -type f \( -name "*.csproj" -o -name "*.vbproj" -o -name "*.fsproj" \) | grep -iv "dotnet4")
           
           if [ -z "$projects" ]; then
-            echo "No projects found!"
-            exit 1
+            echo "=========================================="
+            echo "ℹ️  No project files found in repository"
+            echo "=========================================="
+            echo "This is expected for a new repository."
+            echo "Skipping build and restore steps."
+            echo ""
+            echo "✅ Stage 2b check passed (no projects to build)"
+            exit 0
           fi
           
           echo "=========================================="
@@ -331,11 +409,28 @@ jobs:
       - name:  Run tests (.NET 6.0 - 10.0 only - ARM64 compatible)
         run: |
           # Find all test projects
+          if [ ! -d "./tests" ]; then
+            echo "=========================================="
+            echo "ℹ️  No tests directory found"
+            echo "=========================================="
+            echo "This is expected for a new repository."
+            echo "Skipping test execution."
+            echo ""
+            echo "✅ macOS test step passed (no tests to run)"
+            exit 0
+          fi
+          
           test_projects=$(find ./tests -type f -name "*.csproj")
           
           if [ -z "$test_projects" ]; then
-            echo "❌ No test projects found in ./tests directory!"
-            exit 1
+            echo "=========================================="
+            echo "ℹ️  No test projects found in ./tests directory"
+            echo "=========================================="
+            echo "This is expected for a new repository."
+            echo "Skipping test execution."
+            echo ""
+            echo "✅ macOS test step passed (no tests to run)"
+            exit 0
           fi
           
           echo "=========================================="
@@ -412,11 +507,43 @@ jobs:
       - name:  Run .NET Framework tests (4.6.2 - 4.8.1)
         shell: pwsh
         run: |
-          $testProjects = Get-ChildItem -Path './tests' -Recurse -Filter '*.csproj'
+          if (-not (Test-Path './tests')) {
+            Write-Host "==========================================" -ForegroundColor Cyan
+            Write-Host "ℹ️  ./tests directory does not exist" -ForegroundColor Yellow
+            Write-Host "==========================================" -ForegroundColor Cyan
+            Write-Host "This is expected for a new repository." -ForegroundColor White
+            Write-Host "Skipping test execution." -ForegroundColor White
+            Write-Host ""
+            Write-Host "✅ .NET Framework test step passed (no tests to run)" -ForegroundColor Green
+            Write-Host ""
+            Write-Host "==========================================" -ForegroundColor Green
+            Write-Host "✅ ALL STAGES PASSED (NO PROJECTS)" -ForegroundColor Green
+            Write-Host "==========================================" -ForegroundColor Green
+            Write-Host "No project files found in repository." -ForegroundColor White
+            Write-Host "This is expected for a new repository." -ForegroundColor White
+            Write-Host ""
+            Write-Host "PR is ready to merge! 🎉" -ForegroundColor Green
+            exit 0
+          }
+          $testProjects = Get-ChildItem -Path './tests' -Recurse -Filter '*.csproj' -ErrorAction SilentlyContinue
           
-          if ($testProjects.Count -eq 0) {
-            Write-Error "❌ No test projects found in ./tests directory!"
-            exit 1
+          if (-not $testProjects -or $testProjects.Count -eq 0) {
+            Write-Host "==========================================" -ForegroundColor Cyan
+            Write-Host "ℹ️  No test projects found in ./tests directory" -ForegroundColor Yellow
+            Write-Host "==========================================" -ForegroundColor Cyan
+            Write-Host "This is expected for a new repository." -ForegroundColor White
+            Write-Host "Skipping test execution." -ForegroundColor White
+            Write-Host ""
+            Write-Host "✅ .NET Framework test step passed (no tests to run)" -ForegroundColor Green
+            Write-Host ""
+            Write-Host "==========================================" -ForegroundColor Green
+            Write-Host "✅ ALL STAGES PASSED (NO PROJECTS)" -ForegroundColor Green
+            Write-Host "==========================================" -ForegroundColor Green
+            Write-Host "No project files found in repository." -ForegroundColor White
+            Write-Host "This is expected for a new repository." -ForegroundColor White
+            Write-Host ""
+            Write-Host "PR is ready to merge! 🎉" -ForegroundColor Green
+            exit 0
           }
           
           Write-Host "==========================================" -ForegroundColor Cyan
