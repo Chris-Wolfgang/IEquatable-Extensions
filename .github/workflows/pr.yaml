@@ -657,7 +657,7 @@ jobs:
 
           # Find all .csproj, .vbproj, and .fsproj files
           # Exclude those with 'dotnet4' or 'DotNet4' in the path (case-insensitive)
-          projects=$(find . -type f \( -name "*.csproj" -o -name "*.vbproj" -o -name "*.fsproj" \) | grep -iv "dotnet4")
+          projects=$(find . -type f \( -name "*.csproj" -o -name "*.vbproj" -o -name "*.fsproj" \) | grep -iv "dotnet4" || true)
 
           if [ -z "$projects" ]; then
             echo "=========================================="
