@@ -431,10 +431,22 @@ jobs:
             10.0.x
 
       - name: Restore dependencies
-        run: dotnet restore
+        shell: pwsh
+        run: |
+          $sln = Get-ChildItem -Path . -Filter *.slnx -File | Select-Object -First 1
+          if (-not $sln) { $sln = Get-ChildItem -Path . -Filter *.sln -File | Select-Object -First 1 }
+          if (-not $sln) { Write-Error "No solution file found"; exit 1 }
+          Write-Host "Restoring: $($sln.Name)"
+          dotnet restore $sln.FullName
 
       - name: Build solution
-        run: dotnet build --no-restore --configuration Release
+        shell: pwsh
+        run: |
+          $sln = Get-ChildItem -Path . -Filter *.slnx -File | Select-Object -First 1
+          if (-not $sln) { $sln = Get-ChildItem -Path . -Filter *.sln -File | Select-Object -First 1 }
+          if (-not $sln) { Write-Error "No solution file found"; exit 1 }
+          Write-Host "Building: $($sln.Name)"
+          dotnet build $sln.FullName --no-restore --configuration Release
 
       - name: Run tests (.NET Core 3.1, 5.0 - 10.0)
         shell: pwsh
@@ -907,10 +919,22 @@ jobs:
             8.0.x
 
       - name: Restore dependencies
-        run: dotnet restore
+        shell: pwsh
+        run: |
+          $sln = Get-ChildItem -Path . -Filter *.slnx -File | Select-Object -First 1
+          if (-not $sln) { $sln = Get-ChildItem -Path . -Filter *.sln -File | Select-Object -First 1 }
+          if (-not $sln) { Write-Error "No solution file found"; exit 1 }
+          Write-Host "Restoring: $($sln.Name)"
+          dotnet restore $sln.FullName
 
       - name: Build solution
-        run: dotnet build --no-restore --configuration Release
+        shell: pwsh
+        run: |
+          $sln = Get-ChildItem -Path . -Filter *.slnx -File | Select-Object -First 1
+          if (-not $sln) { $sln = Get-ChildItem -Path . -Filter *.sln -File | Select-Object -First 1 }
+          if (-not $sln) { Write-Error "No solution file found"; exit 1 }
+          Write-Host "Building: $($sln.Name)"
+          dotnet build $sln.FullName --no-restore --configuration Release
 
       - name: Run .NET Framework tests (4.6.2 - 4.8.1)
         shell: pwsh
