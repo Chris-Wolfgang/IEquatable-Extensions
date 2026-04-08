@@ -1,4 +1,3 @@
-#pragma warning disable IDE0007
 namespace Wolfgang.Extensions.IEquatable.Tests.Unit.IsInSet;
 
 // ReSharper disable once InconsistentNaming
