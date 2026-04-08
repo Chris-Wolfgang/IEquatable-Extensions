@@ -265,19 +265,13 @@ public static class IEquatableExtensions
     public static bool NotEqual<T>(this T item, T other)
 #endif
     {
-        // Point to the same item
-        if (ReferenceEquals(item, other))
+        // Both are null — they are equal, so NotEqual is false
+        if (item is null)
         {
-            return false;
+            return other is not null;
         }
 
-        // One is null but the other is not
-        if (ReferenceEquals(null, item))
-        {
-            return true;
-        }
-
-        // Both are not null, compare using IEquatable<T>
+        // Both are not null (or other is null), compare using IEquatable<T>
         return !item.Equals(other);
     }
 }
