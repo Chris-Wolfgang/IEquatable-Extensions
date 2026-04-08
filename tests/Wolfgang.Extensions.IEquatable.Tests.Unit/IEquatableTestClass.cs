@@ -8,7 +8,7 @@ internal class IEquatableTestClass(int value) : IEquatable<IEquatableTestClass>
 {
     private int Value { get; } = value;
 
-    public bool Equals(IEquatableTestClass other)
+    public bool Equals(IEquatableTestClass? other)
     {
         if (ReferenceEquals(null, other))
         {

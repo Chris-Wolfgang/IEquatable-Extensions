@@ -93,7 +93,6 @@ jobs:
           }
 
       - name: Generate SBOM (CycloneDX)
-        if: steps.check-packages.outputs.has-packages == 'true'
         shell: pwsh
         run: |
           dotnet tool install --global CycloneDX
@@ -123,9 +122,10 @@ jobs:
 
       - name: Upload NuGet packages as artifacts
         uses: actions/upload-artifact@v4
-        with: 
+        with:
           name: nuget-packages
-          path: ./nuget-packages/*.nupkg
+          path: |
+            ./nuget-packages/*.nupkg
             ./nuget-packages/*.bom.json
           retention-days: 30
 
@@ -136,7 +136,6 @@ jobs:
         run: |
           $packagesPath = Join-Path $PWD 'nuget-packages'
           Get-ChildItem -Path $packagesPath -Filter '*.nupkg' | ForEach-Object {
-            ./nuget-packages/*.bom.json
             Write-Host "Publishing $($_.FullName)"
             dotnet nuget push $_.FullName --api-key $env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
             if ($LASTEXITCODE -ne 0) {

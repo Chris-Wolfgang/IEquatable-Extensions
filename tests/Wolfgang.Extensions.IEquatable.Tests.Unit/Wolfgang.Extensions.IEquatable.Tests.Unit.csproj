@@ -97,6 +97,7 @@
 
 	<ItemGroup>
 		<Using Include="Xunit" />
+		<Using Include="Wolfgang.Extensions.IEquatable" />
 	</ItemGroup>
 
 </Project>
