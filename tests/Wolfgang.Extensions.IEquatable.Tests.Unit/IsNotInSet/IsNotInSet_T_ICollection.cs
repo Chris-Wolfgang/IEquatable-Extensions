@@ -150,7 +150,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_string_and_set_is_null_throws_ArgumentNullException()
     {
         string sut = "test string";
-        ICollection<string> set = null!;
+        ICollection<string?> set = null!;
         Assert.Throws<ArgumentNullException>(() => sut.IsNotInSet(set));
     }
 
@@ -160,7 +160,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_string_and_T_is_null_and_set_is_empty_returns_true()
     {
         string sut = null!;
-        ICollection<string> set = new List<string>();
+        ICollection<string?> set = new List<string>();
         Assert.True(sut.IsNotInSet(set));
     }
 
@@ -170,7 +170,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_string_and_T_is_null_and_set_contains_null_returns_false()
     {
         string sut = null!;
-        ICollection<string> set = new List<string> { null! };
+        ICollection<string?> set = new List<string> { null! };
         Assert.False(sut.IsNotInSet(set));
     }
 
@@ -180,7 +180,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_string_and_T_is_null_and_set_does_not_contain_null_returns_true()
     {
         string sut = null!;
-        ICollection<string> set = new List<string> { "test1", "test2" };
+        ICollection<string?> set = new List<string> { "test1", "test2" };
         Assert.True(sut.IsNotInSet(set));
     }
 
@@ -190,7 +190,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_string_and_T_is_empty_and_set_is_empty_returns_true()
     {
         string sut = string.Empty;
-        ICollection<string> set = new List<string>();
+        ICollection<string?> set = new List<string>();
         Assert.True(sut.IsNotInSet(set));
     }
 
@@ -200,7 +200,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_string_and_T_is_empty_and_set_contains_empty_returns_false()
     {
         string sut = string.Empty;
-        ICollection<string> set = new List<string> { string.Empty };
+        ICollection<string?> set = new List<string> { string.Empty };
         Assert.False(sut.IsNotInSet(set));
     }
 
@@ -210,7 +210,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_string_and_T_is_empty_and_set_does_not_contain_empty_returns_true()
     {
         string sut = string.Empty;
-        ICollection<string> set = new List<string> { "test1", "test2" };
+        ICollection<string?> set = new List<string> { "test1", "test2" };
         Assert.True(sut.IsNotInSet(set));
     }
 
@@ -220,7 +220,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_string_and_T_has_value_and_set_is_empty_returns_true()
     {
         string sut = "test string";
-        ICollection<string> set = new List<string>();
+        ICollection<string?> set = new List<string>();
         Assert.True(sut.IsNotInSet(set));
     }
 
@@ -230,7 +230,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_string_and_T_has_value_and_set_contains_T_returns_false()
     {
         string sut = "test string";
-        ICollection<string> set = new List<string> { "test string" };
+        ICollection<string?> set = new List<string> { "test string" };
         Assert.False(sut.IsNotInSet(set));
     }
 
@@ -240,7 +240,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_string_and_T_has_value_and_set_does_not_contain_T_returns_true()
     {
         string sut = "test string";
-        ICollection<string> set = new List<string> { "other string", "another string" };
+        ICollection<string?> set = new List<string> { "other string", "another string" };
         Assert.True(sut.IsNotInSet(set));
     }
 
@@ -250,7 +250,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_string_and_T_has_value_and_set_contains_multiple_items_including_T_returns_false()
     {
         string sut = "test string";
-        ICollection<string> set = new List<string> { "other string", "test string", "another string" };
+        ICollection<string?> set = new List<string> { "other string", "test string", "another string" };
         Assert.False(sut.IsNotInSet(set));
     }
 
@@ -260,7 +260,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_string_and_T_has_value_and_set_contains_null_and_empty_but_not_T_returns_true()
     {
         string sut = "test string";
-        ICollection<string> set = new List<string> { null!, string.Empty, "other string" };
+        ICollection<string?> set = new List<string> { null!, string.Empty, "other string" };
         Assert.True(sut.IsNotInSet(set));
     }
 
@@ -274,7 +274,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_Class_and_set_is_null_throws_ArgumentNullException()
     {
         IEquatableTestClass sut = new IEquatableTestClass(3333);
-        ICollection<IEquatableTestClass> set = null!;
+        ICollection<IEquatableTestClass?> set = null!;
         Assert.Throws<ArgumentNullException>(() => sut.IsNotInSet(set));
     }
 
@@ -284,7 +284,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_Class_and_T_is_null_and_set_is_empty_returns_true()
     {
         IEquatableTestClass sut = null!;
-        ICollection<IEquatableTestClass> set = new List<IEquatableTestClass>();
+        ICollection<IEquatableTestClass?> set = new List<IEquatableTestClass>();
         Assert.True(sut.IsNotInSet(set));
     }
 
@@ -294,7 +294,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_Class_and_T_is_null_and_set_contains_null_returns_false()
     {
         IEquatableTestClass sut = null!;
-        ICollection<IEquatableTestClass> set = new List<IEquatableTestClass> { null! };
+        ICollection<IEquatableTestClass?> set = new List<IEquatableTestClass> { null! };
         Assert.False(sut.IsNotInSet(set));
     }
 
@@ -304,7 +304,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_Class_and_T_is_null_and_set_does_not_contain_null_returns_true()
     {
         IEquatableTestClass sut = null!;
-        ICollection<IEquatableTestClass> set = new List<IEquatableTestClass> 
+        ICollection<IEquatableTestClass?> set = new List<IEquatableTestClass> 
         { 
             new IEquatableTestClass(1111), 
             new IEquatableTestClass(2222) 
@@ -318,7 +318,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_Class_and_T_is_not_null_and_set_is_empty_returns_true()
     {
         IEquatableTestClass sut = new IEquatableTestClass(3333);
-        ICollection<IEquatableTestClass> set = new List<IEquatableTestClass>();
+        ICollection<IEquatableTestClass?> set = new List<IEquatableTestClass>();
         Assert.True(sut.IsNotInSet(set));
     }
 
@@ -328,7 +328,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_Class_and_T_is_not_null_and_set_contains_equal_value_returns_false()
     {
         IEquatableTestClass sut = new IEquatableTestClass(3333);
-        ICollection<IEquatableTestClass> set = new List<IEquatableTestClass> 
+        ICollection<IEquatableTestClass?> set = new List<IEquatableTestClass> 
         { 
             new IEquatableTestClass(3333) 
         };
@@ -341,7 +341,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_Class_and_T_is_not_null_and_set_does_not_contain_equal_value_returns_true()
     {
         IEquatableTestClass sut = new IEquatableTestClass(3333);
-        ICollection<IEquatableTestClass> set = new List<IEquatableTestClass> 
+        ICollection<IEquatableTestClass?> set = new List<IEquatableTestClass> 
         { 
             new IEquatableTestClass(1111), 
             new IEquatableTestClass(2222) 
@@ -355,7 +355,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_Class_and_T_is_not_null_and_set_contains_multiple_items_including_equal_value_returns_false()
     {
         IEquatableTestClass sut = new IEquatableTestClass(3333);
-        ICollection<IEquatableTestClass> set = new List<IEquatableTestClass> 
+        ICollection<IEquatableTestClass?> set = new List<IEquatableTestClass> 
         { 
             new IEquatableTestClass(1111), 
             new IEquatableTestClass(3333), 
@@ -370,7 +370,7 @@ public class IsNotInSet_T_ICollection
     public void IsNotInSet_T_ICollection_when_T_is_Class_and_T_is_not_null_and_set_contains_null_but_not_equal_value_returns_true()
     {
         IEquatableTestClass sut = new IEquatableTestClass(3333);
-        ICollection<IEquatableTestClass> set = new List<IEquatableTestClass> 
+        ICollection<IEquatableTestClass?> set = new List<IEquatableTestClass> 
         { 
             null!, 
             new IEquatableTestClass(1111), 
