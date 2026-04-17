@@ -483,7 +483,7 @@ function Start-Setup {
         Write-Success "Renamed README-TEMPLATE.md → README.md"
     }
     else {
-        Write-Error "README-TEMPLATE.md not found!"
+        Write-Host "❌ README-TEMPLATE.md not found!" -ForegroundColor Red
         exit 1
     }
     
@@ -540,7 +540,7 @@ function Start-Setup {
         Write-Success "Removed license template files"
     }
     else {
-        Write-Error "License template file not found: $licenseFile"
+        Write-Host "❌ License template file not found: $licenseFile" -ForegroundColor Red
         exit 1
     }
     
@@ -619,15 +619,12 @@ function Start-Setup {
             }
         }
         
-        # Get all files in the repository
-        $allFiles = Get-ChildItem -Recurse -File -Force | Where-Object {
+        # Get all files in the repository (exclude .git directory upfront for performance)
+        $allFiles = Get-ChildItem -Recurse -File -Force -Exclude '.git' | Where-Object {
+            $_.FullName -notmatch '[/\\]\.git[/\\]'
+        } | Where-Object {
             # Get relative path safely
             $relativePath = Get-SafeRelativePath $_.FullName
-            
-            # Exclude files under .git directory specifically (not .github)
-            if ($relativePath -like '.git/*') {
-                return $false
-            }
             
             # Exclude hidden files (starting with .) except those in .github directory
             $fileName = [System.IO.Path]::GetFileName($relativePath)
@@ -1036,7 +1033,7 @@ try {
     Start-Setup
 }
 catch {
-    Write-Error "Setup failed: $_"
+    Write-Host "❌ Setup failed: $_" -ForegroundColor Red
     Write-Host $_.ScriptStackTrace -ForegroundColor Red
     exit 1
 }
