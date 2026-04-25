@@ -52,7 +52,7 @@ public class IsNotInSet_T_ParamsArray
     public void IsNotInSet_T_ParamsArray_when_T_is_int_and_array_is_empty_returns_true()
     {
         var sut = 12345678;
-        var set = new int[] { };
+        var set = Array.Empty<int>();
         Assert.True(sut.IsNotInSet(set));
     }
 
@@ -113,7 +113,7 @@ public class IsNotInSet_T_ParamsArray
     public void IsNotInSet_T_ParamsArray_when_T_is_nullable_int_and_T_is_null_and_array_is_empty_returns_true()
     {
         int? sut = null!;
-        var set = new int?[] { };
+        var set = Array.Empty<int?>();
         Assert.True(sut.IsNotInSet(set));
     }
 
@@ -185,7 +185,7 @@ public class IsNotInSet_T_ParamsArray
     public void IsNotInSet_T_ParamsArray_when_T_is_string_and_T_is_null_and_array_is_empty_returns_true()
     {
         string sut = null!;
-        var set = new string[] { };
+        var set = Array.Empty<string?>();
         Assert.True(sut.IsNotInSet(set));
     }
 
@@ -235,7 +235,7 @@ public class IsNotInSet_T_ParamsArray
     public void IsNotInSet_T_ParamsArray_when_T_is_string_and_T_has_value_and_array_is_empty_returns_true()
     {
         string sut = "test string";
-        var set = new string[] { };
+        var set = Array.Empty<string?>();
         Assert.True(sut.IsNotInSet(set));
     }
 
@@ -287,7 +287,7 @@ public class IsNotInSet_T_ParamsArray
     public void IsNotInSet_T_ParamsArray_when_T_is_Class_and_T_is_null_and_array_is_empty_returns_true()
     {
         IEquatableTestClass sut = null!;
-        var set = new IEquatableTestClass[] { };
+        var set = Array.Empty<IEquatableTestClass?>();
         Assert.True(sut.IsNotInSet(set));
     }
 
@@ -317,7 +317,7 @@ public class IsNotInSet_T_ParamsArray
     public void IsNotInSet_T_ParamsArray_when_T_is_Class_and_T_is_not_null_and_array_is_empty_returns_true()
     {
         IEquatableTestClass sut = new IEquatableTestClass(3333);
-        var set = new IEquatableTestClass[] { };
+        var set = Array.Empty<IEquatableTestClass?>();
         Assert.True(sut.IsNotInSet(set));
     }
 
