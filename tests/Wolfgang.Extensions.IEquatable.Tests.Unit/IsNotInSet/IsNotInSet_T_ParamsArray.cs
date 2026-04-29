@@ -165,7 +165,7 @@ public class IsNotInSet_T_ParamsArray
     public void IsNotInSet_T_ParamsArray_when_T_is_string_and_T_is_null_and_array_contains_null_returns_false()
     {
         string sut = null!;
-        var set = new string[] { "test1", null!, "test2", "test3" };
+        var set = new[] { "test1", null!, "test2", "test3" };
         Assert.False(sut.IsNotInSet(set));
     }
 
@@ -175,7 +175,7 @@ public class IsNotInSet_T_ParamsArray
     public void IsNotInSet_T_ParamsArray_when_T_is_string_and_T_is_null_and_array_does_not_contain_null_returns_true()
     {
         string sut = null!;
-        var set = new string[] { "test1", "test2", "test3" };
+        var set = new[] { "test1", "test2", "test3" };
         Assert.True(sut.IsNotInSet(set));
     }
 
@@ -195,7 +195,7 @@ public class IsNotInSet_T_ParamsArray
     public void IsNotInSet_T_ParamsArray_when_T_is_string_and_T_is_empty_and_array_contains_empty_returns_false()
     {
         string sut = string.Empty;
-        var set = new string[] { "test1", string.Empty, "test2", "test3" };
+        var set = new[] { "test1", string.Empty, "test2", "test3" };
         Assert.False(sut.IsNotInSet(set));
     }
 
@@ -205,7 +205,7 @@ public class IsNotInSet_T_ParamsArray
     public void IsNotInSet_T_ParamsArray_when_T_is_string_and_T_is_empty_and_array_does_not_contain_empty_returns_true()
     {
         string sut = string.Empty;
-        var set = new string[] { "test1", "test2", "test3" };
+        var set = new[] { "test1", "test2", "test3" };
         Assert.True(sut.IsNotInSet(set));
     }
 
@@ -215,7 +215,7 @@ public class IsNotInSet_T_ParamsArray
     public void IsNotInSet_T_ParamsArray_when_T_is_string_and_T_has_value_and_found_in_array_returns_false()
     {
         string sut = "test string";
-        var set = new string[] { "test1", "test string", "test2", "test3" };
+        var set = new[] { "test1", "test string", "test2", "test3" };
         Assert.False(sut.IsNotInSet(set));
     }
 
@@ -225,7 +225,7 @@ public class IsNotInSet_T_ParamsArray
     public void IsNotInSet_T_ParamsArray_when_T_is_string_and_T_has_value_and_not_found_in_array_returns_true()
     {
         string sut = "test string";
-        var set = new string[] { "test1", "test2", "test3" };
+        var set = new[] { "test1", "test2", "test3" };
         Assert.True(sut.IsNotInSet(set));
     }
 
@@ -267,7 +267,7 @@ public class IsNotInSet_T_ParamsArray
     public void IsNotInSet_T_ParamsArray_when_T_is_Class_and_T_is_null_and_array_contains_null_returns_false()
     {
         IEquatableTestClass sut = null!;
-        var set = new IEquatableTestClass[] { new IEquatableTestClass(1111), null!, new IEquatableTestClass(2222) };
+        var set = new[] { new IEquatableTestClass(1111), null!, new IEquatableTestClass(2222) };
         Assert.False(sut.IsNotInSet(set));
     }
 
@@ -277,7 +277,7 @@ public class IsNotInSet_T_ParamsArray
     public void IsNotInSet_T_ParamsArray_when_T_is_Class_and_T_is_null_and_array_does_not_contain_null_returns_true()
     {
         IEquatableTestClass sut = null!;
-        var set = new IEquatableTestClass[] { new IEquatableTestClass(1111), new IEquatableTestClass(2222), new IEquatableTestClass(3333) };
+        var set = new[] { new IEquatableTestClass(1111), new IEquatableTestClass(2222), new IEquatableTestClass(3333) };
         Assert.True(sut.IsNotInSet(set));
     }
 
@@ -297,7 +297,7 @@ public class IsNotInSet_T_ParamsArray
     public void IsNotInSet_T_ParamsArray_when_T_is_Class_and_T_is_not_null_and_found_by_value_equality_returns_false()
     {
         IEquatableTestClass sut = new IEquatableTestClass(3333);
-        var set = new IEquatableTestClass[] { new IEquatableTestClass(1111), new IEquatableTestClass(3333), new IEquatableTestClass(2222) };
+        var set = new[] { new IEquatableTestClass(1111), new IEquatableTestClass(3333), new IEquatableTestClass(2222) };
         Assert.False(sut.IsNotInSet(set));
     }
 
@@ -307,7 +307,7 @@ public class IsNotInSet_T_ParamsArray
     public void IsNotInSet_T_ParamsArray_when_T_is_Class_and_T_is_not_null_and_not_found_in_array_returns_true()
     {
         IEquatableTestClass sut = new IEquatableTestClass(3333);
-        var set = new IEquatableTestClass[] { new IEquatableTestClass(1111), new IEquatableTestClass(2222), new IEquatableTestClass(4444) };
+        var set = new[] { new IEquatableTestClass(1111), new IEquatableTestClass(2222), new IEquatableTestClass(4444) };
         Assert.True(sut.IsNotInSet(set));
     }
 
