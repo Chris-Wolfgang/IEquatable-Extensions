@@ -22,6 +22,7 @@
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<SignAssembly>False</SignAssembly>
 		<PackageIcon>icon.png</PackageIcon>
+		<PackageTags>IEquatable;Extensions;Equality;Set</PackageTags>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)' == 'net8.0' OR
@@ -34,6 +35,7 @@
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
 	  </None>
+	  <None Include="..\..\assets\128x128.png" Pack="true" PackagePath="\icon.png" Visible="false" />
 	</ItemGroup>
 
 	<!-- Analyzer PackageReferences are centralized in Directory.Build.props -->
