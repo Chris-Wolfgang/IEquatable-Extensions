@@ -5,12 +5,15 @@
       "src": [
         {
           "files": [
-			"src/<path>/<project>.csproj"
+            "src/Wolfgang.Extensions.IEquatable/Wolfgang.Extensions.IEquatable.csproj"
           ],
           "src": "../"
         }
       ],
-      "dest": "api"
+      "dest": "api",
+      "properties": {
+        "TargetFramework": "net8.0"
+      }
     }
   ],
   "build": {
@@ -37,8 +40,8 @@
       "default"
     ],
     "globalMetadata": {
-      "_appName": "",
-      "_appTitle": "<title>",
+      "_appName": "Wolfgang.Extensions.IEquatable",
+      "_appTitle": "Wolfgang.Extensions.IEquatable",
       "_enableSearch": true,
       "pdf": true
     }
