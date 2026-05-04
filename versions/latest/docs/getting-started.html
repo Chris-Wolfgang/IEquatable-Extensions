@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Getting Started | Wolfgang.Extensions.IEquatable </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Getting Started | Wolfgang.Extensions.IEquatable ">
+    
+    
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="Wolfgang.Extensions.IEquatable">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="getting-started">Getting Started</h1>
+
+<p>This guide will help you quickly integrate IEquatable-Extensions (Wolfgang.Extensions.IEquatable) into your .NET project and start using its features.</p>
+<h2 id="installation">Installation</h2>
+<h3 id="nuget-package-manager">NuGet Package Manager</h3>
+<p>Install the package using the NuGet Package Manager Console:</p>
+<pre><code class="lang-powershell">Install-Package Wolfgang.Extensions.IEquatable
+</code></pre>
+<h3 id="net-cli">.NET CLI</h3>
+<p>Use the .NET CLI to add the package to your project:</p>
+<pre><code class="lang-bash">dotnet add package Wolfgang.Extensions.IEquatable
+</code></pre>
+<h3 id="package-reference">Package Reference</h3>
+<p>Alternatively, add the following to your <code>.csproj</code> file (replace <code>1.0.0</code> with the latest version):</p>
+<pre><code class="lang-xml">&lt;PackageReference Include=&quot;Wolfgang.Extensions.IEquatable&quot; Version=&quot;1.0.0&quot; /&gt;
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>: Check <a href="https://www.nuget.org/packages/Wolfgang.Extensions.IEquatable/">NuGet.org</a> for the latest stable version.</p>
+</blockquote>
+<h2 id="basic-usage">Basic Usage</h2>
+<p>Once installed, add the using directive to your C# file:</p>
+<pre><code class="lang-csharp">using Wolfgang.Extensions.IEquatable;
+</code></pre>
+<p>The extension methods are now available for all types.</p>
+<h3 id="isinset-extension-method">IsInSet Extension Method</h3>
+<p>Check if a value matches any value in a set:</p>
+<pre><code class="lang-csharp">// Simple value comparison
+string status = &quot;active&quot;;
+bool isValid = status.IsInSet(&quot;active&quot;, &quot;pending&quot;, &quot;approved&quot;);  // true
+
+// Works with any type
+int value = 5;
+bool inRange = value.IsInSet(1, 2, 3, 4, 5);  // true
+
+// Works with collections
+string[] validStatuses = { &quot;active&quot;, &quot;pending&quot;, &quot;approved&quot; };
+bool isValidStatus = status.IsInSet(validStatuses);  // true
+
+// Works with IEnumerable
+List&lt;int&gt; numbers = new List&lt;int&gt; { 1, 2, 3, 4, 5 };
+bool found = value.IsInSet(numbers);  // true
+</code></pre>
+<p>This replaces verbose code like:</p>
+<pre><code class="lang-csharp">// Before
+if (status == &quot;active&quot; || status == &quot;pending&quot; || status == &quot;approved&quot;)
+{
+    // ...
+}
+
+// After
+if (status.IsInSet(&quot;active&quot;, &quot;pending&quot;, &quot;approved&quot;))
+{
+    // ...
+}
+</code></pre>
+<h3 id="isnotinset-extension-method">IsNotInSet Extension Method</h3>
+<p>Check if a value doesn't match any value in a set (inverse of IsInSet):</p>
+<pre><code class="lang-csharp">string status = &quot;rejected&quot;;
+bool isInvalid = status.IsNotInSet(&quot;active&quot;, &quot;pending&quot;, &quot;approved&quot;);  // true
+
+// Works with arrays and collections
+string[] validStatuses = { &quot;active&quot;, &quot;pending&quot;, &quot;approved&quot; };
+bool isInvalidStatus = status.IsNotInSet(validStatuses);  // true
+</code></pre>
+<p>This replaces verbose code like:</p>
+<pre><code class="lang-csharp">// Before
+if (status != &quot;active&quot; &amp;&amp; status != &quot;pending&quot; &amp;&amp; status != &quot;approved&quot;)
+{
+    // ...
+}
+
+// After
+if (status.IsNotInSet(&quot;active&quot;, &quot;pending&quot;, &quot;approved&quot;))
+{
+    // ...
+}
+</code></pre>
+<h3 id="notequal-extension-method">NotEqual Extension Method</h3>
+<p>Null-safe inequality comparison:</p>
+<pre><code class="lang-csharp">string value1 = &quot;hello&quot;;
+string value2 = &quot;world&quot;;
+string? value3 = null;
+
+bool different = value1.NotEqual(value2);   // true
+bool differentFromNull = value1.NotEqual(value3);  // true (null-safe)
+</code></pre>
+<p>The NotEqual method handles null references safely, avoiding NullReferenceExceptions.</p>
+<h2 id="common-patterns">Common Patterns</h2>
+<h3 id="validating-input-against-allowed-values">Validating Input Against Allowed Values</h3>
+<pre><code class="lang-csharp">public void SetStatus(string status)
+{
+    if (status.IsNotInSet(&quot;draft&quot;, &quot;published&quot;, &quot;archived&quot;))
+    {
+        throw new ArgumentException(&quot;Invalid status value&quot;);
+    }
+    
+    // Status is valid, continue processing...
+}
+</code></pre>
+<h3 id="switch-like-comparisons">Switch-like Comparisons</h3>
+<pre><code class="lang-csharp">public string GetPriority(int level)
+{
+    if (level.IsInSet(1, 2, 3))
+        return &quot;High&quot;;
+    else if (level.IsInSet(4, 5, 6))
+        return &quot;Medium&quot;;
+    else
+        return &quot;Low&quot;;
+}
+</code></pre>
+<h3 id="collection-membership-checks">Collection Membership Checks</h3>
+<pre><code class="lang-csharp">HashSet&lt;string&gt; allowedUsers = new HashSet&lt;string&gt; { &quot;admin&quot;, &quot;manager&quot;, &quot;supervisor&quot; };
+
+public bool CanAccessResource(string username)
+{
+    return username.IsInSet(allowedUsers);
+}
+</code></pre>
+<h3 id="enum-validation">Enum Validation</h3>
+<pre><code class="lang-csharp">public enum OrderStatus
+{
+    Pending,
+    Processing,
+    Shipped,
+    Delivered,
+    Cancelled
+}
+
+public bool IsFinalStatus(OrderStatus status)
+{
+    return status.IsInSet(OrderStatus.Delivered, OrderStatus.Cancelled);
+}
+</code></pre>
+<h2 id="method-overloads">Method Overloads</h2>
+<p>The library provides multiple overloads for flexibility:</p>
+<h3 id="isinset-overloads">IsInSet Overloads</h3>
+<pre><code class="lang-csharp">// Single value
+item.IsInSet(value1)
+
+// Two values
+item.IsInSet(value1, value2)
+
+// Three values
+item.IsInSet(value1, value2, value3)
+
+// Variable number of values (params array)
+item.IsInSet(value1, value2, value3, value4, ...)
+
+// IEnumerable&lt;T&gt;
+item.IsInSet(collection)
+
+// ICollection&lt;T&gt;
+item.IsInSet(hashSet)
+</code></pre>
+<p>All IsNotInSet overloads mirror the IsInSet overloads.</p>
+<h2 id="framework-compatibility">Framework Compatibility</h2>
+<p>The library supports a wide range of .NET frameworks:</p>
+<ul>
+<li>.NET Framework 4.6.2</li>
+<li>.NET Standard 2.0</li>
+<li>.NET 8.0</li>
+<li>.NET 10.0</li>
+</ul>
+<p>The library uses conditional compilation to provide nullable reference type support on .NET 5.0 and later (when running on compatible runtimes through .NET Standard 2.0 compatibility).</p>
+<h2 id="next-steps">Next Steps</h2>
+<ul>
+<li>Review the <a href="setup.html">Setup</a> guide for advanced configuration options</li>
+<li>Explore the API documentation for detailed method descriptions</li>
+<li>Read the <a href="readme.html">README</a> for additional information about the project</li>
+</ul>
+<h2 id="need-help">Need Help?</h2>
+<ul>
+<li>Report issues on <a href="https://github.com/Chris-Wolfgang/IEquatable-Extensions/issues">GitHub Issues</a></li>
+<li>Check existing discussions and questions</li>
+<li>Refer to the inline XML documentation in your IDE</li>
+</ul>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Chris-Wolfgang/IEquatable-Extensions/blob/v0.2.0/docfx_project/docs/getting-started.md/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

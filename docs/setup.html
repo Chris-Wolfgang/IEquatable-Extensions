@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Setup Guide | Wolfgang.Extensions.IEquatable </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Setup Guide | Wolfgang.Extensions.IEquatable ">
+    
+    
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="Wolfgang.Extensions.IEquatable">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="setup-guide">Setup Guide</h1>
+
+<p>This guide covers installation, configuration, and integration scenarios for Wolfgang.Extensions.IEquatable.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#ide-integration">IDE Integration</a></li>
+<li><a href="#build-configuration">Build Configuration</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#advanced-scenarios">Advanced Scenarios</a></li>
+<li><a href="#next-steps">Next Steps</a></li>
+<li><a href="#getting-help">Getting Help</a></li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<h3 id="minimum-requirements">Minimum Requirements</h3>
+<ul>
+<li><strong>.NET</strong>: .NET Framework 4.6.2 or higher, .NET Standard 2.0, .NET 8.0, or .NET 10.0</li>
+<li><strong>C# Version</strong>: 7.3 or higher</li>
+<li><strong>IDE</strong>: Visual Studio 2017 or higher, Visual Studio Code, or JetBrains Rider</li>
+</ul>
+<h3 id="optional-tools">Optional Tools</h3>
+<ul>
+<li><strong>NuGet CLI</strong>: For command-line package management</li>
+<li><strong>Visual Studio Extensions</strong>: For enhanced IntelliSense support</li>
+</ul>
+<h2 id="installation">Installation</h2>
+<h3 id="standard-installation">Standard Installation</h3>
+<p>For most projects, a standard NuGet package installation is sufficient:</p>
+<pre><code class="lang-bash">dotnet add package Wolfgang.Extensions.IEquatable
+</code></pre>
+<h3 id="development-build-installation">Development Build Installation</h3>
+<p>To use the latest development build from a local source:</p>
+<ol>
+<li><p>Clone the repository:</p>
+<pre><code class="lang-bash">git clone https://github.com/Chris-Wolfgang/IEquatable-Extensions.git
+cd IEquatable-Extensions
+</code></pre>
+</li>
+<li><p>Checkout the develop branch:</p>
+<pre><code class="lang-bash">git checkout develop
+</code></pre>
+</li>
+<li><p>Build the project:</p>
+<pre><code class="lang-bash">dotnet build --configuration Release
+</code></pre>
+</li>
+<li><p>Pack the NuGet package:</p>
+<pre><code class="lang-bash">dotnet pack --configuration Release
+</code></pre>
+</li>
+<li><p>Add the local package source:</p>
+<pre><code class="lang-bash">dotnet nuget add source ./artifacts/packages/Release --name LocalIEquatableExtensions
+</code></pre>
+</li>
+<li><p>Install from the local source:</p>
+<pre><code class="lang-bash">dotnet add package Wolfgang.Extensions.IEquatable --source LocalIEquatableExtensions
+</code></pre>
+</li>
+</ol>
+<h2 id="configuration">Configuration</h2>
+<h3 id="global-using-directives">Global Using Directives</h3>
+<p>To make the extensions available throughout your project without explicit using statements, add to your <code>GlobalUsings.cs</code>:</p>
+<pre><code class="lang-csharp">global using Wolfgang.Extensions.IEquatable;
+</code></pre>
+<p>Or add to your <code>.csproj</code> file (C# 10+):</p>
+<pre><code class="lang-xml">&lt;ItemGroup&gt;
+  &lt;Using Include=&quot;Wolfgang.Extensions.IEquatable&quot; /&gt;
+&lt;/ItemGroup&gt;
+</code></pre>
+<h2 id="ide-integration">IDE Integration</h2>
+<h3 id="visual-studio-2017">Visual Studio 2017+</h3>
+<ol>
+<li>Install Visual Studio 2017 or higher (Visual Studio 2022 recommended)</li>
+<li>Ensure the &quot;.NET desktop development&quot; workload is installed</li>
+<li>The package will provide IntelliSense automatically</li>
+</ol>
+<h3 id="visual-studio-code">Visual Studio Code</h3>
+<ol>
+<li>Install the C# extension by Microsoft</li>
+<li>Install the C# Dev Kit (optional but recommended)</li>
+<li>Ensure a compatible .NET SDK is installed and in PATH</li>
+</ol>
+<pre><code class="lang-json">// .vscode/settings.json
+{
+  &quot;dotnet.preferCSharpExtension&quot;: true,
+  &quot;omnisharp.enableRoslynAnalyzers&quot;: true
+}
+</code></pre>
+<h3 id="jetbrains-rider">JetBrains Rider</h3>
+<p>Rider has built-in support for extension methods. No additional configuration needed.</p>
+<h2 id="build-configuration">Build Configuration</h2>
+<h3 id="cicd-integration">CI/CD Integration</h3>
+<h4 id="github-actions">GitHub Actions</h4>
+<pre><code class="lang-yaml">name: Build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: | 
+          6.0.x
+          8.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore --configuration Release
+    - name: Test
+      run: dotnet test --no-build --configuration Release
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>: Adjust the <code>dotnet-version</code> to match your project's target frameworks.</p>
+</blockquote>
+<h4 id="azure-pipelines">Azure Pipelines</h4>
+<pre><code class="lang-yaml">trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    version: '6.0.x'
+- task: UseDotNet@2
+  inputs:
+    version: '8.0.x'
+- task: DotNetCoreCLI@2
+  displayName: 'Restore packages'
+  inputs:
+    command: 'restore'
+- task: DotNetCoreCLI@2
+  displayName: 'Build'
+  inputs:
+    command: 'build'
+    arguments: '--configuration $(buildConfiguration) --no-restore'
+- task: DotNetCoreCLI@2
+  displayName: 'Test'
+  inputs:
+    command: 'test'
+    arguments: '--configuration $(buildConfiguration) --no-build'
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>: Adjust the .NET SDK versions based on your target frameworks.</p>
+</blockquote>
+<h3 id="package-reference-options">Package Reference Options</h3>
+<h4 id="version-pinning">Version Pinning</h4>
+<p>For production applications, pin to a specific version:</p>
+<pre><code class="lang-xml">&lt;PackageReference Include=&quot;Wolfgang.Extensions.IEquatable&quot; Version=&quot;1.0.0&quot; /&gt;
+</code></pre>
+<h4 id="floating-versions">Floating Versions</h4>
+<p>For development or when you want automatic updates (use with caution in production):</p>
+<pre><code class="lang-xml">&lt;!-- Latest stable (not recommended for production) --&gt;
+&lt;PackageReference Include=&quot;Wolfgang.Extensions.IEquatable&quot; Version=&quot;*&quot; /&gt;
+
+&lt;!-- Latest 1.x version --&gt;
+&lt;PackageReference Include=&quot;Wolfgang.Extensions.IEquatable&quot; Version=&quot;1.*&quot; /&gt;
+</code></pre>
+<blockquote>
+<p><strong>Warning</strong>: Floating versions can introduce breaking changes unexpectedly. Always pin to specific versions in production builds.</p>
+</blockquote>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="intellisense-not-working">IntelliSense Not Working</h3>
+<p><strong>Problem</strong>: Extension methods not showing in IntelliSense</p>
+<p><strong>Solutions</strong>:</p>
+<ol>
+<li><p>Add explicit using directive:</p>
+<pre><code class="lang-csharp">using Wolfgang.Extensions.IEquatable;
+</code></pre>
+</li>
+<li><p>Check that the package reference exists in <code>.csproj</code></p>
+</li>
+<li><p>Restart OmniSharp (VS Code) or Visual Studio</p>
+</li>
+</ol>
+<h3 id="build-errors">Build Errors</h3>
+<p><strong>Problem</strong>: Compilation errors related to extension methods</p>
+<p><strong>Solutions</strong>:</p>
+<ol>
+<li><p>Ensure the using directive is present:</p>
+<pre><code class="lang-csharp">using Wolfgang.Extensions.IEquatable;
+</code></pre>
+</li>
+<li><p>Verify the package is properly installed:</p>
+<pre><code class="lang-bash">dotnet list package
+</code></pre>
+</li>
+<li><p>Clean and rebuild:</p>
+<pre><code class="lang-bash">dotnet clean
+dotnet build
+</code></pre>
+</li>
+</ol>
+<h3 id="nuget-package-not-found">NuGet Package Not Found</h3>
+<p><strong>Problem</strong>: Cannot find the package in NuGet</p>
+<p><strong>Solutions</strong>:</p>
+<ol>
+<li><p>Clear NuGet cache:</p>
+<pre><code class="lang-bash">dotnet nuget locals all --clear
+</code></pre>
+</li>
+<li><p>Verify package source:</p>
+<pre><code class="lang-bash">dotnet nuget list source
+</code></pre>
+</li>
+<li><p>Add nuget.org as a source:</p>
+<pre><code class="lang-bash">dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
+</code></pre>
+</li>
+</ol>
+<h2 id="advanced-scenarios">Advanced Scenarios</h2>
+<h3 id="multi-targeting">Multi-Targeting</h3>
+<p>If your library needs to target multiple frameworks:</p>
+<pre><code class="lang-xml">&lt;PropertyGroup&gt;
+  &lt;TargetFrameworks&gt;net462;netstandard2.0;net8.0;net10.0&lt;/TargetFrameworks&gt;
+&lt;/PropertyGroup&gt;
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>: The library supports .NET Framework 4.6.2, .NET Standard 2.0, .NET 8.0, and .NET 10.0.</p>
+</blockquote>
+<h3 id="integration-with-dependency-injection">Integration with Dependency Injection</h3>
+<p>The library provides extension methods only, so no DI registration is needed. Simply ensure the using directive is present where you need the extensions.</p>
+<h2 id="next-steps">Next Steps</h2>
+<ul>
+<li>Read the <a href="getting-started.html">Getting Started</a> guide for usage examples</li>
+<li>Explore the <a href="../api/">API Reference</a> for detailed documentation</li>
+<li>Visit the <a href="https://github.com/Chris-Wolfgang/IEquatable-Extensions">GitHub repository</a> for source code</li>
+</ul>
+<h2 id="getting-help">Getting Help</h2>
+<p>If you encounter issues not covered here:</p>
+<ol>
+<li>Check <a href="https://github.com/Chris-Wolfgang/IEquatable-Extensions/issues">GitHub Issues</a></li>
+<li>Search <a href="https://github.com/Chris-Wolfgang/IEquatable-Extensions/discussions">GitHub Discussions</a></li>
+<li>Create a new issue with:
+<ul>
+<li>Your .NET version (<code>dotnet --version</code>)</li>
+<li>Your OS and IDE</li>
+<li>A minimal reproducible example</li>
+<li>Error messages and stack traces</li>
+</ul>
+</li>
+</ol>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Chris-Wolfgang/IEquatable-Extensions/blob/v0.2.0/docfx_project/docs/setup.md/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

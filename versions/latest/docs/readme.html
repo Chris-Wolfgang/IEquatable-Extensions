@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Wolfgang.Extensions.IEquatable | Wolfgang.Extensions.IEquatable </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Wolfgang.Extensions.IEquatable | Wolfgang.Extensions.IEquatable ">
+    
+    
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="Wolfgang.Extensions.IEquatable">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="wolfgangextensionsiequatable">Wolfgang.Extensions.IEquatable</h1>
+
+<p><a href="https://www.nuget.org/packages/Wolfgang.Extensions.IEquatable/"><img src="https://img.shields.io/nuget/v/Wolfgang.Extensions.IEquatable.svg" alt="NuGet"></a>
+<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+<a href="https://github.com/Chris-Wolfgang/IEquatable-Extensions/actions"><img src="https://github.com/Chris-Wolfgang/IEquatable-Extensions/actions/workflows/pr.yaml/badge.svg" alt="Build Status"></a></p>
+<p>A lightweight .NET library that provides extension methods to simplify common equality comparison patterns.</p>
+<h2 id="-why-wolfgangextensionsiequatable">🌟 Why Wolfgang.Extensions.IEquatable?</h2>
+<p>Writing clean, readable equality comparisons often involves repetitive boilerplate code. This library eliminates that repetition with simple, expressive extension methods.</p>
+<h3 id="problems-this-library-solves">Problems This Library Solves</h3>
+<ul>
+<li>❌ <strong>Verbose OR Chains</strong>: <code>if (x == a || x == b || x == c || x == d)</code></li>
+<li>❌ <strong>Verbose AND Chains</strong>: <code>if (x != a &amp;&amp; x != b &amp;&amp; x != c &amp;&amp; x != d)</code></li>
+<li>❌ <strong>Null Reference Errors</strong>: Forgetting null checks in inequality comparisons</li>
+<li>❌ <strong>Readability</strong>: Hard to parse complex conditional logic at a glance</li>
+</ul>
+<h3 id="our-solution">Our Solution</h3>
+<ul>
+<li>✅ <strong>IsInSet</strong>: Check if a value matches any of a set of values</li>
+<li>✅ <strong>IsNotInSet</strong>: Check if a value doesn't match any of a set of values</li>
+<li>✅ <strong>NotEqual</strong>: Null-safe inequality comparison</li>
+</ul>
+<h2 id="-installation">📦 Installation</h2>
+<p>Choose your preferred installation method:</p>
+<h3 id="nuget-package-manager">NuGet Package Manager</h3>
+<pre><code class="lang-powershell">Install-Package Wolfgang.Extensions.IEquatable
+</code></pre>
+<h3 id="net-cli">.NET CLI</h3>
+<pre><code class="lang-bash">dotnet add package Wolfgang.Extensions.IEquatable
+</code></pre>
+<h3 id="packagereference">PackageReference</h3>
+<pre><code class="lang-xml">&lt;PackageReference Include=&quot;Wolfgang.Extensions.IEquatable&quot; Version=&quot;1.0.0&quot; /&gt;
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>: Replace with the specific version you need. Check <a href="https://www.nuget.org/packages/Wolfgang.Extensions.IEquatable/">NuGet.org</a> for available versions.</p>
+</blockquote>
+<h2 id="-requirements">🎯 Requirements</h2>
+<p><strong>Supported Frameworks:</strong></p>
+<ul>
+<li>.NET Framework 4.6.2 or higher</li>
+<li>.NET Standard 2.0</li>
+<li>.NET 8.0</li>
+<li>.NET 10.0</li>
+</ul>
+<p><strong>Language Version:</strong></p>
+<ul>
+<li>C# 7.3 or higher</li>
+</ul>
+<p>The library is designed to work across a wide range of .NET platforms, making it suitable for both legacy and modern applications.</p>
+<h2 id="-quick-start">🚀 Quick Start</h2>
+<h3 id="example-1-isinset">Example 1: IsInSet</h3>
+<pre><code class="lang-csharp">using Wolfgang.Extensions.IEquatable;
+
+// Before: Verbose OR chain
+if (status == &quot;active&quot; || status == &quot;pending&quot; || status == &quot;approved&quot;)
+{
+    // Process valid status
+}
+
+// After: Clean and readable
+if (status.IsInSet(&quot;active&quot;, &quot;pending&quot;, &quot;approved&quot;))
+{
+    // Process valid status
+}
+</code></pre>
+<h3 id="example-2-isnotinset">Example 2: IsNotInSet</h3>
+<pre><code class="lang-csharp">using Wolfgang.Extensions.IEquatable;
+
+// Before: Verbose AND chain
+if (role != &quot;admin&quot; &amp;&amp; role != &quot;moderator&quot; &amp;&amp; role != &quot;owner&quot;)
+{
+    throw new UnauthorizedAccessException();
+}
+
+// After: Clean and readable
+if (role.IsNotInSet(&quot;admin&quot;, &quot;moderator&quot;, &quot;owner&quot;))
+{
+    throw new UnauthorizedAccessException();
+}
+</code></pre>
+<h3 id="example-3-notequal">Example 3: NotEqual</h3>
+<pre><code class="lang-csharp">using Wolfgang.Extensions.IEquatable;
+
+// Null-safe inequality check
+string? value1 = GetValue();
+string? value2 = GetOtherValue();
+
+if (value1.NotEqual(value2))
+{
+    // Values are different (handles null safely)
+}
+</code></pre>
+<h2 id="-key-features">🎯 Key Features</h2>
+<h3 id="isinset-extension-methods">IsInSet Extension Methods</h3>
+<p>Check if a value matches any value in a set. Multiple overloads available:</p>
+<ul>
+<li>Single value: <code>item.IsInSet(value1)</code></li>
+<li>Multiple values: <code>item.IsInSet(value1, value2, value3)</code></li>
+<li>Collections: <code>item.IsInSet(array)</code> or <code>item.IsInSet(collection)</code></li>
+</ul>
+<h3 id="isnotinset-extension-methods">IsNotInSet Extension Methods</h3>
+<p>Check if a value doesn't match any value in a set. Same overloads as IsInSet.</p>
+<h3 id="notequal-extension-method">NotEqual Extension Method</h3>
+<p>Null-safe inequality comparison with proper reference equality checks.</p>
+<h3 id="performance">Performance</h3>
+<ul>
+<li>Minimal overhead with optimized implementations</li>
+<li>No allocations for simple value comparisons</li>
+<li>Efficient null checking</li>
+</ul>
+<h2 id="-documentation">📚 Documentation</h2>
+<ul>
+<li><strong><a href="introduction.html">Introduction</a></strong>: Learn about the library and its purpose</li>
+<li><strong><a href="getting-started.html">Getting Started</a></strong>: Installation and basic usage</li>
+<li><strong><a href="setup.html">Setup</a></strong>: Advanced configuration and customization</li>
+<li><strong>API Reference</strong>: Detailed API documentation (generated by DocFX)</li>
+</ul>
+<h2 id="project-structure">Project Structure</h2>
+<pre><code>IEquatable-Extensions/
+├── src/                    # Source code
+│   └── Wolfgang.Extensions.IEquatable/
+├── tests/                  # Unit tests
+├── benchmarks/            # Performance benchmarks
+├── examples/              # Usage examples
+└── docs/                  # Documentation
+</code></pre>
+<h2 id="-contributing">🤝 Contributing</h2>
+<p>Contributions are welcome! Please read our <a href="../../CONTRIBUTING.md">Contributing Guide</a> before submitting pull requests.</p>
+<h3 id="how-to-contribute">How to Contribute</h3>
+<ol>
+<li>Fork the repository</li>
+<li>Create a feature branch (<code>git checkout -b feature/amazing-feature</code>)</li>
+<li>Commit your changes (<code>git commit -m 'Add amazing feature'</code>)</li>
+<li>Push to the branch (<code>git push origin feature/amazing-feature</code>)</li>
+<li>Open a Pull Request</li>
+</ol>
+<h2 id="-license">📝 License</h2>
+<p>This project is licensed under the MIT License - see the <a href="../../LICENSE">LICENSE</a> file for details.</p>
+<h2 id="-acknowledgments">🙏 Acknowledgments</h2>
+<ul>
+<li>Inspired by common patterns in the .NET ecosystem</li>
+<li>Compatible with .NET Framework 4.6.2 through .NET 10</li>
+<li>Follows Microsoft's design guidelines for .NET libraries</li>
+</ul>
+<h2 id="-support">📞 Support</h2>
+<ul>
+<li><strong>Issues</strong>: <a href="https://github.com/Chris-Wolfgang/IEquatable-Extensions/issues">GitHub Issues</a></li>
+<li><strong>Discussions</strong>: <a href="https://github.com/Chris-Wolfgang/IEquatable-Extensions/discussions">GitHub Discussions</a></li>
+<li><strong>Documentation</strong>: <a href="https://chris-wolfgang.github.io/IEquatable-Extensions">Online Docs</a></li>
+</ul>
+<h2 id="-show-your-support">🌟 Show Your Support</h2>
+<p>If you find this library useful, please consider:</p>
+<ul>
+<li>⭐ Starring the repository</li>
+<li>📢 Sharing it with others</li>
+<li>🐛 Reporting bugs or requesting features</li>
+<li>🤝 Contributing to the codebase</li>
+</ul>
+<hr>
+<p>Made with ❤️ by Chris Wolfgang</p>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Chris-Wolfgang/IEquatable-Extensions/blob/v0.2.0/docfx_project/docs/readme.md/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
