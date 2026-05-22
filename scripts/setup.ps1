@@ -483,7 +483,7 @@ function Start-Setup {
         Write-Success "Renamed README-TEMPLATE.md → README.md"
     }
     else {
-        Write-Host "❌ README-TEMPLATE.md not found!" -ForegroundColor Red
+        Write-Error "README-TEMPLATE.md not found!"
         exit 1
     }
     
@@ -540,7 +540,7 @@ function Start-Setup {
         Write-Success "Removed license template files"
     }
     else {
-        Write-Host "❌ License template file not found: $licenseFile" -ForegroundColor Red
+        Write-Error "License template file not found: $licenseFile"
         exit 1
     }
     
@@ -619,12 +619,15 @@ function Start-Setup {
             }
         }
         
-        # Get all files in the repository (exclude .git directory upfront for performance)
-        $allFiles = Get-ChildItem -Recurse -File -Force -Exclude '.git' | Where-Object {
-            $_.FullName -notmatch '[/\\]\.git[/\\]'
-        } | Where-Object {
+        # Get all files in the repository
+        $allFiles = Get-ChildItem -Recurse -File -Force | Where-Object {
             # Get relative path safely
             $relativePath = Get-SafeRelativePath $_.FullName
+            
+            # Exclude files under .git directory specifically (not .github)
+            if ($relativePath -like '.git/*') {
+                return $false
+            }
             
             # Exclude hidden files (starting with .) except those in .github directory
             $fileName = [System.IO.Path]::GetFileName($relativePath)
@@ -1013,7 +1016,14 @@ function Start-Setup {
     Write-Host ""
     Write-Host "1. Configure branch protection (see REPO-INSTRUCTIONS.md if kept)" -ForegroundColor Yellow
     Write-Host ""
-    Write-Host "2. Start developing!" -ForegroundColor Yellow
+    Write-Host "2. Provision custom labels (includes the Maintenance framework labels)" -ForegroundColor Yellow
+    Write-Host "   pwsh ./scripts/Setup-Labels.ps1" -ForegroundColor Gray
+    Write-Host ""
+    Write-Host "3. Create the parent Maintenance issue for this repo" -ForegroundColor Yellow
+    Write-Host "   pwsh ./scripts/Setup-Maintenance.ps1 -MaintenanceProjectUrl '<url>'" -ForegroundColor Gray
+    Write-Host "   # The cross-repo Maintenance project URL — ask the repo owner if you don't have it" -ForegroundColor DarkGray
+    Write-Host ""
+    Write-Host "4. Start developing!" -ForegroundColor Yellow
     if ($solutionName) {
         Write-Host "   # Solution file created: $solutionName.slnx" -ForegroundColor Gray
         Write-Host "   # Add your projects to src/ and tests/" -ForegroundColor Gray
@@ -1033,7 +1043,7 @@ try {
     Start-Setup
 }
 catch {
-    Write-Host "❌ Setup failed: $_" -ForegroundColor Red
+    Write-Error "Setup failed: $_"
     Write-Host $_.ScriptStackTrace -ForegroundColor Red
     exit 1
 }
