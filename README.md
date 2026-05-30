@@ -158,6 +158,23 @@ modern runtimes while still supporting legacy .NET Framework consumers.
 
 ---
 
+## 🔍 Code Quality & Static Analysis
+
+This project enforces **strict code quality standards** through **8 specialized analyzers**, an `<TreatWarningsAsErrors>true</TreatWarningsAsErrors>` Release gate, and custom rules:
+
+### Analyzers in Use
+
+1. **Microsoft.CodeAnalysis.NetAnalyzers** — Built-in .NET analyzers for correctness and performance
+2. **Roslynator.Analyzers** — Advanced refactoring and code quality rules
+3. **AsyncFixer** — Async/await best practices and anti-pattern detection
+4. **Microsoft.VisualStudio.Threading.Analyzers** — Thread safety and async patterns
+5. **Microsoft.CodeAnalysis.BannedApiAnalyzers** — Prevents usage of banned APIs (see `BannedSymbols.txt`); the async-blocking bans in the shared list are inert here since the library is fully synchronous
+6. **Meziantou.Analyzer** — Comprehensive code quality rules
+7. **SonarAnalyzer.CSharp** — Industry-standard code analysis
+8. **Microsoft.CodeAnalysis.PublicApiAnalyzers** — Tracks the public API surface via `PublicAPI.Shipped.txt` / `PublicAPI.Unshipped.txt`; surfaces additions/removals at compile time as a breaking-change review gate
+
+---
+
 ## 🛠️ Building from source
 
 ```bash

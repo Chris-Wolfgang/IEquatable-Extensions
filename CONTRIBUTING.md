@@ -87,60 +87,20 @@ All code is analyzed by these tools during build:
    - Security vulnerability detection
    - Code smell identification
 
-### Async-First Enforcement
+### Banned APIs
 
-This library **prohibits synchronous blocking calls** via `BannedSymbols.txt`. The following APIs are **banned**:
+`BannedSymbols.txt` is shared fleet-wide and bans the same set of obsolete
+or insecure APIs across every Wolfgang.* repo (e.g. `BinaryFormatter`,
+`new WebClient()`, `DateTime.Now` — prefer `DateTimeOffset.UtcNow`). The
+analyzer enforces these on every build.
 
-#### ❌ Blocking Async Operations
-```csharp
-// Banned - blocks threads
-task.Wait();
-task.Result;
-Task.WaitAll(tasks);
-
-// Required - truly async
-await task;
-await Task.WhenAll(tasks);
-```
-
-#### ❌ Synchronous I/O
-```csharp
-// Banned
-File.ReadAllText(path);
-stream.Read(buffer, 0, count);
-streamReader.ReadLine();
-
-// Required
-await File.ReadAllTextAsync(path);
-await stream.ReadAsync(buffer, 0, count);
-await streamReader.ReadLineAsync();
-```
-
-#### ❌ Thread Blocking
-```csharp
-// Banned
-Thread.Sleep(1000);
-Console.ReadLine();
-
-// Required
-await Task.Delay(1000);
-// Avoid blocking console reads in async code
-```
-
-#### ❌ Obsolete/Insecure APIs
-```csharp
-// Banned
-var client = new WebClient();
-var formatter = new BinaryFormatter();
-var now = DateTime.Now; // Use DateTimeOffset
-
-// Required
-var client = new HttpClient();
-// Use System.Text.Json.JsonSerializer
-var now = DateTimeOffset.UtcNow;
-```
-
-**Why?** This ensures all code is **truly asynchronous** and **non-blocking**, providing optimal performance in async contexts.
+The async-blocking bans (`task.Wait()`, `task.Result`, `File.ReadAllText`,
+`Thread.Sleep`, etc.) are also part of the shared list. They don't
+currently apply to this library — **`Wolfgang.Extensions.IEquatable` is a
+synchronous extension-method library** with no async APIs, no I/O, and no
+threading. The bans are inert here, but the shared rule set means that
+if async code is ever introduced to this project, it will be required to
+follow the fleet's async-first conventions from the start.
 
 ---
 
@@ -217,8 +177,10 @@ View the complete configuration in [.editorconfig](.editorconfig).
 - Add relevant tests for new features or bug fixes.
 - Document any public APIs with XML documentation comments.
 - Ensure all analyzer warnings are addressed (they're treated as errors in Release builds).
-- Use async/await patterns - no blocking calls allowed.
-- Include `CancellationToken` parameters in async methods where appropriate.
+- If async code is ever introduced, follow the fleet's async-first
+  conventions: avoid blocking calls (`task.Wait()`, `task.Result`,
+  `Thread.Sleep`), prefer async I/O, and accept `CancellationToken`
+  parameters where appropriate.
 
 ---
 

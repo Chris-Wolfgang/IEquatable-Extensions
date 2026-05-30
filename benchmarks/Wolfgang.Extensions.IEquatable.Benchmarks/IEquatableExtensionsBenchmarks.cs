@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using BenchmarkDotNet.Attributes;
 using Wolfgang.Extensions.IEquatable;
 
@@ -10,11 +11,20 @@ namespace Wolfgang.Extensions.IEquatable.Benchmarks;
 /// which boxes value-type arguments — the chart should surface that cost so
 /// any future move to <c>EqualityComparer&lt;T&gt;.Default</c> can be quantified.
 ///
-/// The collection overloads have different routing: the
-/// <c>IEnumerable&lt;T&gt;</c> overload delegates to <c>Enumerable.Contains</c>
-/// (LINQ), while the <c>ICollection&lt;T&gt;</c> overload calls
-/// <c>ICollection&lt;T&gt;.Contains</c> directly — for <c>HashSet&lt;T&gt;</c>
-/// that's an O(1) hash lookup vs the O(N) LINQ enumeration.
+/// The collection overloads land on different code paths:
+/// <list type="bullet">
+/// <item><description>The <c>ICollection&lt;T&gt;</c> overload calls
+///   <c>ICollection&lt;T&gt;.Contains</c> directly — for <c>HashSet&lt;T&gt;</c>
+///   that's an O(1) hash lookup; for <c>List&lt;T&gt;</c> it's O(N).</description></item>
+/// <item><description>The <c>IEnumerable&lt;T&gt;</c> overload calls
+///   <c>Enumerable.Contains</c> (LINQ). That method internally checks whether
+///   the source is an <c>ICollection&lt;T&gt;</c> and dispatches to its
+///   <c>.Contains</c> when so — meaning passing a <c>List&lt;T&gt;</c> cast
+///   to <c>IEnumerable&lt;T&gt;</c> doesn't actually exercise the iterator
+///   fallback. To force that fallback in <c>IsInSet_IEnumerable_Iterator</c>
+///   the benchmark wraps the list in a <c>Select</c> projection, which
+///   produces a non-<c>ICollection&lt;T&gt;</c> enumerable.</description></item>
+/// </list>
 ///
 /// The benchmark types are <c>int?</c> rather than <c>int</c> so the casts
 /// bind to the NET5_0_OR_GREATER overloads (<c>T?[]</c>,
@@ -65,18 +75,27 @@ public class IEquatableExtensionsBenchmarks
 
 
 
+    // Note: passing (IEnumerable<int?>)ListSet here would NOT exercise the
+    // LINQ iterator fallback — Enumerable.Contains detects ICollection<T>
+    // and dispatches to its .Contains. To actually measure the iterator
+    // path, see IsInSet_IEnumerable_Iterator below.
     [Benchmark]
-    public bool IsInSet_IEnumerable() => Sample.IsInSet((IEnumerable<int?>)ListSet);
+    public bool IsInSet_IEnumerable_FromList() => Sample.IsInSet((IEnumerable<int?>)ListSet);
 
 
 
     [Benchmark]
-    public bool IsInSet_ICollection() => Sample.IsInSet((ICollection<int?>)ListSet);
+    public bool IsInSet_IEnumerable_Iterator() => Sample.IsInSet(ListSet.Select(x => x));
 
 
 
     [Benchmark]
-    public bool IsInSet_HashSet_AsICollection() => Sample.IsInSet((ICollection<int?>)HashSet);
+    public bool IsInSet_ICollection_List() => Sample.IsInSet((ICollection<int?>)ListSet);
+
+
+
+    [Benchmark]
+    public bool IsInSet_ICollection_HashSet() => Sample.IsInSet((ICollection<int?>)HashSet);
 
 
 
