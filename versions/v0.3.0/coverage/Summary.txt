@@ -1,0 +1,23 @@
+Summary
+  Generated on: 5/30/2026 - 9:33:06 PM
+  Coverage date: 5/30/2026 - 9:33:02 PM
+  Parser: Cobertura
+  Assemblies: 1
+  Classes: 1
+  Files: 1
+  Line coverage: 100%
+  Covered lines: 19
+  Uncovered lines: 0
+  Coverable lines: 19
+  Total lines: 270
+  Branch coverage: 100% (12 of 12)
+  Covered branches: 12
+  Total branches: 12
+  Method coverage: 100% (13 of 13)
+  Full method coverage: 100% (13 of 13)
+  Covered methods: 13
+  Fully covered methods: 13
+  Total methods: 13
+
+Wolfgang.Extensions.IEquatable                           100%
+  Wolfgang.Extensions.IEquatable.IEquatableExtensions    100%

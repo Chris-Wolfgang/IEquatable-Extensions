@@ -1,0 +1,153 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: Wolfgang.Extensions.IEquatable
+  name: Wolfgang.Extensions.IEquatable
+  href: api/Wolfgang.Extensions.IEquatable.html
+  commentId: N:Wolfgang.Extensions.IEquatable
+  fullName: Wolfgang.Extensions.IEquatable
+  nameWithType: Wolfgang.Extensions.IEquatable
+- uid: Wolfgang.Extensions.IEquatable.IEquatableExtensions
+  name: IEquatableExtensions
+  href: api/Wolfgang.Extensions.IEquatable.IEquatableExtensions.html
+  commentId: T:Wolfgang.Extensions.IEquatable.IEquatableExtensions
+  fullName: Wolfgang.Extensions.IEquatable.IEquatableExtensions
+  nameWithType: IEquatableExtensions
+- uid: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet*
+  name: IsInSet
+  href: api/Wolfgang.Extensions.IEquatable.IEquatableExtensions.html#Wolfgang_Extensions_IEquatable_IEquatableExtensions_IsInSet_
+  commentId: Overload:Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet
+  isSpec: "True"
+  fullName: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet
+  nameWithType: IEquatableExtensions.IsInSet
+- uid: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet``1(``0,System.Collections.Generic.ICollection{``0})
+  name: IsInSet<T>(T?, ICollection<T?>)
+  href: api/Wolfgang.Extensions.IEquatable.IEquatableExtensions.html#Wolfgang_Extensions_IEquatable_IEquatableExtensions_IsInSet__1___0_System_Collections_Generic_ICollection___0__
+  commentId: M:Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet``1(``0,System.Collections.Generic.ICollection{``0})
+  name.vb: IsInSet(Of T)(T, ICollection(Of T))
+  fullName: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet<T>(T?, System.Collections.Generic.ICollection<T?>)
+  fullName.vb: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet(Of T)(T, System.Collections.Generic.ICollection(Of T))
+  nameWithType: IEquatableExtensions.IsInSet<T>(T?, ICollection<T?>)
+  nameWithType.vb: IEquatableExtensions.IsInSet(Of T)(T, ICollection(Of T))
+- uid: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet``1(``0,System.Collections.Generic.IEnumerable{``0})
+  name: IsInSet<T>(T?, IEnumerable<T?>)
+  href: api/Wolfgang.Extensions.IEquatable.IEquatableExtensions.html#Wolfgang_Extensions_IEquatable_IEquatableExtensions_IsInSet__1___0_System_Collections_Generic_IEnumerable___0__
+  commentId: M:Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet``1(``0,System.Collections.Generic.IEnumerable{``0})
+  name.vb: IsInSet(Of T)(T, IEnumerable(Of T))
+  fullName: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet<T>(T?, System.Collections.Generic.IEnumerable<T?>)
+  fullName.vb: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet(Of T)(T, System.Collections.Generic.IEnumerable(Of T))
+  nameWithType: IEquatableExtensions.IsInSet<T>(T?, IEnumerable<T?>)
+  nameWithType.vb: IEquatableExtensions.IsInSet(Of T)(T, IEnumerable(Of T))
+- uid: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet``1(``0,``0)
+  name: IsInSet<T>(T?, T?)
+  href: api/Wolfgang.Extensions.IEquatable.IEquatableExtensions.html#Wolfgang_Extensions_IEquatable_IEquatableExtensions_IsInSet__1___0___0_
+  commentId: M:Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet``1(``0,``0)
+  name.vb: IsInSet(Of T)(T, T)
+  fullName: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet<T>(T?, T?)
+  fullName.vb: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet(Of T)(T, T)
+  nameWithType: IEquatableExtensions.IsInSet<T>(T?, T?)
+  nameWithType.vb: IEquatableExtensions.IsInSet(Of T)(T, T)
+- uid: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet``1(``0,``0,``0)
+  name: IsInSet<T>(T?, T?, T?)
+  href: api/Wolfgang.Extensions.IEquatable.IEquatableExtensions.html#Wolfgang_Extensions_IEquatable_IEquatableExtensions_IsInSet__1___0___0___0_
+  commentId: M:Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet``1(``0,``0,``0)
+  name.vb: IsInSet(Of T)(T, T, T)
+  fullName: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet<T>(T?, T?, T?)
+  fullName.vb: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet(Of T)(T, T, T)
+  nameWithType: IEquatableExtensions.IsInSet<T>(T?, T?, T?)
+  nameWithType.vb: IEquatableExtensions.IsInSet(Of T)(T, T, T)
+- uid: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet``1(``0,``0,``0,``0)
+  name: IsInSet<T>(T?, T?, T?, T?)
+  href: api/Wolfgang.Extensions.IEquatable.IEquatableExtensions.html#Wolfgang_Extensions_IEquatable_IEquatableExtensions_IsInSet__1___0___0___0___0_
+  commentId: M:Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet``1(``0,``0,``0,``0)
+  name.vb: IsInSet(Of T)(T, T, T, T)
+  fullName: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet<T>(T?, T?, T?, T?)
+  fullName.vb: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet(Of T)(T, T, T, T)
+  nameWithType: IEquatableExtensions.IsInSet<T>(T?, T?, T?, T?)
+  nameWithType.vb: IEquatableExtensions.IsInSet(Of T)(T, T, T, T)
+- uid: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet``1(``0,``0[])
+  name: IsInSet<T>(T?, params T?[])
+  href: api/Wolfgang.Extensions.IEquatable.IEquatableExtensions.html#Wolfgang_Extensions_IEquatable_IEquatableExtensions_IsInSet__1___0___0___
+  commentId: M:Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet``1(``0,``0[])
+  name.vb: IsInSet(Of T)(T, ParamArray T())
+  fullName: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet<T>(T?, params T?[])
+  fullName.vb: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet(Of T)(T, ParamArray T())
+  nameWithType: IEquatableExtensions.IsInSet<T>(T?, params T?[])
+  nameWithType.vb: IEquatableExtensions.IsInSet(Of T)(T, ParamArray T())
+- uid: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet*
+  name: IsNotInSet
+  href: api/Wolfgang.Extensions.IEquatable.IEquatableExtensions.html#Wolfgang_Extensions_IEquatable_IEquatableExtensions_IsNotInSet_
+  commentId: Overload:Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet
+  isSpec: "True"
+  fullName: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet
+  nameWithType: IEquatableExtensions.IsNotInSet
+- uid: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet``1(``0,System.Collections.Generic.ICollection{``0})
+  name: IsNotInSet<T>(T?, ICollection<T?>)
+  href: api/Wolfgang.Extensions.IEquatable.IEquatableExtensions.html#Wolfgang_Extensions_IEquatable_IEquatableExtensions_IsNotInSet__1___0_System_Collections_Generic_ICollection___0__
+  commentId: M:Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet``1(``0,System.Collections.Generic.ICollection{``0})
+  name.vb: IsNotInSet(Of T)(T, ICollection(Of T))
+  fullName: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet<T>(T?, System.Collections.Generic.ICollection<T?>)
+  fullName.vb: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet(Of T)(T, System.Collections.Generic.ICollection(Of T))
+  nameWithType: IEquatableExtensions.IsNotInSet<T>(T?, ICollection<T?>)
+  nameWithType.vb: IEquatableExtensions.IsNotInSet(Of T)(T, ICollection(Of T))
+- uid: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet``1(``0,System.Collections.Generic.IEnumerable{``0})
+  name: IsNotInSet<T>(T?, IEnumerable<T?>)
+  href: api/Wolfgang.Extensions.IEquatable.IEquatableExtensions.html#Wolfgang_Extensions_IEquatable_IEquatableExtensions_IsNotInSet__1___0_System_Collections_Generic_IEnumerable___0__
+  commentId: M:Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet``1(``0,System.Collections.Generic.IEnumerable{``0})
+  name.vb: IsNotInSet(Of T)(T, IEnumerable(Of T))
+  fullName: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet<T>(T?, System.Collections.Generic.IEnumerable<T?>)
+  fullName.vb: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet(Of T)(T, System.Collections.Generic.IEnumerable(Of T))
+  nameWithType: IEquatableExtensions.IsNotInSet<T>(T?, IEnumerable<T?>)
+  nameWithType.vb: IEquatableExtensions.IsNotInSet(Of T)(T, IEnumerable(Of T))
+- uid: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet``1(``0,``0)
+  name: IsNotInSet<T>(T?, T?)
+  href: api/Wolfgang.Extensions.IEquatable.IEquatableExtensions.html#Wolfgang_Extensions_IEquatable_IEquatableExtensions_IsNotInSet__1___0___0_
+  commentId: M:Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet``1(``0,``0)
+  name.vb: IsNotInSet(Of T)(T, T)
+  fullName: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet<T>(T?, T?)
+  fullName.vb: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet(Of T)(T, T)
+  nameWithType: IEquatableExtensions.IsNotInSet<T>(T?, T?)
+  nameWithType.vb: IEquatableExtensions.IsNotInSet(Of T)(T, T)
+- uid: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet``1(``0,``0,``0)
+  name: IsNotInSet<T>(T?, T?, T?)
+  href: api/Wolfgang.Extensions.IEquatable.IEquatableExtensions.html#Wolfgang_Extensions_IEquatable_IEquatableExtensions_IsNotInSet__1___0___0___0_
+  commentId: M:Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet``1(``0,``0,``0)
+  name.vb: IsNotInSet(Of T)(T, T, T)
+  fullName: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet<T>(T?, T?, T?)
+  fullName.vb: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet(Of T)(T, T, T)
+  nameWithType: IEquatableExtensions.IsNotInSet<T>(T?, T?, T?)
+  nameWithType.vb: IEquatableExtensions.IsNotInSet(Of T)(T, T, T)
+- uid: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet``1(``0,``0,``0,``0)
+  name: IsNotInSet<T>(T?, T?, T?, T?)
+  href: api/Wolfgang.Extensions.IEquatable.IEquatableExtensions.html#Wolfgang_Extensions_IEquatable_IEquatableExtensions_IsNotInSet__1___0___0___0___0_
+  commentId: M:Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet``1(``0,``0,``0,``0)
+  name.vb: IsNotInSet(Of T)(T, T, T, T)
+  fullName: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet<T>(T?, T?, T?, T?)
+  fullName.vb: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet(Of T)(T, T, T, T)
+  nameWithType: IEquatableExtensions.IsNotInSet<T>(T?, T?, T?, T?)
+  nameWithType.vb: IEquatableExtensions.IsNotInSet(Of T)(T, T, T, T)
+- uid: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet``1(``0,``0[])
+  name: IsNotInSet<T>(T?, params T?[])
+  href: api/Wolfgang.Extensions.IEquatable.IEquatableExtensions.html#Wolfgang_Extensions_IEquatable_IEquatableExtensions_IsNotInSet__1___0___0___
+  commentId: M:Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet``1(``0,``0[])
+  name.vb: IsNotInSet(Of T)(T, ParamArray T())
+  fullName: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet<T>(T?, params T?[])
+  fullName.vb: Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet(Of T)(T, ParamArray T())
+  nameWithType: IEquatableExtensions.IsNotInSet<T>(T?, params T?[])
+  nameWithType.vb: IEquatableExtensions.IsNotInSet(Of T)(T, ParamArray T())
+- uid: Wolfgang.Extensions.IEquatable.IEquatableExtensions.NotEqual*
+  name: NotEqual
+  href: api/Wolfgang.Extensions.IEquatable.IEquatableExtensions.html#Wolfgang_Extensions_IEquatable_IEquatableExtensions_NotEqual_
+  commentId: Overload:Wolfgang.Extensions.IEquatable.IEquatableExtensions.NotEqual
+  isSpec: "True"
+  fullName: Wolfgang.Extensions.IEquatable.IEquatableExtensions.NotEqual
+  nameWithType: IEquatableExtensions.NotEqual
+- uid: Wolfgang.Extensions.IEquatable.IEquatableExtensions.NotEqual``1(``0,``0)
+  name: NotEqual<T>(T?, T?)
+  href: api/Wolfgang.Extensions.IEquatable.IEquatableExtensions.html#Wolfgang_Extensions_IEquatable_IEquatableExtensions_NotEqual__1___0___0_
+  commentId: M:Wolfgang.Extensions.IEquatable.IEquatableExtensions.NotEqual``1(``0,``0)
+  name.vb: NotEqual(Of T)(T, T)
+  fullName: Wolfgang.Extensions.IEquatable.IEquatableExtensions.NotEqual<T>(T?, T?)
+  fullName.vb: Wolfgang.Extensions.IEquatable.IEquatableExtensions.NotEqual(Of T)(T, T)
+  nameWithType: IEquatableExtensions.NotEqual<T>(T?, T?)
+  nameWithType.vb: IEquatableExtensions.NotEqual(Of T)(T, T)
