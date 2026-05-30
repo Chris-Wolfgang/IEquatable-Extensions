@@ -68,10 +68,20 @@ if (lhs.NotEqual(rhs))
 ```
 
 All methods are pure: they return a `bool` and never mutate the input or the
-set. Equality semantics follow the framework `Equals` contract — value types
-compare structurally; reference types use `Equals(object)` unless `T`
-implements `IEquatable<T>`, in which case the strongly-typed `Equals(T)` is
-preferred.
+set.
+
+Equality semantics depend on the overload:
+
+- **Single-pair overloads** (`IsInSet(T t1)`, `IsInSet(T t1, T t2)`, `NotEqual(T)`, ...)
+  use `static object.Equals(object, object)`. That call boxes value types and
+  uses `Object.Equals` virtual dispatch — it does **not** prefer the
+  strongly-typed `IEquatable<T>.Equals(T)` overload. A future revision may
+  switch to `EqualityComparer<T>.Default` to avoid both the boxing and the
+  virtual call (tracked separately).
+- **Collection overloads** (`params T[]`, `IEnumerable<T>`, `ICollection<T>`)
+  use `Enumerable.Contains` / `ICollection<T>.Contains`, both of which route
+  through `EqualityComparer<T>.Default`. That comparer **does** prefer
+  `IEquatable<T>.Equals(T)` when `T` implements it.
 
 ---
 
@@ -102,10 +112,11 @@ authoritative list (kept in sync with source on every release), see the
   reference annotations — they're declared as plain `T`. The runtime behaviour
   is identical; only the compile-time analysis differs.
 - **Collection overload preference.** When the source is already an
-  `ICollection<T>`, the `ICollection<T>` overload avoids the
-  `IEnumerable<T>.GetEnumerator()` indirection. When it's an `IEnumerable<T>`
-  the enumerable overload is used — both ultimately delegate to
-  `Enumerable.Contains` for the lookup.
+  `ICollection<T>`, the `ICollection<T>` overload calls
+  `ICollection<T>.Contains` directly — for types like `HashSet<T>` that's
+  an O(1) hash lookup. When the source is an `IEnumerable<T>` the
+  enumerable overload delegates to `Enumerable.Contains` (LINQ), which is
+  O(N) and routes through `EqualityComparer<T>.Default`.
 
 ### Examples
 
