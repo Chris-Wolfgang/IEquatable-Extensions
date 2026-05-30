@@ -19,6 +19,7 @@
     <File Path=".github/ISSUE_TEMPLATE/feature_request.md" />
   </Folder>
   <Folder Name="/.root/.github/workflows/">
+    <File Path=".github/workflows/benchmarks.yaml" />
     <File Path=".github/workflows/create-labels.yaml" />
     <File Path=".github/workflows/docfx.yaml" />
     <File Path=".github/workflows/pr.yaml" />
