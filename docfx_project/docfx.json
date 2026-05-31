@@ -13,15 +13,17 @@
       "dest": "api",
       "properties": {
         "TargetFramework": "net8.0"
-      }
+      },
+      "disableGitFeatures": false,
+      "disableDefaultFilter": false
     }
   ],
   "build": {
     "content": [
       {
-		"files": [
-			"**/*.{md,yml}"
-		],
+        "files": [
+          "**/*.{md,yml}"
+        ],
         "exclude": [
           "_site/**"
         ]
@@ -30,19 +32,30 @@
     "resource": [
       {
         "files": [
-          "images/**"
+          "logo.svg",
+          "images/**",
+          "public/**",
+          "versions.json"
         ]
       }
     ],
     "output": "_site",
     "template": [
+      "default",
       "modern",
-      "default"
+      "modern-dark"
     ],
     "globalMetadata": {
       "_appName": "Wolfgang.Extensions.IEquatable",
-      "_appTitle": "Wolfgang.Extensions.IEquatable",
+      "_appTitle": "Wolfgang.Extensions.IEquatable Documentation",
+      "_appLogoPath": "logo.svg",
       "_enableSearch": true,
+      "_appFooter": "Made with DocFX <script>(function(){var r='/';if(window.location.hostname.endsWith('.github.io')){var s=window.location.pathname.split('/').filter(Boolean);if(s.length)r='/'+s[0]+'/';}var t=document.createElement('script');t.src=r+'public/version-picker.js';t.async=true;document.head.appendChild(t);})();</script>",
+      "_disableSidebar": false,
+      "_disableTocFilter": false,
+      "_enableDarkMode": true,
+      "colorMode": "dark",
+      "_baseUrl": "https://Chris-Wolfgang.github.io/IEquatable-Extensions/",
       "pdf": true
     }
   }
