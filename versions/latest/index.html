@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Title | Wolfgang.Extensions.IEquatable Documentation </title>
+      <title>Wolfgang.Extensions.IEquatable | Wolfgang.Extensions.IEquatable Documentation </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Title | Wolfgang.Extensions.IEquatable Documentation ">
+      <meta name="title" content="Wolfgang.Extensions.IEquatable | Wolfgang.Extensions.IEquatable Documentation ">
       
       
       <link rel="icon" href="favicon.ico">
@@ -71,10 +71,43 @@
         </div>
 
         <article data-uid="">
-<h1 id="title">Title</h1>
+<h1 id="wolfgangextensionsiequatable">Wolfgang.Extensions.IEquatable</h1>
 
-<h2 id="quick-start-notes">Quick Start Notes:</h2>
-<!--1. Add images to the *images* folder if the file is referencing an image.-->
+<p>A lightweight .NET library of extension methods that simplify common equality
+comparison patterns — concise membership checks (<code>IsInSet</code> / <code>IsNotInSet</code>) and a
+fluent <code>NotEqual</code> complement to <code>Equals</code>.</p>
+<h2 id="quick-start">Quick Start</h2>
+<pre><code class="lang-csharp">using Wolfgang.Extensions.IEquatable;
+
+// Membership check instead of a verbose OR chain
+if (status.IsInSet(&quot;active&quot;, &quot;pending&quot;, &quot;approved&quot;))
+{
+    // ...
+}
+
+// Inverse — instead of a verbose AND chain
+if (role.IsNotInSet(&quot;admin&quot;, &quot;moderator&quot;, &quot;owner&quot;))
+{
+    throw new UnauthorizedAccessException();
+}
+
+// Fluent inequality
+if (currentVersion.NotEqual(supportedVersion))
+{
+    // ...
+}
+</code></pre>
+<h2 id="where-to-next">Where to next</h2>
+<ul>
+<li><a href="docs/introduction.html">Introduction</a> — what the library is and when to use it</li>
+<li><a href="docs/getting-started.html">Getting Started</a> — install and first usage</li>
+<li><a href="docs/setup.html">Setup</a> — configuration and integration scenarios</li>
+<li><a href="api/Wolfgang.Extensions.IEquatable.IEquatableExtensions.html">API Reference</a> — every method, generated from source</li>
+</ul>
+<h2 id="install">Install</h2>
+<pre><code class="lang-bash">dotnet add package Wolfgang.Extensions.IEquatable
+</code></pre>
+<p>Targets .NET Framework 4.6.2, .NET Standard 2.0, .NET 8.0, and .NET 10.0.</p>
 
 </article>
 

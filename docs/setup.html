@@ -117,32 +117,36 @@
 <p>For most projects, a standard NuGet package installation is sufficient:</p>
 <pre><code class="lang-bash">dotnet add package Wolfgang.Extensions.IEquatable
 </code></pre>
-<h3 id="development-build-installation">Development Build Installation</h3>
-<p>To use the latest development build from a local source:</p>
+<h3 id="local-build-installation">Local Build Installation</h3>
+<p>To build and consume the package from a local source:</p>
 <ol>
 <li><p>Clone the repository:</p>
 <pre><code class="lang-bash">git clone https://github.com/Chris-Wolfgang/IEquatable-Extensions.git
 cd IEquatable-Extensions
 </code></pre>
 </li>
-<li><p>Checkout the develop branch:</p>
-<pre><code class="lang-bash">git checkout develop
-</code></pre>
-</li>
 <li><p>Build the project:</p>
 <pre><code class="lang-bash">dotnet build --configuration Release
 </code></pre>
 </li>
-<li><p>Pack the NuGet package:</p>
+<li><p>Pack the NuGet package (the <code>.nupkg</code> is written to the project's
+<code>bin/Release/</code> directory):</p>
 <pre><code class="lang-bash">dotnet pack --configuration Release
 </code></pre>
 </li>
-<li><p>Add the local package source:</p>
-<pre><code class="lang-bash">dotnet nuget add source ./artifacts/packages/Release --name LocalIEquatableExtensions
+<li><p>Add the output directory as a local package source. <code>dotnet nuget add source</code> records the path verbatim in your user-global NuGet config, so
+it must be an <strong>absolute</strong> path — a relative path would stop resolving
+once you run <code>dotnet</code> from a different directory:</p>
+<pre><code class="lang-bash"># from the cloned repo root; resolves to an absolute path
+dotnet nuget add source &quot;$(pwd)/src/Wolfgang.Extensions.IEquatable/bin/Release&quot; --name LocalIEquatableExtensions
 </code></pre>
+<p>On Windows PowerShell, use <code>(Resolve-Path ./src/Wolfgang.Extensions.IEquatable/bin/Release)</code> instead of <code>$(pwd)/...</code>.</p>
 </li>
-<li><p>Install from the local source:</p>
-<pre><code class="lang-bash">dotnet add package Wolfgang.Extensions.IEquatable --source LocalIEquatableExtensions
+<li><p>Install from the local source — run this <strong>in your consuming project</strong>,
+not in the library repo (<code>dotnet add package</code> targets the project in
+the current directory):</p>
+<pre><code class="lang-bash">cd /path/to/your/project
+dotnet add package Wolfgang.Extensions.IEquatable --source LocalIEquatableExtensions
 </code></pre>
 </li>
 </ol>
