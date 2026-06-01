@@ -37,9 +37,9 @@ For most projects, a standard NuGet package installation is sufficient:
 dotnet add package Wolfgang.Extensions.IEquatable
 ```
 
-### Development Build Installation
+### Local Build Installation
 
-To use the latest development build from a local source:
+To build and consume the package from a local source:
 
 1. Clone the repository:
    ```bash
@@ -47,28 +47,32 @@ To use the latest development build from a local source:
    cd IEquatable-Extensions
    ```
 
-2. Checkout the develop branch:
-   ```bash
-   git checkout develop
-   ```
-
-3. Build the project:
+2. Build the project:
    ```bash
    dotnet build --configuration Release
    ```
 
-4. Pack the NuGet package:
+3. Pack the NuGet package (the `.nupkg` is written to the project's
+   `bin/Release/` directory):
    ```bash
    dotnet pack --configuration Release
    ```
 
-5. Add the local package source:
+4. Add the output directory as a local package source. `dotnet nuget add
+   source` records the path verbatim in your user-global NuGet config, so
+   it must be an **absolute** path — a relative path would stop resolving
+   once you run `dotnet` from a different directory:
    ```bash
-   dotnet nuget add source ./artifacts/packages/Release --name LocalIEquatableExtensions
+   # from the cloned repo root; resolves to an absolute path
+   dotnet nuget add source "$(pwd)/src/Wolfgang.Extensions.IEquatable/bin/Release" --name LocalIEquatableExtensions
    ```
+   On Windows PowerShell, use `(Resolve-Path ./src/Wolfgang.Extensions.IEquatable/bin/Release)` instead of `$(pwd)/...`.
 
-6. Install from the local source:
+5. Install from the local source — run this **in your consuming project**,
+   not in the library repo (`dotnet add package` targets the project in
+   the current directory):
    ```bash
+   cd /path/to/your/project
    dotnet add package Wolfgang.Extensions.IEquatable --source LocalIEquatableExtensions
    ```
 
