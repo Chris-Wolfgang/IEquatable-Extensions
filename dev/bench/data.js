@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1781892363814,
+  "lastUpdate": 1785191013525,
   "repoUrl": "https://github.com/Chris-Wolfgang/IEquatable-Extensions",
   "entries": {
     "BenchmarkDotNet": [
@@ -180,6 +180,96 @@ window.BENCHMARK_DATA = {
             "value": 26.152511845032375,
             "unit": "ns",
             "range": "± 0.13583309022754778"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "210299580+Chris-Wolfgang@users.noreply.github.com",
+            "name": "Chris Wolfgang",
+            "username": "Chris-Wolfgang"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "25220838c580670a4a0d33754a050e7018ca92fc",
+          "message": "Merge pull request #194 from Chris-Wolfgang/dependabot/github_actions/github-actions-b93e283e24\n\nbuild(deps): bump the github-actions group with 2 updates",
+          "timestamp": "2026-07-27T18:20:40-04:00",
+          "tree_id": "ac8bf8d98f9eb254c29d0281c3e7e0cf41bef169",
+          "url": "https://github.com/Chris-Wolfgang/IEquatable-Extensions/commit/25220838c580670a4a0d33754a050e7018ca92fc"
+        },
+        "date": 1785191011725,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_1",
+            "value": 26.593959500392277,
+            "unit": "ns",
+            "range": "± 0.08933362778660096"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_2",
+            "value": 52.0050233801206,
+            "unit": "ns",
+            "range": "± 0.2128770368745932"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_3",
+            "value": 79.31727468967438,
+            "unit": "ns",
+            "range": "± 0.2651357429859299"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ParamsArray",
+            "value": 4.390351307888825,
+            "unit": "ns",
+            "range": "± 0.26589546090435545"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_IEnumerable_FromList",
+            "value": 5.068634661535422,
+            "unit": "ns",
+            "range": "± 0.01696618577975578"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_IEnumerable_Iterator",
+            "value": 25.742436697085697,
+            "unit": "ns",
+            "range": "± 0.2533409060180939"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ICollection_List",
+            "value": 5.141306787729263,
+            "unit": "ns",
+            "range": "± 0.09452325122422425"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ICollection_HashSet",
+            "value": 2.6868841846783957,
+            "unit": "ns",
+            "range": "± 0.0037990256673380083"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsNotInSet_1",
+            "value": 25.45924402276675,
+            "unit": "ns",
+            "range": "± 0.16587086570139092"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsNotInSet_ParamsArray",
+            "value": 4.153334841132164,
+            "unit": "ns",
+            "range": "± 0.06542956000494994"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.NotEqual",
+            "value": 25.872246086597443,
+            "unit": "ns",
+            "range": "± 0.2889324651383593"
           }
         ]
       }
