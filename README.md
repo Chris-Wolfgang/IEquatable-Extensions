@@ -144,19 +144,15 @@ if (currentVersion.NotEqual(supportedVersion))
 
 ---
 
-## 🧪 Target Frameworks
+## 🎯 Supported Frameworks
 
-| Framework | Supported |
-|---|---|
-| .NET Framework 4.6.2 | ✅ |
-| .NET Standard 2.0   | ✅ |
-| .NET 8.0            | ✅ |
-| .NET 10.0           | ✅ |
+This library targets:
 
-The package multi-targets to keep the dependency footprint small on the
-modern runtimes while still supporting legacy .NET Framework consumers.
+- **.NET Framework:** 4.6.2
+- **.NET Standard:** 2.0
+- **.NET:** 8.0, 10.0
 
----
+See the [NuGet package page](https://www.nuget.org/packages/Wolfgang.Extensions.IEquatable/) for the authoritative per-TFM compatibility matrix.
 
 ## 🔍 Code Quality & Static Analysis
 
