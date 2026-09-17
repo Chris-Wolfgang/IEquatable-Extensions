@@ -1,0 +1,19 @@
+# gitleaks configuration
+# https://github.com/gitleaks/gitleaks
+#
+# Add allowlist rules here to suppress false positives from test fixtures,
+# example configs, or documentation.
+
+title = "gitleaks config"
+
+# REQUIRED. gitleaks loads this file INSTEAD of its built-in rules whenever it exists,
+# so without this block the file defines zero detection rules and every scan passes.
+[extend]
+useDefault = true
+
+[allowlist]
+  description = "Global allowlist"
+  paths = [
+    '''(^|/)tests?/.*fixtures?/''',
+    '''(^|/)tests?/.*testdata/''',
+  ]
