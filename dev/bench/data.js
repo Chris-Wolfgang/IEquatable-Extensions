@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1785191013525,
+  "lastUpdate": 1789611586609,
   "repoUrl": "https://github.com/Chris-Wolfgang/IEquatable-Extensions",
   "entries": {
     "BenchmarkDotNet": [
@@ -270,6 +270,96 @@ window.BENCHMARK_DATA = {
             "value": 25.872246086597443,
             "unit": "ns",
             "range": "± 0.2889324651383593"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "210299580+Chris-Wolfgang@users.noreply.github.com",
+            "name": "Chris Wolfgang",
+            "username": "Chris-Wolfgang"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "c2f8776e824236d4d7f39c30e57f3be9bbb43abd",
+          "message": "ci: pin every workflow action to a commit SHA with an exact # vX.Y.Z comment (#220)\n\nRan repo-template's scripts/pin-actions.ps1 -PinTags: tag references become\nSHA pins and major-only comments (# v7) become the exact tag on the pinned\ncommit (# v7.0.1), so zizmor's ref-version-mismatch stops firing when the\nmajor tag moves on. Only the ref/comment text changed. Dependabot keeps the\nprecision it finds, so this stays converted.\n\n4 already exact, 43 line(s) rewritten, 42 tag reference(s), 0 pinned SHA(s) with no tag\n\nRefs Chris-Wolfgang/repo-template#447\n\nCo-authored-by: Chris Wolfgang <cwolfgan@ptd.net>\nCo-authored-by: Claude Opus 5 <noreply@anthropic.com>",
+          "timestamp": "2026-09-16T22:16:53-04:00",
+          "tree_id": "64a183df0831aab74c914be68e9a0a6db5057300",
+          "url": "https://github.com/Chris-Wolfgang/IEquatable-Extensions/commit/c2f8776e824236d4d7f39c30e57f3be9bbb43abd"
+        },
+        "date": 1789611583397,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_1",
+            "value": 25.848888496557873,
+            "unit": "ns",
+            "range": "± 0.0628697821177278"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_2",
+            "value": 50.52447563409805,
+            "unit": "ns",
+            "range": "± 0.3775585549797782"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_3",
+            "value": 75.5055302977562,
+            "unit": "ns",
+            "range": "± 0.35590532365798017"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ParamsArray",
+            "value": 4.3780485565463705,
+            "unit": "ns",
+            "range": "± 0.18645944308777948"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_IEnumerable_FromList",
+            "value": 5.045661906401317,
+            "unit": "ns",
+            "range": "± 0.010328138052603391"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_IEnumerable_Iterator",
+            "value": 25.719785690307617,
+            "unit": "ns",
+            "range": "± 0.4081180004574821"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ICollection_List",
+            "value": 5.1130906616648035,
+            "unit": "ns",
+            "range": "± 0.08957240796887025"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ICollection_HashSet",
+            "value": 2.872989796102047,
+            "unit": "ns",
+            "range": "± 0.014775422043263809"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsNotInSet_1",
+            "value": 25.751032521327335,
+            "unit": "ns",
+            "range": "± 0.1511606496012346"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsNotInSet_ParamsArray",
+            "value": 4.149180958668391,
+            "unit": "ns",
+            "range": "± 0.012426155119263855"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.NotEqual",
+            "value": 25.492826282978058,
+            "unit": "ns",
+            "range": "± 0.1414426679984937"
           }
         ]
       }
