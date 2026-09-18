@@ -9,6 +9,7 @@ A collection of extension methods for types that implement `IEquatable<T>` — c
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![.NET](https://img.shields.io/badge/.NET-Multi--Targeted-purple.svg)](https://dotnet.microsoft.com/)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?logo=github)](https://github.com/Chris-Wolfgang/IEquatable-Extensions)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/Chris-Wolfgang/IEquatable-Extensions/badge)](https://scorecard.dev/viewer/?uri=github.com/Chris-Wolfgang/IEquatable-Extensions)
 
 ---
 
