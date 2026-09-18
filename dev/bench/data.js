@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1789611586609,
+  "lastUpdate": 1789733969377,
   "repoUrl": "https://github.com/Chris-Wolfgang/IEquatable-Extensions",
   "entries": {
     "BenchmarkDotNet": [
@@ -360,6 +360,96 @@ window.BENCHMARK_DATA = {
             "value": 25.492826282978058,
             "unit": "ns",
             "range": "± 0.1414426679984937"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b834cd587ba4da8f845a1af0d7cb29b8cad51d6b",
+          "message": "chore(deps): bump benchmark-action/github-action-benchmark (#225)\n\nBumps the github-actions group with 1 update: [benchmark-action/github-action-benchmark](https://github.com/benchmark-action/github-action-benchmark).\n\n\nUpdates `benchmark-action/github-action-benchmark` from 1.22.1 to 1.22.2\n- [Release notes](https://github.com/benchmark-action/github-action-benchmark/releases)\n- [Changelog](https://github.com/benchmark-action/github-action-benchmark/blob/master/CHANGELOG.md)\n- [Commits](https://github.com/benchmark-action/github-action-benchmark/compare/52576c92bccf6ac60c8223ec7eb2565637cae9ba...4322e5726e6334590d251fc4f92bec0efafc45dc)\n\n---\nupdated-dependencies:\n- dependency-name: benchmark-action/github-action-benchmark\n  dependency-version: 1.22.2\n  dependency-type: direct:production\n  update-type: version-update:semver-patch\n  dependency-group: github-actions\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-09-18T08:16:42-04:00",
+          "tree_id": "4dfbcf7ccb7959aafc318faf8e75064d0af8bd6d",
+          "url": "https://github.com/Chris-Wolfgang/IEquatable-Extensions/commit/b834cd587ba4da8f845a1af0d7cb29b8cad51d6b"
+        },
+        "date": 1789733968068,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_1",
+            "value": 29.202727019786835,
+            "unit": "ns",
+            "range": "± 0.3828137676865298"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_2",
+            "value": 51.41933949788412,
+            "unit": "ns",
+            "range": "± 0.3454084887433548"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_3",
+            "value": 78.64425373077393,
+            "unit": "ns",
+            "range": "± 0.032701927562030816"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ParamsArray",
+            "value": 4.487153830627601,
+            "unit": "ns",
+            "range": "± 0.37468890174931413"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_IEnumerable_FromList",
+            "value": 5.073612290124099,
+            "unit": "ns",
+            "range": "± 0.025547317812282016"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_IEnumerable_Iterator",
+            "value": 27.25477296113968,
+            "unit": "ns",
+            "range": "± 0.28247747547544066"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ICollection_List",
+            "value": 5.4739088614781695,
+            "unit": "ns",
+            "range": "± 0.4503981459223978"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ICollection_HashSet",
+            "value": 2.687124994893869,
+            "unit": "ns",
+            "range": "± 0.0009637146531697747"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsNotInSet_1",
+            "value": 26.594186464945476,
+            "unit": "ns",
+            "range": "± 0.1627031317272991"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsNotInSet_ParamsArray",
+            "value": 4.225714288651943,
+            "unit": "ns",
+            "range": "± 0.07549615516073305"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.NotEqual",
+            "value": 26.712036609649658,
+            "unit": "ns",
+            "range": "± 0.03295122233589944"
           }
         ]
       }
