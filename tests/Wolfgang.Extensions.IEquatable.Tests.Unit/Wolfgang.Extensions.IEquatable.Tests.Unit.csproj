@@ -8,7 +8,6 @@
 		</TargetFrameworks>
 		<Version>1.0.0</Version>
 		<LangVersion>latest</LangVersion>
-		<ImplicitUsings>enable</ImplicitUsings>
 		<IsPackable>false</IsPackable>
 		<IsTestProject>true</IsTestProject>
 		<Copyright>Copyright 2025 Chris Wolfgang</Copyright>
@@ -92,11 +91,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Wolfgang.Extensions.IEquatable\Wolfgang.Extensions.IEquatable.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Using Include="Xunit" />
-		<Using Include="Wolfgang.Extensions.IEquatable" />
 	</ItemGroup>
 
 	<!-- Analyzer PackageReferences are centralized in Directory.Build.props -->
