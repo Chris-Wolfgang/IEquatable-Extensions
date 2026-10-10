@@ -160,7 +160,7 @@ public class NotEqual
     [Fact]
     public void NotEqual_T_when_T_is_Class_and_left_is_not_null_and_right_is_null_returns_true()
     {
-        IEquatableTestClass sut = new IEquatableTestClass(3)!;
+        IEquatableTestClass sut = new IEquatableTestClass(3);
         IEquatableTestClass other = null!;
         Assert.True(sut.NotEqual(other));
     }

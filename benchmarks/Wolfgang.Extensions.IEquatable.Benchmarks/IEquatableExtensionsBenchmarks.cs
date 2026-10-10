@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using BenchmarkDotNet.Attributes;
-using Wolfgang.Extensions.IEquatable;
 
 namespace Wolfgang.Extensions.IEquatable.Benchmarks;
 
@@ -90,12 +89,12 @@ public class IEquatableExtensionsBenchmarks
 
 
     [Benchmark]
-    public bool IsInSet_ICollection_List() => Sample.IsInSet((ICollection<int?>)ListSet);
+    public bool IsInSet_ICollection_List() => Sample.IsInSet(ListSet);
 
 
 
     [Benchmark]
-    public bool IsInSet_ICollection_HashSet() => Sample.IsInSet((ICollection<int?>)HashSet);
+    public bool IsInSet_ICollection_HashSet() => Sample.IsInSet(HashSet);
 
 
 
