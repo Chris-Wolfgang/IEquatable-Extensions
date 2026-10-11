@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1791101434130,
+  "lastUpdate": 1791700122567,
   "repoUrl": "https://github.com/Chris-Wolfgang/IEquatable-Extensions",
   "entries": {
     "Mutation score": [
@@ -48,6 +48,33 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/Chris-Wolfgang/IEquatable-Extensions/commit/fe805c98f11c676b2b821ca8583fb296a739cd48"
         },
         "date": 1791101430867,
+        "tool": "customBiggerIsBetter",
+        "benches": [
+          {
+            "name": "Mutation score",
+            "value": 94.12,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]",
+            "email": "49699333+dependabot[bot]@users.noreply.github.com"
+          },
+          "committer": {
+            "name": "GitHub",
+            "username": "web-flow",
+            "email": "noreply@github.com"
+          },
+          "id": "41f9888d4abfd9d044c142e25f3a15aa26853275",
+          "message": "chore(deps): bump urllib3 from 2.7.0 to 2.8.0 in /.github/requirements (#701)\n\nBumps [urllib3](https://github.com/urllib3/urllib3) from 2.7.0 to 2.8.0.\n- [Release notes](https://github.com/urllib3/urllib3/releases)\n- [Changelog](https://github.com/urllib3/urllib3/blob/main/CHANGES.rst)\n- [Commits](https://github.com/urllib3/urllib3/compare/2.7.0...2.8.0)\n\n---\nupdated-dependencies:\n- dependency-name: urllib3\n  dependency-version: 2.8.0\n  dependency-type: indirect\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-10-11T01:24:12Z",
+          "url": "https://github.com/Chris-Wolfgang/IEquatable-Extensions/commit/41f9888d4abfd9d044c142e25f3a15aa26853275"
+        },
+        "date": 1791700119196,
         "tool": "customBiggerIsBetter",
         "benches": [
           {
