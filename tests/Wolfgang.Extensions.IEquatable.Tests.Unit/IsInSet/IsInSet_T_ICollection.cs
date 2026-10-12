@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using Xunit;
+
 #pragma warning disable IDE0007
 namespace Wolfgang.Extensions.IEquatable.Tests.Unit.IsInSet;
 

@@ -1,3 +1,5 @@
+using Xunit;
+
 namespace Wolfgang.Extensions.IEquatable.Tests.Unit;
 
 public class NotEqual
