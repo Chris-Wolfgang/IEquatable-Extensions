@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1789733969377,
+  "lastUpdate": 1791831060812,
   "repoUrl": "https://github.com/Chris-Wolfgang/IEquatable-Extensions",
   "entries": {
     "BenchmarkDotNet": [
@@ -450,6 +450,96 @@ window.BENCHMARK_DATA = {
             "value": 26.712036609649658,
             "unit": "ns",
             "range": "± 0.03295122233589944"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "210299580+Chris-Wolfgang@users.noreply.github.com",
+            "name": "Chris Wolfgang",
+            "username": "Chris-Wolfgang"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "f8de181acb7c326d8f91e54dd855c8a442e66835",
+          "message": "chore: explicit usings on every TFM (no implicit/global usings in multi-TFM projects) (#695)\n\nRemove ImplicitUsings and the csproj <Using> items from the multi-target\nsrc and test projects, and add the using directives each file needs.\nWith implicit usings on only some TFMs, single-slice InspectCode reports\nusings the older TFMs genuinely need as RedundantUsingDirective.\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-10-12T14:47:19-04:00",
+          "tree_id": "6d8a98c2f352ac198a7c67b9255c876ebd8608ef",
+          "url": "https://github.com/Chris-Wolfgang/IEquatable-Extensions/commit/f8de181acb7c326d8f91e54dd855c8a442e66835"
+        },
+        "date": 1791831057727,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_1",
+            "value": 25.62419691681862,
+            "unit": "ns",
+            "range": "± 0.36478873302155695"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_2",
+            "value": 51.08218769232432,
+            "unit": "ns",
+            "range": "± 0.7033978160114823"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_3",
+            "value": 78.24395976463954,
+            "unit": "ns",
+            "range": "± 0.6394552562051912"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ParamsArray",
+            "value": 4.184659359355767,
+            "unit": "ns",
+            "range": "± 0.08482186990268348"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_IEnumerable_FromList",
+            "value": 5.085341016451518,
+            "unit": "ns",
+            "range": "± 0.04505091549900526"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_IEnumerable_Iterator",
+            "value": 25.865556438763935,
+            "unit": "ns",
+            "range": "± 0.3686999256735741"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ICollection_List",
+            "value": 5.924367427825928,
+            "unit": "ns",
+            "range": "± 0.010931410410269096"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ICollection_HashSet",
+            "value": 2.68145914375782,
+            "unit": "ns",
+            "range": "± 0.002246946717248391"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsNotInSet_1",
+            "value": 25.689485381046932,
+            "unit": "ns",
+            "range": "± 0.11500024608651521"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsNotInSet_ParamsArray",
+            "value": 4.147063146034877,
+            "unit": "ns",
+            "range": "± 0.0064496804496367195"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.NotEqual",
+            "value": 25.00240422288577,
+            "unit": "ns",
+            "range": "± 0.12469720233003848"
           }
         ]
       }
