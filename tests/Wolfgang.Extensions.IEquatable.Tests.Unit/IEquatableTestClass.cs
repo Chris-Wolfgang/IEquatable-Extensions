@@ -2,7 +2,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Wolfgang.Extensions.IEquatable.Tests.Unit;
 
-[ExcludeFromCodeCoverage]
 [SuppressMessage("Major Code Smell", "S101:Types should be named in PascalCase",
     Justification = "Test class intentionally named after IEquatable<T> for clarity")]
 // ReSharper disable once InconsistentNaming
