@@ -2,10 +2,15 @@
   <Folder Name="/.root/">
     <File Path=".editorconfig" />
     <File Path=".gitignore" />
+    <File Path=".globalconfig" />
+    <File Path="BannedSymbols.txt" />
+    <File Path="CHANGELOG.md" />
     <File Path="CODE_OF_CONDUCT.md" />
     <File Path="CONTRIBUTING.md" />
+    <File Path="Directory.Build.props" />
     <File Path="LICENSE" />
     <File Path="README.md" />
+    <File Path="SECURITY.md" />
   </Folder>
   <Folder Name="/.root/.github/">
     <File Path=".github/CODEOWNERS" />
@@ -15,18 +20,25 @@
   </Folder>
   <Folder Name="/.root/.github/ISSUE_TEMPLATE/">
     <File Path=".github/ISSUE_TEMPLATE/BUG_REPORT.yaml" />
+    <File Path=".github/ISSUE_TEMPLATE/feature_request.yaml" />
+    <File Path=".github/ISSUE_TEMPLATE/maintenance-task.yaml" />
   </Folder>
   <Folder Name="/.root/.github/workflows/">
-    <File Path=".github/workflows/semgrep.yaml" />
-    <File Path=".github/workflows/security-alerts.yml" />
-    <File Path=".github/workflows/scorecard.yaml" />
-    <File Path=".github/workflows/sbom.yaml" />
-    <File Path=".github/workflows/license-audit.yaml" />
     <File Path=".github/workflows/actions-audit.yaml" />
     <File Path=".github/workflows/benchmarks.yaml" />
+    <File Path=".github/workflows/build-all-versions.yaml" />
+    <File Path=".github/workflows/codeql.yaml" />
     <File Path=".github/workflows/docfx.yaml" />
+    <File Path=".github/workflows/license-audit.yaml" />
     <File Path=".github/workflows/pr.yaml" />
+    <File Path=".github/workflows/protected-files.yaml" />
     <File Path=".github/workflows/release.yaml" />
+    <File Path=".github/workflows/sbom.yaml" />
+    <File Path=".github/workflows/scorecard.yaml" />
+    <File Path=".github/workflows/security-alerts.yml" />
+    <File Path=".github/workflows/semgrep.yaml" />
+    <File Path=".github/workflows/sourcelink.yaml" />
+    <File Path=".github/workflows/stryker.yaml" />
   </Folder>
   <Folder Name="/benchmarks/">
     <Project Path="benchmarks/Wolfgang.Extensions.IEquatable.Benchmarks/Wolfgang.Extensions.IEquatable.Benchmarks.csproj" Id="d4e8f1a2-7b3c-4f5e-9a6d-2c8b0e1f3a47" />

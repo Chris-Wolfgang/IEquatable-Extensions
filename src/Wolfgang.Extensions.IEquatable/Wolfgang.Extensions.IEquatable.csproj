@@ -2,7 +2,6 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net462;netstandard2.0;net8.0;net10.0</TargetFrameworks>
-		<LangVersion>latest</LangVersion>
 		<Version>0.3.0</Version>
 		<!-- Pin AssemblyVersion to a fixed binding-stability baseline so consumers
 		     do not need to recompile / add binding redirects on every minor/patch
@@ -12,12 +11,9 @@
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<FileVersion>$([System.Text.RegularExpressions.Regex]::Replace("$(Version)", "[-+].*$", "")).0</FileVersion>
 		<Title>$(AssemblyName)</Title>
-		<Authors>Chris Wolfgang</Authors>
 		<Description>A collection of extension methods for types that implement IEquatable&lt;T&gt;</Description>
-		<Copyright>Copyright 2026 Chris Wolfgang</Copyright>
 		<PackageProjectUrl>https://github.com/Chris-Wolfgang/IEquatable-Extensions</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/Chris-Wolfgang/IEquatable-Extensions</RepositoryUrl>
-		<RepositoryType>git</RepositoryType>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
