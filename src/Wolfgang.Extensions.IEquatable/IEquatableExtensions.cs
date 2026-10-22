@@ -10,7 +10,6 @@ namespace Wolfgang.Extensions.IEquatable;
 // ReSharper disable once InconsistentNaming
 public static class IEquatableExtensions
 {
-
     /// <summary>
     /// Determines if the item is in the specified set of items.
     /// </summary>
@@ -26,6 +25,7 @@ public static class IEquatableExtensions
     {
         return Equals(item, t1);
     }
+
 
 
     /// <summary>
@@ -44,6 +44,7 @@ public static class IEquatableExtensions
     {
         return Equals(item, t1) || Equals(item, t2);
     }
+
 
 
     /// <summary>
