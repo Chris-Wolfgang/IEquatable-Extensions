@@ -1,12 +1,10 @@
 using Xunit;
 
-#pragma warning disable IDE0007
 namespace Wolfgang.Extensions.IEquatable.Tests.Unit.IsNotInSet;
 
 // ReSharper disable once InconsistentNaming
 public class IsNotInSet_T_T1
 {
-
     // ---------------------------------   int   ----------------------------------
 
 
@@ -37,8 +35,8 @@ public class IsNotInSet_T_T1
     [Fact]
     public void IsNotInSet_T_T1_when_T_is_nullable_int_and_T_and_T1_are_both_null_returns_false()
     {
-        int? sut = null!;
-        int? t1 = null!;
+        int? sut = null;
+        int? t1 = null;
         Assert.False(sut.IsNotInSet(t1));
     }
 
@@ -47,7 +45,7 @@ public class IsNotInSet_T_T1
     [Fact]
     public void IsNotInSet_T_T1_when_T_is_nullable_int_and_T_is_null_and_T1_is_not_null_returns_true()
     {
-        int? sut = null!;
+        int? sut = null;
         int? t1 = 5;
         Assert.True(sut.IsNotInSet(t1));
     }
@@ -148,7 +146,6 @@ public class IsNotInSet_T_T1
 
 
 
-
     [Fact]
     public void IsNotInSet_T_T1_when_T_is_string_and_T_has_value_and_T1_is_null_returns_true()
     {
@@ -230,7 +227,6 @@ public class IsNotInSet_T_T1
         IEquatableTestClass t1 = null!;
         Assert.True(sut.IsNotInSet(t1));
     }
-
 
 
 
