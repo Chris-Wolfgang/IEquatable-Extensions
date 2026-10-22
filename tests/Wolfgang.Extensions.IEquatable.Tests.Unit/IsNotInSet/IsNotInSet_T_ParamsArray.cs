@@ -351,6 +351,8 @@ public class IsNotInSet_T_ParamsArray
     {
         var sut = 12345678;
         int[] set = null!;
-        Assert.Throws<ArgumentNullException>(() => sut.IsNotInSet(set));
+        var ex = Assert.Throws<ArgumentNullException>(() => sut.IsNotInSet(set));
+
+        Assert.Equal("set", ex.ParamName);
     }
 }
