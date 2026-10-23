@@ -64,3 +64,53 @@ Tell us in the report how you would like to be named.
 
 Your help is greatly appreciated!
 Responsible disclosure of security vulnerabilities helps protect our entire community.
+
+## Verifying a release
+
+Each release ships artifacts that let a consumer check that the package they downloaded was built
+from this repository, unmodified. Replace `<version>` with the release you are checking;
+`gh release download v<version> --repo Chris-Wolfgang/IEquatable-Extensions` fetches the release
+assets.
+
+### 1. Package signature (`nuget verify`)
+
+NuGet.org applies a **repository signature** to every package it accepts, so this works for every
+published version:
+
+```bash
+nuget verify -Signatures Wolfgang.Extensions.IEquatable.<version>.nupkg
+```
+
+There is no **author signature** yet: that needs a code-signing certificate (tracked in #202).
+
+### 2. Build provenance (SLSA attestation)
+
+`release.yaml` records a Sigstore-backed [SLSA build-provenance](https://slsa.dev/) attestation for
+each `.nupkg` before it is pushed, signed with the workflow's OIDC identity (no stored key). It binds
+the package's SHA-256 digest to this repository, the tagged commit and the `release.yaml` run.
+Verify it with the GitHub CLI:
+
+```bash
+gh attestation verify Wolfgang.Extensions.IEquatable.<version>.nupkg \
+  --repo Chris-Wolfgang/IEquatable-Extensions \
+  --signer-workflow Chris-Wolfgang/IEquatable-Extensions/.github/workflows/release.yaml
+```
+
+The attestation step was added after 0.3.0, so 0.3.0 and earlier have no attestation; the first
+release after it is the first one this check applies to.
+
+### 3. SBOM
+
+Each release attaches a CycloneDX SBOM, `Wolfgang.Extensions.IEquatable.bom.json` (0.3.0 has one),
+listing the package's dependency graph for vulnerability scanning and license review. The package
+has no run-time package dependencies; `license-audit.yaml` checks the full transitive closure
+against an allow-list on every pull request and weekly.
+
+### 4. Rebuild it yourself
+
+[REPRODUCIBLE-BUILD.md](REPRODUCIBLE-BUILD.md) gives the exact rebuild command, how to compare the
+result with the published DLLs, and what an expected near-match looks like.
+
+Together these close the chain: **provenance** (this repository's workflow produced the bytes),
+**signature** (nuget.org has not altered them since), **SBOM** (what is inside) and **rebuild**
+(the source at the tag produces the same code).
