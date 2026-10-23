@@ -65,6 +65,16 @@ Tell us in the report how you would like to be named.
 Your help is greatly appreciated!
 Responsible disclosure of security vulnerabilities helps protect our entire community.
 
+## Release path & compromise scope
+
+Facts a maintainer would need at 2am if the release identity is compromised. Generic incident-response steps (rotating credentials, revoking OAuth apps, publishing advisories, unlisting NuGet packages) are not duplicated here — GitHub's and NuGet's own docs update faster than a checked-in runbook.
+
+- **Release path**: OIDC / NuGet Trusted Publishing via `NuGet/login@v1` in `.github/workflows/release.yaml`. The workflow mints an ephemeral push token per run via OIDC — the release path does not depend on a long-lived API key stored in GitHub secrets or on the NuGet account. During an incident, check the NuGet account for any long-lived API keys anyway (they can be created outside of CI) and delete anything you don't recognize.
+- **Fallback**: none. If Trusted Publishing is compromised, the incident is at the GitHub-account level (the OIDC identity is `Chris-Wolfgang/IEquatable-Extensions`).
+- **Owner**: @Chris-Wolfgang.
+- **Downstream consumers**: no first-party Wolfgang.* repository depends on `Wolfgang.Extensions.IEquatable`; unknown external consumers may exist on nuget.org (public package). Use nuget.org download counts and reverse-dependency search as the incident-time signal.
+- **Package coordinates for unlisting**: `Wolfgang.Extensions.IEquatable` on nuget.org — https://www.nuget.org/packages/Wolfgang.Extensions.IEquatable/. This repository ships exactly one package.
+
 ## Verifying a release
 
 Each release ships artifacts that let a consumer check that the package they downloaded was built
