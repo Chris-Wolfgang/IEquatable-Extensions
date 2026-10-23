@@ -8,7 +8,7 @@ The template in [TEMPLATE-major-version-migration.md](TEMPLATE-major-version-mig
 
 - The release PR that turns over the MAJOR version (0.x → 1.0, 1.x → 2.0, …) adds `vX-to-vN.md` to this folder in the same PR as the breaking code change.
 - The guide is part of the release-prep checklist; a MAJOR bump does not merge without one.
-- Minor / patch releases do NOT get a migration guide — non-breaking by SemVer contract.
+- From 1.0 on, minor / patch releases do NOT get a migration guide — non-breaking by SemVer contract. Before 1.0 see below.
 
 ## Index
 
