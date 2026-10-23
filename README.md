@@ -78,7 +78,7 @@ Equality semantics depend on the overload:
   uses `Object.Equals` virtual dispatch — it does **not** prefer the
   strongly-typed `IEquatable<T>.Equals(T)` overload. A future revision may
   switch to `EqualityComparer<T>.Default` to avoid both the boxing and the
-  virtual call (tracked separately).
+  virtual call (tracked in [#721](https://github.com/Chris-Wolfgang/IEquatable-Extensions/issues/721)).
 - **Collection overloads** (`params T[]`, `IEnumerable<T>`, `ICollection<T>`)
   use `Enumerable.Contains` / `ICollection<T>.Contains`, both of which route
   through `EqualityComparer<T>.Default`. That comparer **does** prefer
@@ -157,7 +157,7 @@ See the [NuGet package page](https://www.nuget.org/packages/Wolfgang.Extensions.
 
 ## 🔍 Code Quality & Static Analysis
 
-This project enforces **strict code quality standards** through **8 specialized analyzers**, an `<TreatWarningsAsErrors>true</TreatWarningsAsErrors>` Release gate, and custom rules:
+This project enforces **strict code quality standards** through **7 analyzers on every build, plus PublicApiAnalyzers once the API baseline files exist**, an `<TreatWarningsAsErrors>true</TreatWarningsAsErrors>` Release gate, and custom rules:
 
 ### Analyzers in Use
 
@@ -168,7 +168,7 @@ This project enforces **strict code quality standards** through **8 specialized 
 5. **Microsoft.CodeAnalysis.BannedApiAnalyzers** — Prevents usage of banned APIs (see `BannedSymbols.txt`); the async-blocking bans in the shared list are inert here since the library is fully synchronous
 6. **Meziantou.Analyzer** — Comprehensive code quality rules
 7. **SonarAnalyzer.CSharp** — Industry-standard code analysis
-8. **Microsoft.CodeAnalysis.PublicApiAnalyzers** — Tracks the public API surface via `PublicAPI.Shipped.txt` / `PublicAPI.Unshipped.txt`; surfaces additions/removals at compile time as a breaking-change review gate
+8. **Microsoft.CodeAnalysis.PublicApiAnalyzers** — Tracks the public API surface via `PublicAPI.Shipped.txt` / `PublicAPI.Unshipped.txt`; surfaces additions/removals at compile time as a breaking-change review gate. `Directory.Build.props` references it only for a project that has those files, so it is active only once `src/Wolfgang.Extensions.IEquatable/` carries them ([#199](https://github.com/Chris-Wolfgang/IEquatable-Extensions/issues/199)).
 
 ---
 
