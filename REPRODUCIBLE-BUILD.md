@@ -1,18 +1,22 @@
 # Reproducible builds
 
-The assemblies in the `Wolfgang.Extensions.IEquatable` package are built deterministically: the same source commit, built with the same .NET SDK on the same operating system, produces byte-identical DLLs and PDBs regardless of the machine or the checkout path. This relies on `Deterministic` and `ContinuousIntegrationBuild` (set when `CI=true`) in `Directory.Build.props`, which normalise source paths, plus SourceLink, which embeds the commit.
+The assemblies in the `Wolfgang.Extensions.IEquatable` package are built deterministically: the same source commit, built with the same .NET SDK, produces byte-identical DLLs and PDBs regardless of the machine, the checkout path or the operating system (Linux or Windows). This relies on `Deterministic` and `ContinuousIntegrationBuild` (set when `CI=true`) in `Directory.Build.props`, which normalise source paths, plus SourceLink, which embeds the commit. Two more settings remove the operating-system inputs: `Directory.Build.targets` rewrites the SDK-generated `AssemblyInfo` / `AssemblyAttributes` sources to LF before compiling (the PDB records their hashes), and `Directory.Build.props` compiles the .NET Framework targets against the `Microsoft.NETFramework.ReferenceAssemblies` package on every OS instead of a locally installed targeting pack. Releases built before these two settings were added are reproducible on the same operating system only.
 
 One input depends on the calendar: once the package takes its copyright line from `Directory.Build.props` (`Copyright (c) <UtcNow.Year> Chris Wolfgang`), a rebuild in a later year changes the `AssemblyCopyright` attribute unless the original year is passed back in (see step 2). Releases up to and including 0.3.0 pin `Copyright 2026 Chris Wolfgang` in the csproj, so for those the year does not matter.
 
 ## What CI checks
 
-The [Reproducible Build](.github/workflows/reproducible-build.yaml) workflow, on each of `ubuntu-latest` and `windows-latest`, builds the commit twice from two different directories, hashes every `.dll` and `.pdb` the `src/` project produces, and fails when the two sets of hashes differ. The `.nupkg` itself is not compared, because a zip records entry timestamps; the files inside are what must match. Both builds run in the same job, so the check cannot detect the year dependence described above.
+The [Reproducible Build](.github/workflows/reproducible-build.yaml) workflow checks three things on every pull request and push to `main`:
 
-Linux and Windows output are **not** compared with each other and are not byte-identical. The SDK writes `obj/*.AssemblyInfo.cs` and `obj/*.AssemblyAttributes.cs` with the operating system's newline, and the PDB records those files' checksums, so PDBs (and the DLL debug-directory bytes derived from them) differ across operating systems. The compiled IL and metadata are the same. Verify on the same operating system as the build you are checking.
+1. On each of `ubuntu-latest` and `windows-latest` it builds the commit twice from two different directories, hashes every `.dll` and `.pdb` the `src/` project produces, and fails when the two sets of hashes differ.
+2. In the same job it packs both builds and compares the two `.nupkg` files **entry by entry** (each entry's name and the SHA-256 of its content). The `.nupkg` file itself is never byte-identical, because a zip records each entry's pack time; the entries are what must match.
+3. A `cross-os` job compares the Linux hashes with the Windows hashes and fails when any `.dll` or `.pdb` differs.
+
+Both builds of step 1 run in the same job, so the check cannot detect the year dependence described above.
 
 ## Verify a release yourself
 
-1. Check out the release tag, on the same operating system as the release build (its `pack-and-validate` job runs on `windows-latest`), with the .NET SDK that job installed. The SDK version is printed in the release run's "Setup .NET" log, but GitHub deletes run logs after 90 days, so for an old release it may no longer be recoverable.
+1. Check out the release tag with the .NET SDK the release's `pack-and-validate` job installed. Any operating system works for a release built with the LF-normalising `Directory.Build.targets`. Older releases, including 0.3.0, must be rebuilt on the release build's operating system (`windows-latest`). The SDK version is printed in the release run's "Setup .NET" log, but GitHub deletes run logs after 90 days, so for an old release it may no longer be recoverable.
 2. Set `CI=true` in the environment and build the library:
    `dotnet build src/Wolfgang.Extensions.IEquatable -c Release -p:ContinuousIntegrationBuild=true -p:NuGetAudit=false`.
    For a release whose csproj no longer pins `<Copyright>`, add `"-p:Copyright=Copyright (c) <year> Chris Wolfgang"`, where `<year>` is the year the release was built (the published DLL's `AssemblyCopyright` attribute shows it). Do **not** pass it for 0.3.0 or earlier: a global property overrides the csproj's own value and changes the DLL. `NuGetAudit=false` is needed for older tags: NuGet's vulnerability audit is time-dependent, so a tag that restored cleanly on release day can fail today with `NU1902` once an advisory is published against one of its build-time packages. It switches off the audit only and does not change the output.
