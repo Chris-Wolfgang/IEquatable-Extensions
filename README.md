@@ -155,6 +155,13 @@ This library targets:
 
 See the [NuGet package page](https://www.nuget.org/packages/Wolfgang.Extensions.IEquatable/) for the authoritative per-TFM compatibility matrix.
 
+## Native AOT
+
+This library is trim- and Native AOT-compatible. **.NET 10 is the lowest version on which Native
+AOT is supported**: on every pull request the unit suite is compiled and run as a native binary
+(`tests/Wolfgang.Extensions.IEquatable.Tests.Aot`). The .NET 8 build passes the trim/AOT analyzers but is not executed
+natively, so Native AOT on .NET 8 is not a supported scenario.
+
 ## 🔍 Code Quality & Static Analysis
 
 This project enforces **strict code quality standards** through **8 specialized analyzers**, an `<TreatWarningsAsErrors>true</TreatWarningsAsErrors>` Release gate, and custom rules:
