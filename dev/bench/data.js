@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1791831060812,
+  "lastUpdate": 1793644369618,
   "repoUrl": "https://github.com/Chris-Wolfgang/IEquatable-Extensions",
   "entries": {
     "BenchmarkDotNet": [
@@ -540,6 +540,96 @@ window.BENCHMARK_DATA = {
             "value": 25.00240422288577,
             "unit": "ns",
             "range": "± 0.12469720233003848"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "210299580+Chris-Wolfgang@users.noreply.github.com",
+            "name": "Chris Wolfgang",
+            "username": "Chris-Wolfgang"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "cad52344251657842ce1822104b9e79bcf1e0fe8",
+          "message": "fix(security): override semgrep's OpenTelemetry pins to 1.45.x (GHSA-xcq7-p3pf-p88h) (#785)\n\nsemgrep 1.182.1 pins opentelemetry-api~=1.37.0, affected by GHSA-xcq7-p3pf-p88h\n(unbounded tracestate parsing, <= 1.45.0; Dependabot alert #37). The OTel\npackages release in lockstep, so the whole family is overridden to 1.45.x /\n0.66bx in semgrep-overrides.txt and semgrep.txt is regenerated with the header\nuv command. Same approach as Enterprise-Service-Bus-Demo #198 and\nETL-SqlBulkCopy #494.\n\nCo-authored-by: Claude Fable 5.1 <noreply@anthropic.com>",
+          "timestamp": "2026-11-02T13:29:49-05:00",
+          "tree_id": "6c62b8e8c467afa59374332f3c81a85f343e4402",
+          "url": "https://github.com/Chris-Wolfgang/IEquatable-Extensions/commit/cad52344251657842ce1822104b9e79bcf1e0fe8"
+        },
+        "date": 1793644366558,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_1",
+            "value": 14.42780970533689,
+            "unit": "ns",
+            "range": "± 0.10191776136647374"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_2",
+            "value": 29.260700225830078,
+            "unit": "ns",
+            "range": "± 0.17080847564307017"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_3",
+            "value": 40.303832272688545,
+            "unit": "ns",
+            "range": "± 0.34959934703540013"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ParamsArray",
+            "value": 1.8493823769191902,
+            "unit": "ns",
+            "range": "± 0.010741503619011303"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_IEnumerable_FromList",
+            "value": 2.338293481618166,
+            "unit": "ns",
+            "range": "± 0.004425127958518343"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_IEnumerable_Iterator",
+            "value": 12.555419956644377,
+            "unit": "ns",
+            "range": "± 0.0541116196322696"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ICollection_List",
+            "value": 2.329224471002817,
+            "unit": "ns",
+            "range": "± 0.0003456863820871434"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ICollection_HashSet",
+            "value": 1.3825553990900517,
+            "unit": "ns",
+            "range": "± 0.0021890678348182925"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsNotInSet_1",
+            "value": 13.472994903723398,
+            "unit": "ns",
+            "range": "± 0.20992040303942427"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsNotInSet_ParamsArray",
+            "value": 1.860347216327985,
+            "unit": "ns",
+            "range": "± 0.09596307530276439"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.NotEqual",
+            "value": 14.273166755835215,
+            "unit": "ns",
+            "range": "± 0.2565741430913563"
           }
         ]
       }
