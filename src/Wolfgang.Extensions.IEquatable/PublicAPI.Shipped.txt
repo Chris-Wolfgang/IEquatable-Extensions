@@ -1,0 +1,15 @@
+#nullable enable
+Wolfgang.Extensions.IEquatable.IEquatableExtensions
+static Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet<T>(this T? item, System.Collections.Generic.ICollection<T?>! set) -> bool
+static Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet<T>(this T? item, System.Collections.Generic.IEnumerable<T?>! set) -> bool
+static Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet<T>(this T? item, T? t1) -> bool
+static Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet<T>(this T? item, T? t1, T? t2) -> bool
+static Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet<T>(this T? item, T? t1, T? t2, T? t3) -> bool
+static Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsInSet<T>(this T? item, params T?[]! set) -> bool
+static Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet<T>(this T? item, System.Collections.Generic.ICollection<T?>! set) -> bool
+static Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet<T>(this T? item, System.Collections.Generic.IEnumerable<T?>! set) -> bool
+static Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet<T>(this T? item, T? t1) -> bool
+static Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet<T>(this T? item, T? t1, T? t2) -> bool
+static Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet<T>(this T? item, T? t1, T? t2, T? t3) -> bool
+static Wolfgang.Extensions.IEquatable.IEquatableExtensions.IsNotInSet<T>(this T? item, params T?[]! set) -> bool
+static Wolfgang.Extensions.IEquatable.IEquatableExtensions.NotEqual<T>(this T? item, T? other) -> bool
