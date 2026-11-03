@@ -87,8 +87,9 @@ public class IEquatableTestClassTests
     public void Equals_object_when_obj_is_different_type_returns_false()
     {
         var sut = new IEquatableTestClass(3333);
+        object other = 3333;
 
-        Assert.False(sut.Equals((object)3333));
+        Assert.False(sut.Equals(other));
     }
 
 
