@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using BenchmarkDotNet.Attributes;
 
@@ -32,6 +33,9 @@ namespace Wolfgang.Extensions.IEquatable.Benchmarks;
 /// project compiles against.
 /// </summary>
 [MemoryDiagnoser]
+[SuppressMessage("Major Code Smell", "S101:Types should be named in PascalCase",
+    Justification = "Named after the IEquatableExtensions class it benchmarks; the class name is also the series key of the published benchmark chart.")]
+// ReSharper disable once InconsistentNaming
 public class IEquatableExtensionsBenchmarks
 {
     // A representative nullable-int value and a small pre-built set. int? is
