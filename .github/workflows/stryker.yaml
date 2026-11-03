@@ -45,6 +45,13 @@ on:
 permissions:
   contents: read
 
+# A burst of pushes to one PR cancels the superseded mutation runs (they are slow). The
+# weekly schedule and manual dispatch never cancel each other: those runs publish the
+# score history and update the survivors issue, so a dropped run would leave a gap.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   detect:
     name: Detect Stryker configuration

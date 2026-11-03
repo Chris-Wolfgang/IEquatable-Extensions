@@ -1,15 +1,10 @@
 using Xunit;
 
-#pragma warning disable IDE0007
 namespace Wolfgang.Extensions.IEquatable.Tests.Unit.IsInSet;
 
 // ReSharper disable once InconsistentNaming
 public class IsInSet_T_T1_T2_T3
 {
-
-
-
-
     [Fact]
     public void IsInSet_T_T1_T2_T3_when_T_is_int_and_T_and_T1_are_the_same_value_returns_true()
     {
@@ -65,8 +60,8 @@ public class IsInSet_T_T1_T2_T3
     [Fact]
     public void IsInSet_T_T1_T2_T3_when_T_is_nullable_int_and_T_and_T1_are_both_null_returns_true()
     {
-        int? sut = null!;
-        int? t1 = null!;
+        int? sut = null;
+        int? t1 = null;
         int? t2 = 1111;
         int? t3 = 2222;
         Assert.True(sut.IsInSet(t1, t2, t3));
@@ -77,9 +72,9 @@ public class IsInSet_T_T1_T2_T3
     [Fact]
     public void IsInSet_T_T1_T2_T3_when_T_is_nullable_int_and_T_and_T2_are_both_null_returns_true()
     {
-        int? sut = null!;
+        int? sut = null;
         int? t1 = 1111;
-        int? t2 = null!;
+        int? t2 = null;
         int? t3 = 2222;
         Assert.True(sut.IsInSet(t1, t2, t3));
     }
@@ -89,10 +84,10 @@ public class IsInSet_T_T1_T2_T3
     [Fact]
     public void IsInSet_T_T1_T2_T3_when_T_is_nullable_int_and_T_and_T3_are_both_null_returns_true()
     {
-        int? sut = null!;
+        int? sut = null;
         int? t1 = 1111;
         int? t2 = 2222;
-        int? t3 = null!;
+        int? t3 = null;
         Assert.True(sut.IsInSet(t1, t2, t3));
     }
 
@@ -101,7 +96,7 @@ public class IsInSet_T_T1_T2_T3
     [Fact]
     public void IsInSet_T_T1_T2_T3_when_T_is_nullable_int_and_T_is_null_and_T1_and_T2_and_T3_are_not_null_returns_false()
     {
-        int? sut = null!;
+        int? sut = null;
         int? t1 = 11111;
         int? t2 = 88888;
         int? t3 = 99999;
@@ -428,7 +423,7 @@ public class IsInSet_T_T1_T2_T3
         Assert.False(sut.IsInSet(t1, t2, t3));
     }
 
-    
+
 
     [Fact]
     public void IsInSet_T_T1_T2_T3_when_T_is_Class_and_T_is_not_null_and_T1_is_same_value_returns_true()
