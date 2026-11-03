@@ -16,7 +16,9 @@ public class IsNotInSet_T_IEnumerable
     {
         var sut = 12345678;
         IEnumerable<int> set = null!;
-        Assert.Throws<ArgumentNullException>(() => sut.IsNotInSet(set));
+        var ex = Assert.Throws<ArgumentNullException>(() => sut.IsNotInSet(set));
+
+        Assert.Equal("set", ex.ParamName);
     }
 
 
@@ -60,7 +62,9 @@ public class IsNotInSet_T_IEnumerable
     {
         string sut = "test string";
         IEnumerable<string> set = null!;
-        Assert.Throws<ArgumentNullException>(() => sut.IsNotInSet(set));
+        var ex = Assert.Throws<ArgumentNullException>(() => sut.IsNotInSet(set));
+
+        Assert.Equal("set", ex.ParamName);
     }
 
 
@@ -94,7 +98,9 @@ public class IsNotInSet_T_IEnumerable
     {
         IEquatableTestClass sut = new IEquatableTestClass(3333);
         IEnumerable<IEquatableTestClass> set = null!;
-        Assert.Throws<ArgumentNullException>(() => sut.IsNotInSet(set));
+        var ex = Assert.Throws<ArgumentNullException>(() => sut.IsNotInSet(set));
+
+        Assert.Equal("set", ex.ParamName);
     }
 
 

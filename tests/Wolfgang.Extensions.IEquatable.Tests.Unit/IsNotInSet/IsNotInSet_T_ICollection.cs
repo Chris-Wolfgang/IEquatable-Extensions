@@ -15,7 +15,9 @@ public class IsNotInSet_T_ICollection
     {
         var sut = 12345678;
         ICollection<int> set = null!;
-        Assert.Throws<ArgumentNullException>(() => sut.IsNotInSet(set));
+        var ex = Assert.Throws<ArgumentNullException>(() => sut.IsNotInSet(set));
+
+        Assert.Equal("set", ex.ParamName);
     }
 
 
@@ -69,7 +71,9 @@ public class IsNotInSet_T_ICollection
     {
         int? sut = 12345678;
         ICollection<int?> set = null!;
-        Assert.Throws<ArgumentNullException>(() => sut.IsNotInSet(set));
+        var ex = Assert.Throws<ArgumentNullException>(() => sut.IsNotInSet(set));
+
+        Assert.Equal("set", ex.ParamName);
     }
 
 
@@ -153,7 +157,9 @@ public class IsNotInSet_T_ICollection
     {
         string sut = "test string";
         ICollection<string?> set = null!;
-        Assert.Throws<ArgumentNullException>(() => sut.IsNotInSet(set));
+        var ex = Assert.Throws<ArgumentNullException>(() => sut.IsNotInSet(set));
+
+        Assert.Equal("set", ex.ParamName);
     }
 
 
@@ -277,7 +283,9 @@ public class IsNotInSet_T_ICollection
     {
         IEquatableTestClass sut = new IEquatableTestClass(3333);
         ICollection<IEquatableTestClass?> set = null!;
-        Assert.Throws<ArgumentNullException>(() => sut.IsNotInSet(set));
+        var ex = Assert.Throws<ArgumentNullException>(() => sut.IsNotInSet(set));
+
+        Assert.Equal("set", ex.ParamName);
     }
 
 
