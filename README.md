@@ -145,6 +145,13 @@ if (currentVersion.NotEqual(supportedVersion))
 
 ---
 
+## 🔏 Verify the build
+
+- **Provenance and SBOM:** every release attaches a CycloneDX SBOM and a build-provenance attestation; see [SECURITY.md](SECURITY.md).
+- **Rebuilding from source:** see [REPRODUCIBLE-BUILD.md](REPRODUCIBLE-BUILD.md) for the exact steps, a measured worked example (what a near-match looks like for v0.3.0), the release hash manifest, and how to report a discrepancy or share a verification result.
+
+---
+
 ## 🎯 Supported Frameworks
 
 This library targets:
