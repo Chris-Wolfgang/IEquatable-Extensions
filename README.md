@@ -107,11 +107,11 @@ authoritative list (kept in sync with source on every release), see the
 
 ### Overload-set notes
 
-- **Nullable annotations.** On `net5.0+` (and net8.0/net10.0 builds) all
-  parameters are declared `T?` so nullability flows through the call site. On
-  `net462` / `netstandard2.0` builds — which predate the framework's nullable
-  reference annotations — they're declared as plain `T`. The runtime behaviour
-  is identical; only the compile-time analysis differs.
+- **Nullable annotations.** Every parameter is declared `T?` in every package
+  asset (`net462`, `netstandard2.0`, `net8.0`, `net10.0`), so nullability flows
+  through the call site the same way whichever asset a consumer binds to. An
+  unconstrained `T?` needs only C# 9; the compiler emits the nullable metadata
+  itself, so the older frameworks need no runtime support for it.
 - **Collection overload preference.** When the source is already an
   `ICollection<T>`, the `ICollection<T>` overload calls
   `ICollection<T>.Contains` directly — for types like `HashSet<T>` that's
