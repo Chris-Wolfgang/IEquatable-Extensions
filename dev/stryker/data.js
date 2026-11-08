@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1792304872945,
+  "lastUpdate": 1794142726251,
   "repoUrl": "https://github.com/Chris-Wolfgang/IEquatable-Extensions",
   "entries": {
     "Mutation score": [
@@ -102,6 +102,33 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/Chris-Wolfgang/IEquatable-Extensions/commit/a0fb158083631f7c8cafff671d9661afbe373c88"
         },
         "date": 1792304869337,
+        "tool": "customBiggerIsBetter",
+        "benches": [
+          {
+            "name": "Mutation score",
+            "value": 94.12,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "Chris Wolfgang",
+            "username": "Chris-Wolfgang",
+            "email": "210299580+Chris-Wolfgang@users.noreply.github.com"
+          },
+          "committer": {
+            "name": "GitHub",
+            "username": "web-flow",
+            "email": "noreply@github.com"
+          },
+          "id": "53df7edb52bb403730bc7f34a9b887a624f4fc5d",
+          "message": "ci: weekly check of the PUBLISHED symbols (snupkg PDB per TFM, GUID match, SourceLink) (#755)\n\nsourcelink.yaml checks a fresh build's PDBs. published-symbols.yaml downloads\nthe latest stable Wolfgang.Extensions.IEquatable .nupkg from the feed and its\n.snupkg from the NuGet symbol endpoint (as a debugger would) and checks, per\ntarget framework, that a PDB exists, that the DLL's CodeView GUID equals the\nPDB id, and that 'dotnet sourcelink test' resolves every document. Weekly +\ndispatch (optional version input). Ported from IEnumerable-Extensions #566.\n\nRefs #159\n\nCo-authored-by: Claude Fable 5.1 <noreply@anthropic.com>",
+          "timestamp": "2026-11-04T02:19:28Z",
+          "url": "https://github.com/Chris-Wolfgang/IEquatable-Extensions/commit/53df7edb52bb403730bc7f34a9b887a624f4fc5d"
+        },
+        "date": 1794142722921,
         "tool": "customBiggerIsBetter",
         "benches": [
           {
