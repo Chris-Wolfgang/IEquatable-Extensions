@@ -22,10 +22,10 @@ dotnet add package Wolfgang.Extensions.IEquatable
 
 ### Package Reference
 
-Alternatively, add the following to your `.csproj` file (replace `1.0.0` with the latest version):
+Alternatively, add the following to your `.csproj` file (0.3.0 is the latest version at the time of writing):
 
 ```xml
-<PackageReference Include="Wolfgang.Extensions.IEquatable" Version="1.0.0" />
+<PackageReference Include="Wolfgang.Extensions.IEquatable" Version="0.3.0" />
 ```
 
 > **Note**: Check [NuGet.org](https://www.nuget.org/packages/Wolfgang.Extensions.IEquatable/) for the latest stable version.
@@ -107,7 +107,7 @@ if (status.IsNotInSet("active", "pending", "approved"))
 
 ### NotEqual Extension Method
 
-Null-safe inequality comparison:
+A fluent `!Equals(item, other)`:
 
 ```csharp
 string value1 = "hello";
@@ -115,10 +115,10 @@ string value2 = "world";
 string? value3 = null;
 
 bool different = value1.NotEqual(value2);   // true
-bool differentFromNull = value1.NotEqual(value3);  // true (null-safe)
+bool differentFromNull = value1.NotEqual(value3);  // true
 ```
 
-The NotEqual method handles null references safely, avoiding NullReferenceExceptions.
+`NotEqual` has the same null semantics as `!Equals(a, b)` and `!=`: two nulls are equal, a null and a value are not, and none of them throw.
 
 ## Common Patterns
 
@@ -216,7 +216,7 @@ The library supports a wide range of .NET frameworks:
 - .NET 8.0
 - .NET 10.0
 
-The library uses conditional compilation to provide nullable reference type support on .NET 5.0 and later (when running on compatible runtimes through .NET Standard 2.0 compatibility).
+Nullable annotations: up to and including 0.3.0, only the `net8.0` and `net10.0` assets declare the parameters `T?`. A consumer on .NET 5, 6 or 7 binds to the `netstandard2.0` asset and gets no annotations. Later releases declare `T?` in every asset.
 
 ## Next Steps
 

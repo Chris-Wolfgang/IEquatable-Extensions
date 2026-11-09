@@ -14,16 +14,16 @@ IEquatable-Extensions adds convenient extension methods for common equality comp
 
 - **IsInSet**: Check if a value matches any of a set of values
 - **IsNotInSet**: Check if a value doesn't match any of a set of values
-- **NotEqual**: Null-safe inequality comparison
+- **NotEqual**: A fluent `!Equals(item, other)`
 
 These extension methods help reduce boilerplate code and make your equality checks more readable and maintainable.
 
 ## Key Features
 
 - 🚀 **Simple API**: Easy-to-use extension methods that work with any type
-- ⚡ **High Performance**: Minimal overhead with optimized implementations
+- ⚡ **Small**: thin wrappers over `object.Equals` and `Contains`; the collection overloads do not allocate, and the one, two and three item overloads box value-type arguments
 - 📦 **Lightweight**: Single file library with no external dependencies
-- 🔒 **Null-safe**: Built-in null handling in extension methods
+- 🔒 **Null-tolerant items**: a null item or null set element is compared like any other value; only a null *set* throws `ArgumentNullException`
 - ✅ **Well Tested**: Comprehensive test coverage ensuring reliability
 
 ## Use Cases
