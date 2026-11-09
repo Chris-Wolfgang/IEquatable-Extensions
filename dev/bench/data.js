@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1794179398980,
+  "lastUpdate": 1794194254151,
   "repoUrl": "https://github.com/Chris-Wolfgang/IEquatable-Extensions",
   "entries": {
     "BenchmarkDotNet": [
@@ -720,6 +720,96 @@ window.BENCHMARK_DATA = {
             "value": 16.710277448097866,
             "unit": "ns",
             "range": "± 0.3643444197889694"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "210299580+Chris-Wolfgang@users.noreply.github.com",
+            "name": "Chris Wolfgang",
+            "username": "Chris-Wolfgang"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "800ace9f9894911fdba1bca63233d53b25da8a84",
+          "message": "test: give the IEnumerable<T> overloads the same 34-case matrix as ICollection<T> (#734)\n\nIsInSet_T_IEnumerable had 11 facts and IsNotInSet_T_IEnumerable 10, against 34\neach for the ICollection<T> siblings. Both IEnumerable files now carry the full\nmatrix (int, int?, string, class x null set / empty / contains / missing /\nmultiple / null element). Every set is wrapped in a local iterator so\nEnumerable.Contains walks the sequence rather than dispatching to\nICollection<T>.Contains, keeping the tests on the IEnumerable<T> path.\n\nRefs #181\n\nCo-authored-by: Claude Fable 5.1 <noreply@anthropic.com>",
+          "timestamp": "2026-11-08T22:14:41-05:00",
+          "tree_id": "d19c03fac934e42a9d08bf0121dda1b8d0c1d10c",
+          "url": "https://github.com/Chris-Wolfgang/IEquatable-Extensions/commit/800ace9f9894911fdba1bca63233d53b25da8a84"
+        },
+        "date": 1794194252706,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_1",
+            "value": 21.232799341281254,
+            "unit": "ns",
+            "range": "± 0.28947054553437673"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_2",
+            "value": 41.997321317593254,
+            "unit": "ns",
+            "range": "± 0.6998533133933849"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_3",
+            "value": 60.689536809921265,
+            "unit": "ns",
+            "range": "± 1.7979905738155748"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ParamsArray",
+            "value": 3.3987138122320175,
+            "unit": "ns",
+            "range": "± 0.02521393919439793"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_IEnumerable_FromList",
+            "value": 4.314849992593129,
+            "unit": "ns",
+            "range": "± 0.0016350978737692061"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_IEnumerable_Iterator",
+            "value": 21.135042190551758,
+            "unit": "ns",
+            "range": "± 0.904550623192805"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ICollection_List",
+            "value": 4.3501268203059835,
+            "unit": "ns",
+            "range": "± 0.08460299654436475"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ICollection_HashSet",
+            "value": 2.700261764228344,
+            "unit": "ns",
+            "range": "± 0.00209754024577473"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsNotInSet_1",
+            "value": 20.249570379654568,
+            "unit": "ns",
+            "range": "± 0.021398600913873744"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsNotInSet_ParamsArray",
+            "value": 3.3626291255156198,
+            "unit": "ns",
+            "range": "± 0.021825663993604135"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.NotEqual",
+            "value": 21.103761345148087,
+            "unit": "ns",
+            "range": "± 0.5668912804233486"
           }
         ]
       }
