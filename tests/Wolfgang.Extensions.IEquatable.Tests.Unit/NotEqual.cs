@@ -4,7 +4,6 @@ namespace Wolfgang.Extensions.IEquatable.Tests.Unit;
 
 public class NotEqual
 {
-
     // ---------------------------------   int   ----------------------------------
 
 
@@ -15,7 +14,6 @@ public class NotEqual
         int other = 11111;
         Assert.False(sut.NotEqual(other));
     }
-
 
 
 
@@ -41,7 +39,7 @@ public class NotEqual
         Assert.False(sut.NotEqual(other));
     }
 
-    
+
 
     [Fact]
     public void NotEqual_T_when_T_is_Nullable_int_and_left_is_null_and_right_is_not_null_returns_true()
@@ -135,7 +133,6 @@ public class NotEqual
 
 
 
-
     // ---------------------------------   Class   ----------------------------------
 
 
@@ -186,7 +183,4 @@ public class NotEqual
         IEquatableTestClass other = new IEquatableTestClass(999999);
         Assert.True(sut.NotEqual(other));
     }
-
-
-
 }

@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-#pragma warning disable IDE0007
 namespace Wolfgang.Extensions.IEquatable.Tests.Unit.IsNotInSet;
 
 // ReSharper disable once InconsistentNaming
 public class IsNotInSet_T_IEnumerable
 {
-
     // ---------------------------------   int   ----------------------------------
 
 
