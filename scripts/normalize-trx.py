@@ -49,7 +49,13 @@ def main() -> int:
 
     lines.sort()
 
-    with open(output_path, "w", encoding="utf-8") as f:
+    # newline="
+": on Windows, text mode would translate "
+" to "
+" and every line of the
+    # Windows file would then differ from the Linux baseline in the cross-platform diff.
+    with open(output_path, "w", encoding="utf-8", newline="
+") as f:
         f.write("\n".join(lines) + ("\n" if lines else ""))
 
     print(f"Wrote {len(lines)} normalized result(s) to {output_path}")
