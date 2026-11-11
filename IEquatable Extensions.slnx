@@ -49,6 +49,7 @@
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Wolfgang.Extensions.IEquatable.Tests.AotSmoke/Wolfgang.Extensions.IEquatable.Tests.AotSmoke.csproj" />
+    <Project Path="tests/Wolfgang.Extensions.IEquatable.Tests.DocExamples/Wolfgang.Extensions.IEquatable.Tests.DocExamples.csproj" />
     <Project Path="tests/Wolfgang.Extensions.IEquatable.Tests.Unit/Wolfgang.Extensions.IEquatable.Tests.Unit.csproj" Id="3f0ff8d1-bd9d-47cd-b731-973bb5183309" />
   </Folder>
 </Solution>
