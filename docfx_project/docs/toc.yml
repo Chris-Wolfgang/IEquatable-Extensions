@@ -1,3 +1,5 @@
+- name: Index
+  href: Index.md
 - name: README
   href: readme.md
 - name: Introduction

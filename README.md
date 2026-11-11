@@ -4,7 +4,7 @@ A collection of extension methods for types that implement `IEquatable<T>` — c
 
 [![NuGet](https://img.shields.io/nuget/v/Wolfgang.Extensions.IEquatable.svg?logo=nuget&label=NuGet)](https://www.nuget.org/packages/Wolfgang.Extensions.IEquatable)
 [![NuGet downloads](https://img.shields.io/nuget/dt/Wolfgang.Extensions.IEquatable.svg?logo=nuget&label=downloads)](https://www.nuget.org/packages/Wolfgang.Extensions.IEquatable)
-[![PR build](https://img.shields.io/github/actions/workflow/status/Chris-Wolfgang/IEquatable-Extensions/pr.yaml?branch=main&label=PR%20build&logo=github)](https://github.com/Chris-Wolfgang/IEquatable-Extensions/actions/workflows/pr.yaml)
+[![PR build](https://img.shields.io/github/actions/workflow/status/Chris-Wolfgang/IEquatable-Extensions/pr.yaml?event=pull_request_target&label=PR%20build&logo=github)](https://github.com/Chris-Wolfgang/IEquatable-Extensions/actions/workflows/pr.yaml)
 [![Release](https://img.shields.io/github/actions/workflow/status/Chris-Wolfgang/IEquatable-Extensions/release.yaml?label=release&logo=github)](https://github.com/Chris-Wolfgang/IEquatable-Extensions/actions/workflows/release.yaml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![.NET](https://img.shields.io/badge/.NET-Multi--Targeted-purple.svg)](https://dotnet.microsoft.com/)
@@ -78,7 +78,7 @@ Equality semantics depend on the overload:
   uses `Object.Equals` virtual dispatch — it does **not** prefer the
   strongly-typed `IEquatable<T>.Equals(T)` overload. A future revision may
   switch to `EqualityComparer<T>.Default` to avoid both the boxing and the
-  virtual call (tracked in [#721](https://github.com/Chris-Wolfgang/IEquatable-Extensions/issues/721)).
+  virtual call (tracked separately).
 - **Collection overloads** (`params T[]`, `IEnumerable<T>`, `ICollection<T>`)
   use `Enumerable.Contains` / `ICollection<T>.Contains`, both of which route
   through `EqualityComparer<T>.Default`. That comparer **does** prefer
@@ -162,16 +162,9 @@ This library targets:
 
 See the [NuGet package page](https://www.nuget.org/packages/Wolfgang.Extensions.IEquatable/) for the authoritative per-TFM compatibility matrix.
 
-## Native AOT
-
-This library is trim- and Native AOT-compatible. **.NET 10 is the lowest version on which Native
-AOT is supported**: on every pull request the unit suite is compiled and run as a native binary
-(`tests/Wolfgang.Extensions.IEquatable.Tests.Aot`). The .NET 8 build passes the trim/AOT analyzers but is not executed
-natively, so Native AOT on .NET 8 is not a supported scenario.
-
 ## 🔍 Code Quality & Static Analysis
 
-This project enforces **strict code quality standards** through **7 analyzers on every build, plus PublicApiAnalyzers once the API baseline files exist**, an `<TreatWarningsAsErrors>true</TreatWarningsAsErrors>` Release gate, and custom rules:
+This project enforces **strict code quality standards** through **8 specialized analyzers**, an `<TreatWarningsAsErrors>true</TreatWarningsAsErrors>` Release gate, and custom rules:
 
 ### Analyzers in Use
 
@@ -182,7 +175,7 @@ This project enforces **strict code quality standards** through **7 analyzers on
 5. **Microsoft.CodeAnalysis.BannedApiAnalyzers** — Prevents usage of banned APIs (see `BannedSymbols.txt`); the async-blocking bans in the shared list are inert here since the library is fully synchronous
 6. **Meziantou.Analyzer** — Comprehensive code quality rules
 7. **SonarAnalyzer.CSharp** — Industry-standard code analysis
-8. **Microsoft.CodeAnalysis.PublicApiAnalyzers** — Tracks the public API surface via `PublicAPI.Shipped.txt` / `PublicAPI.Unshipped.txt`; surfaces additions/removals at compile time as a breaking-change review gate. `Directory.Build.props` references it only for a project that has those files, so it is active only once `src/Wolfgang.Extensions.IEquatable/` carries them ([#199](https://github.com/Chris-Wolfgang/IEquatable-Extensions/issues/199)).
+8. **Microsoft.CodeAnalysis.PublicApiAnalyzers** — Tracks the public API surface via `PublicAPI.Shipped.txt` / `PublicAPI.Unshipped.txt`; surfaces additions/removals at compile time as a breaking-change review gate
 
 ---
 
