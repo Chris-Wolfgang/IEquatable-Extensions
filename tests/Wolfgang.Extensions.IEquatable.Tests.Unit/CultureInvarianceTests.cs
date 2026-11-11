@@ -112,17 +112,17 @@ public class CultureInvarianceTests
 
             Assert.False(item.IsInSet(others));
             Assert.False(item.IsInSet((IEnumerable<string>)others.ToList()));
-            Assert.False(item.IsInSet((ICollection<string?>)new HashSet<string?>(others)));
+            Assert.False(item.IsInSet(new HashSet<string?>(others)));
 
             Assert.True(item.IsNotInSet(others));
             Assert.True(item.IsNotInSet((IEnumerable<string>)others.ToList()));
-            Assert.True(item.IsNotInSet((ICollection<string?>)new HashSet<string?>(others)));
+            Assert.True(item.IsNotInSet(new HashSet<string?>(others)));
 
             var withItem = others.Concat(new[] { item }).ToArray();
 
             Assert.True(item.IsInSet(withItem));
             Assert.True(item.IsInSet((IEnumerable<string>)withItem.ToList()));
-            Assert.True(item.IsInSet((ICollection<string?>)new HashSet<string?>(withItem)));
+            Assert.True(item.IsInSet(new HashSet<string?>(withItem)));
         }
     }
 
