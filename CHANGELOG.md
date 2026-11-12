@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-05-30
+
 ### Added
 
 - Real README with installation, Quick Start, API reference table, and
@@ -14,8 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - This CHANGELOG, seeded from git tag history.
 - `<RepositoryUrl>` / `<RepositoryType>` package metadata per the
   fleet-wide CI1 canonical (NuGet quality).
-- Explicit `<FileVersion>$(Version).0` so file-version metadata tracks
-  every release.
+- Explicit `<FileVersion>` (`<Version>` with any prerelease or build
+  suffix stripped, plus `.0`) so file-version metadata tracks every release.
 - D8 release-time docs-build verification via the canonical
   `verify-docs-build` job — a docs failure now blocks `publish-nuget`
   instead of landing after the package is already on NuGet.
@@ -60,5 +62,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `NotEqual` extension method family across `net462`,
   `netstandard2.0`, `net8.0`, and `net10.0`.
 
-[Unreleased]: https://github.com/Chris-Wolfgang/IEquatable-Extensions/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/Chris-Wolfgang/IEquatable-Extensions/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/Chris-Wolfgang/IEquatable-Extensions/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/Chris-Wolfgang/IEquatable-Extensions/releases/tag/v0.2.0
