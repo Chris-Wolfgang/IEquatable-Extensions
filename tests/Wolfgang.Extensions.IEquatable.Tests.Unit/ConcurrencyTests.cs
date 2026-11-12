@@ -111,30 +111,36 @@ public class ConcurrencyTests
 
     private static async Task RunOnDedicatedThreadsAsync(Action body)
     {
-        using var barrier = new Barrier(Threads);
+        // Disposed in finally rather than by a using declaration: every task is awaited before
+        // the barrier is disposed, which InspectCode's AccessToDisposedClosure check cannot see
+        // through a closure over a using variable.
+        var barrier = new Barrier(Threads);
 
-        var tasks = Enumerable
-            .Range(0, Threads)
-            .Select
-            (
-                _ => Task.Factory.StartNew
+        try
+        {
+            var tasks = Enumerable
+                .Range(0, Threads)
+                .Select
                 (
-                    // The barrier goes in as the task's state rather than a captured variable:
-                    // every task is awaited before the using disposes it, which InspectCode's
-                    // AccessToDisposedClosure check cannot see through a closure.
-                    state =>
-                    {
-                        ((Barrier)state!).SignalAndWait();
-                        body();
-                    },
-                    barrier,
-                    CancellationToken.None,
-                    TaskCreationOptions.LongRunning,
-                    TaskScheduler.Default
+                    _ => Task.Factory.StartNew
+                    (
+                        () =>
+                        {
+                            barrier.SignalAndWait();
+                            body();
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    )
                 )
-            )
-            .ToArray();
+                .ToArray();
 
-        await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks);
+        }
+        finally
+        {
+            barrier.Dispose();
+        }
     }
 }
