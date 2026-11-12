@@ -119,11 +119,15 @@ public class ConcurrencyTests
             (
                 _ => Task.Factory.StartNew
                 (
-                    () =>
+                    // The barrier goes in as the task's state rather than a captured variable:
+                    // every task is awaited before the using disposes it, which InspectCode's
+                    // AccessToDisposedClosure check cannot see through a closure.
+                    state =>
                     {
-                        barrier.SignalAndWait();
+                        ((Barrier)state!).SignalAndWait();
                         body();
                     },
+                    barrier,
                     CancellationToken.None,
                     TaskCreationOptions.LongRunning,
                     TaskScheduler.Default
