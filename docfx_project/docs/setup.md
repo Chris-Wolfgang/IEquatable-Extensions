@@ -19,7 +19,7 @@ This guide covers installation, configuration, and integration scenarios for Wol
 ### Minimum Requirements
 
 - **.NET**: .NET Framework 4.6.2 or higher, .NET Standard 2.0, .NET 8.0, or .NET 10.0
-- **C# Version**: 7.3 or higher
+- **C# Version**: 7.3 or higher in the consuming project (the library itself is built with the newest C# version the .NET SDK supports)
 - **IDE**: Visual Studio 2017 or higher, Visual Studio Code, or JetBrains Rider
 
 ### Optional Tools
@@ -135,13 +135,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+    # Pin actions to a full commit SHA (as this repository does) rather than a moving tag.
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
       with:
-        dotnet-version: | 
-          6.0.x
+        persist-credentials: false
+    - name: Setup .NET
+      uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68  # v6.0.0
+      with:
+        dotnet-version: |
           8.0.x
+          10.0.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -196,7 +199,7 @@ steps:
 For production applications, pin to a specific version:
 
 ```xml
-<PackageReference Include="Wolfgang.Extensions.IEquatable" Version="1.0.0" />
+<PackageReference Include="Wolfgang.Extensions.IEquatable" Version="0.3.0" />
 ```
 
 #### Floating Versions
