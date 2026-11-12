@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1794194254151,
+  "lastUpdate": 1794517901299,
   "repoUrl": "https://github.com/Chris-Wolfgang/IEquatable-Extensions",
   "entries": {
     "BenchmarkDotNet": [
@@ -810,6 +810,96 @@ window.BENCHMARK_DATA = {
             "value": 21.103761345148087,
             "unit": "ns",
             "range": "± 0.5668912804233486"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "210299580+Chris-Wolfgang@users.noreply.github.com",
+            "name": "Chris Wolfgang",
+            "username": "Chris-Wolfgang"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "e48f0d25e9e876eccf527447f53252d9bccc5773",
+          "message": "docs(security): baseline of the accepted actionlint / zizmor / shellcheck suppressions (#846)\n\nactions-audit.yaml already runs actionlint and zizmor on every PR (#168);\nthe remaining acceptance item was a documented baseline of accepted\nsuppressions with a reason for each. WORKFLOW_SECURITY.md now lists all four\ninline suppressions in the workflows (zizmor dangerous-triggers on\nprotected-files.yaml, zizmor self-repository on release.yaml's docs call,\nshellcheck SC2094 in pr.yaml's Stage 1 loop, SC2086 in scorecard.yaml) and\nhow to add one.\n\nRefs #168\n\n\n(cherry picked from commit ffa4358bacc3f4f96ffabb3c58fb2541bed691a3)\n\nCo-authored-by: Claude Fable 5.1 <noreply@anthropic.com>",
+          "timestamp": "2026-11-12T16:07:42-05:00",
+          "tree_id": "a45498252d33ad437d9572c619789a8d8266da17",
+          "url": "https://github.com/Chris-Wolfgang/IEquatable-Extensions/commit/e48f0d25e9e876eccf527447f53252d9bccc5773"
+        },
+        "date": 1794517899913,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_1",
+            "value": 20.84663548072179,
+            "unit": "ns",
+            "range": "± 0.21598122285419413"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_2",
+            "value": 44.34050134817759,
+            "unit": "ns",
+            "range": "± 1.5801958025045149"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_3",
+            "value": 63.91498996814092,
+            "unit": "ns",
+            "range": "± 0.4761289765278893"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ParamsArray",
+            "value": 3.558074543873469,
+            "unit": "ns",
+            "range": "± 0.021467738544489183"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_IEnumerable_FromList",
+            "value": 4.379961649576823,
+            "unit": "ns",
+            "range": "± 0.0615746192478124"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_IEnumerable_Iterator",
+            "value": 18.819287409385044,
+            "unit": "ns",
+            "range": "± 0.7908582166502307"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ICollection_List",
+            "value": 4.212795831263065,
+            "unit": "ns",
+            "range": "± 0.0781871295918003"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ICollection_HashSet",
+            "value": 1.3128149112065632,
+            "unit": "ns",
+            "range": "± 0.029733502393071633"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsNotInSet_1",
+            "value": 22.401383886734646,
+            "unit": "ns",
+            "range": "± 0.7374629371460213"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsNotInSet_ParamsArray",
+            "value": 3.6965931157271066,
+            "unit": "ns",
+            "range": "± 0.22479914756682698"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.NotEqual",
+            "value": 22.988394250472385,
+            "unit": "ns",
+            "range": "± 1.1719001255463768"
           }
         ]
       }
