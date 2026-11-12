@@ -111,36 +111,51 @@ public class ConcurrencyTests
 
     private static async Task RunOnDedicatedThreadsAsync(Action body)
     {
-        // Disposed in finally rather than by a using declaration: every task is awaited before
-        // the barrier is disposed, which InspectCode's AccessToDisposedClosure check cannot see
-        // through a closure over a using variable.
-        var barrier = new Barrier(Threads);
+        using var barrier = new Barrier(Threads);
 
-        try
-        {
-            var tasks = Enumerable
-                .Range(0, Threads)
-                .Select
+        // Each thread runs BarrierWorker.Run rather than a lambda: a lambda that captures the
+        // using-scoped barrier trips InspectCode's AccessToDisposedClosure check (a finally-block
+        // Dispose does too), even though every task is awaited before the barrier is disposed.
+        var worker = new BarrierWorker(barrier, body);
+
+        var tasks = Enumerable
+            .Range(0, Threads)
+            .Select
+            (
+                _ => Task.Factory.StartNew
                 (
-                    _ => Task.Factory.StartNew
-                    (
-                        () =>
-                        {
-                            barrier.SignalAndWait();
-                            body();
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    )
+                    worker.Run,
+                    CancellationToken.None,
+                    TaskCreationOptions.LongRunning,
+                    TaskScheduler.Default
                 )
-                .ToArray();
+            )
+            .ToArray();
 
-            await Task.WhenAll(tasks);
-        }
-        finally
+        await Task.WhenAll(tasks);
+    }
+
+
+
+    private sealed class BarrierWorker
+    {
+        private readonly Barrier _barrier;
+        private readonly Action _body;
+
+
+
+        public BarrierWorker(Barrier barrier, Action body)
         {
-            barrier.Dispose();
+            _barrier = barrier;
+            _body = body;
+        }
+
+
+
+        public void Run()
+        {
+            _barrier.SignalAndWait();
+            _body();
         }
     }
 }
