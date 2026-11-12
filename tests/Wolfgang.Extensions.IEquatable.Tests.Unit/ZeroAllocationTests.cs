@@ -100,7 +100,7 @@ public class ZeroAllocationTests
     [Fact]
     public void IsInSet_T_ICollection_when_set_is_a_HashSet_of_int_allocates_zero_bytes()
     {
-        AssertZeroAllocation(() => 2.IsInSet((ICollection<int>)IntHashSet));
+        AssertZeroAllocation(() => 2.IsInSet(IntHashSet));
     }
 
 
@@ -108,7 +108,7 @@ public class ZeroAllocationTests
     [Fact]
     public void IsNotInSet_T_ICollection_when_set_is_a_List_of_int_allocates_zero_bytes()
     {
-        AssertZeroAllocation(() => 4.IsNotInSet((ICollection<int>)IntList));
+        AssertZeroAllocation(() => 4.IsNotInSet(IntList));
     }
 
 
