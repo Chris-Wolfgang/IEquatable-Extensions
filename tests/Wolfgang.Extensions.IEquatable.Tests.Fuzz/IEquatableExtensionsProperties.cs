@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using FsCheck.Xunit;
 
 namespace Wolfgang.Extensions.IEquatable.Tests.Fuzz;
 
@@ -104,10 +103,10 @@ public class IEquatableExtensionsProperties
         return (expected is null || expected == reference)
             && item.IsInSet(values) == reference
             && item.IsInSet(Iterate(values)) == reference
-            && item.IsInSet((ICollection<T?>)list) == reference
+            && item.IsInSet(list) == reference
             && item.IsNotInSet(values) == !reference
             && item.IsNotInSet(Iterate(values)) == !reference
-            && item.IsNotInSet((ICollection<T?>)list) == !reference;
+            && item.IsNotInSet(list) == !reference;
     }
 
 
