@@ -46,3 +46,12 @@ dotnet_diagnostic.S1144.severity = none
 
 # xUnit2013: Use Assert.Single instead of Assert.Equal for collection size
 dotnet_diagnostic.xUnit2013.severity = none
+
+# S101: Types should be named in PascalCase. The IsInSet / IsNotInSet test classes are named after the
+# overload they cover (IsInSet_T_ICollection = IsInSet<T>(T, ICollection<T>)), already opted out of
+# ReSharper's InconsistentNaming. Scoped to those two folders so S101 still applies everywhere else.
+[Wolfgang.Extensions.IEquatable.Tests.Unit/IsInSet/**.cs]
+dotnet_diagnostic.S101.severity = none
+
+[Wolfgang.Extensions.IEquatable.Tests.Unit/IsNotInSet/**.cs]
+dotnet_diagnostic.S101.severity = none
