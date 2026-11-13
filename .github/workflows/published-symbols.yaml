@@ -68,8 +68,10 @@ jobs:
           id_lower="${PACKAGE_ID,,}"
           version="${INPUT_VERSION:-}"
           if [ -z "$version" ]; then
-            version=$(curl -fsS "https://api.nuget.org/v3-flatcontainer/${id_lower}/index.json" \
-              | python3 -c "import sys,json;v=[x for x in json.load(sys.stdin)['versions'] if '-' not in x];print(v[-1])")
+            # Download to a file, then parse it: Scorecard's Pinned-Dependencies check reads
+            # `curl ... | python3` as download-then-run even when the script only parses JSON.
+            curl -fsS -o nuget-index.json "https://api.nuget.org/v3-flatcontainer/${id_lower}/index.json"
+            version=$(python3 -c "import json;v=[x for x in json.load(open('nuget-index.json'))['versions'] if '-' not in x];print(v[-1])")
           fi
           echo "Checking ${PACKAGE_ID} ${version}"
           mkdir -p published/dll published/snupkg
