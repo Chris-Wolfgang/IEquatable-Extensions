@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1794517901299,
+  "lastUpdate": 1794666899237,
   "repoUrl": "https://github.com/Chris-Wolfgang/IEquatable-Extensions",
   "entries": {
     "BenchmarkDotNet": [
@@ -900,6 +900,96 @@ window.BENCHMARK_DATA = {
             "value": 22.988394250472385,
             "unit": "ns",
             "range": "± 1.1719001255463768"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "210299580+Chris-Wolfgang@users.noreply.github.com",
+            "name": "Chris Wolfgang",
+            "username": "Chris-Wolfgang"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "c60521115503a8f82c06395270c963898eea60a3",
+          "message": "ci: install the .NET 11.0.x SDK and keep net11.0 in every test stage (#819) (#861)\n\nEvery actions/setup-dotnet step lists 11.0.x next to its existing SDKs\n(22 steps in 16 workflows), so the stacked global.json move to the 11.0\nSDK can resolve everywhere. The pr.yaml Stage 1-3 TFM filters and the\nbuild-pr.ps1 Stage 2 mirror accept net11.0, so a net11.0 target is\ntested and coverage-gated instead of silently skipped. Job names are\nunchanged so required-check entries stay valid.\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-11-14T09:22:59-05:00",
+          "tree_id": "f53111e19aad84284bdd259df15a6d0c001aae51",
+          "url": "https://github.com/Chris-Wolfgang/IEquatable-Extensions/commit/c60521115503a8f82c06395270c963898eea60a3"
+        },
+        "date": 1794666898247,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_1",
+            "value": 25.845413366953533,
+            "unit": "ns",
+            "range": "± 0.02315025785750507"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_2",
+            "value": 48.84418648481369,
+            "unit": "ns",
+            "range": "± 0.16932919933687152"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_3",
+            "value": 73.09651682774226,
+            "unit": "ns",
+            "range": "± 0.39414543852579365"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ParamsArray",
+            "value": 4.272323563694954,
+            "unit": "ns",
+            "range": "± 0.1946020690558834"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_IEnumerable_FromList",
+            "value": 5.641684537132581,
+            "unit": "ns",
+            "range": "± 0.07146261508552168"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_IEnumerable_Iterator",
+            "value": 24.077932516733807,
+            "unit": "ns",
+            "range": "± 0.22752737535436351"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ICollection_List",
+            "value": 5.085198561350505,
+            "unit": "ns",
+            "range": "± 0.03338980673415993"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ICollection_HashSet",
+            "value": 2.689996416370074,
+            "unit": "ns",
+            "range": "± 0.017500866411296095"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsNotInSet_1",
+            "value": 25.83106322089831,
+            "unit": "ns",
+            "range": "± 0.7280442508900999"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsNotInSet_ParamsArray",
+            "value": 4.103950947523117,
+            "unit": "ns",
+            "range": "± 0.022893491326492803"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.NotEqual",
+            "value": 25.590696821610134,
+            "unit": "ns",
+            "range": "± 0.22612455077535845"
           }
         ]
       }
