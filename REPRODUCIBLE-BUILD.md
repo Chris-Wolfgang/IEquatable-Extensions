@@ -2,7 +2,7 @@
 
 The assemblies in the `Wolfgang.Extensions.IEquatable` package are built deterministically: the same source commit, built with the same .NET SDK, produces byte-identical DLLs and PDBs regardless of the machine, the checkout path or the operating system (Linux or Windows). This relies on `Deterministic` and `ContinuousIntegrationBuild` (set when `CI=true`) in `Directory.Build.props`, which normalise source paths, plus SourceLink, which embeds the commit. Two more settings remove the operating-system inputs: `Directory.Build.targets` rewrites the SDK-generated `AssemblyInfo` / `AssemblyAttributes` sources to LF before compiling (the PDB records their hashes), and `Directory.Build.props` compiles the .NET Framework targets against the `Microsoft.NETFramework.ReferenceAssemblies` package on every OS instead of a locally installed targeting pack. Releases built before these two settings were added are reproducible on the same operating system only.
 
-One input depends on the calendar: once the package takes its copyright line from `Directory.Build.props` (`Copyright (c) <UtcNow.Year> Chris Wolfgang`), a rebuild in a later year changes the `AssemblyCopyright` attribute unless the original year is passed back in (see step 2). Releases up to and including 0.3.0 pin `Copyright 2026 Chris Wolfgang` in the csproj, so for those the year does not matter.
+The copyright line is a literal in `Directory.Build.props` (`Copyright (c) 2026 Chris Wolfgang`, bumped in the first release of each year), so a rebuild in a later year produces the same `AssemblyCopyright` attribute. For a while `Directory.Build.props` computed it from the build clock (`Copyright (c) <UtcNow.Year> Chris Wolfgang`); a release built in that window needs the original year passed back in (see step 2). Releases up to and including 0.3.0 pin `Copyright 2026 Chris Wolfgang` in the csproj, so for those the year does not matter.
 
 ## What CI checks
 
@@ -16,10 +16,10 @@ Both builds of step 1 run in the same job, so the check cannot detect the year d
 
 ## Verify a release yourself
 
-1. Check out the release tag with the .NET SDK the release's `pack-and-validate` job installed. Any operating system works for a release built with the LF-normalising `Directory.Build.targets`. Older releases, including 0.3.0, must be rebuilt on the release build's operating system (`windows-latest`). The SDK version is printed in the release run's "Setup .NET" log, but GitHub deletes run logs after 90 days, so for an old release it may no longer be recoverable.
+1. Check out the release tag with the .NET SDK the release's `pack-and-validate` job installed. Any operating system works for a release built with the LF-normalising `Directory.Build.targets`. Older releases, including 0.3.0, must be rebuilt on the release build's operating system (`windows-latest`). Releases that attach `reproducible-build-manifest.json` record that SDK in its `sdk` field (and the runner image in `runner_image`). For older releases the SDK version is printed in the release run's "Setup .NET" log, but GitHub deletes run logs after 90 days, so for an old release it may no longer be recoverable.
 2. Set `CI=true` in the environment and build the library:
    `dotnet build src/Wolfgang.Extensions.IEquatable -c Release -p:ContinuousIntegrationBuild=true -p:NuGetAudit=false`.
-   For a release whose csproj no longer pins `<Copyright>`, add `"-p:Copyright=Copyright (c) <year> Chris Wolfgang"`, where `<year>` is the year the release was built (the published DLL's `AssemblyCopyright` attribute shows it). Do **not** pass it for 0.3.0 or earlier: a global property overrides the csproj's own value and changes the DLL. `NuGetAudit=false` is needed for older tags: NuGet's vulnerability audit is time-dependent, so a tag that restored cleanly on release day can fail today with `NU1902` once an advisory is published against one of its build-time packages. It switches off the audit only and does not change the output.
+   For a release built while `Directory.Build.props` computed the year from the build clock (its csproj does not pin `<Copyright>` and its `Directory.Build.props` shows `UtcNow.Year`), add `"-p:Copyright=Copyright (c) <year> Chris Wolfgang"`, where `<year>` is the year the release was built (the published DLL's `AssemblyCopyright` attribute shows it). Do **not** pass it for 0.3.0 or earlier: a global property overrides the csproj's own value and changes the DLL. `NuGetAudit=false` is needed for older tags: NuGet's vulnerability audit is time-dependent, so a tag that restored cleanly on release day can fail today with `NU1902` once an advisory is published against one of its build-time packages. It switches off the audit only and does not change the output.
 3. Download the `.nupkg` from the GitHub Release (or nuget.org) and extract it; it is a zip. For each `lib/<tfm>/Wolfgang.Extensions.IEquatable.dll`, compare it with `src/Wolfgang.Extensions.IEquatable/bin/Release/<tfm>/Wolfgang.Extensions.IEquatable.dll`. `cmp -l published.dll rebuilt.dll | wc -l` prints the number of differing bytes (`0` means byte-identical). A `sha256sum` of each file gives the same yes/no answer.
 
 The guarantee covers the library's own assembly. The PDB embeds the repository URL and commit, so a fork builds different PDBs.
@@ -46,7 +46,27 @@ Open an issue and include: the release tag and commit, your operating system and
 
 ### Release hash manifest
 
-Releases published after the manifest step was added to `release.yaml` carry a `reproducible-build-manifest.json` asset. It lists the tag, the commit, and the SHA-256 of each attached `.nupkg` and `.snupkg` and of every `.dll` and `.pdb` inside them. It describes the **published bytes**, which is what a rebuild is compared against; it is not signed (the build-provenance attestation covers the `.nupkg`, see [SECURITY.md](SECURITY.md)). Because of the toolchain-dependent fields above, a rebuild is not expected to match every hash; compare with `cmp -l` as described and treat a mismatch confined to those five ranges as the expected near-match. Releases up to and including 0.3.0 have no manifest; compare against the `.nupkg` itself.
+Releases published after the manifest step was added to `release.yaml` carry a `reproducible-build-manifest.json` asset. It lists the tag, the commit, and the SHA-256 of each attached `.nupkg` and `.snupkg` and of every `.dll` and `.pdb` inside them. Newer releases also record the SDK (`sdk`), `runner_os` and `runner_image` that built the packages. It describes the **published bytes**, which is what a rebuild is compared against. Releases whose `release.yaml` writes `SHA256SUMS.txt` (below) also include the manifest in the build-provenance attestation; for earlier releases it is unsigned and only the `.nupkg` is attested (see [SECURITY.md](SECURITY.md)). Because of the toolchain-dependent fields above, a rebuild is not expected to match every hash; compare with `cmp -l` as described and treat a mismatch confined to those five ranges as the expected near-match. Releases up to and including 0.3.0 have no manifest; compare against the `.nupkg` itself.
+
+### SHA256SUMS.txt
+
+Newer releases also attach **`SHA256SUMS.txt`**: the same hashes in `sha256sum -c` format, one line per `.dll` / `.pdb` keyed by its path inside the package (`lib/<tfm>/...`), then one line per `.nupkg` / `.snupkg`. The release workflow writes it in the job that packs, and attests it together with the manifest and the packages before anything is pushed to NuGet, so first confirm it came from the release workflow:
+
+```bash
+gh release download v<version> --repo Chris-Wolfgang/IEquatable-Extensions   --pattern SHA256SUMS.txt --pattern reproducible-build-manifest.json
+gh attestation verify SHA256SUMS.txt   --repo Chris-Wolfgang/IEquatable-Extensions   --signer-workflow Chris-Wolfgang/IEquatable-Extensions/.github/workflows/release.yaml
+```
+
+Then pack your rebuild (step 2, with `dotnet pack` instead of `dotnet build`), extract the `.nupkg` and `.snupkg` into one directory and check it:
+
+```bash
+mkdir mine && cd mine
+unzip -o ../Wolfgang.Extensions.IEquatable.<version>.nupkg
+unzip -o ../Wolfgang.Extensions.IEquatable.<version>.snupkg
+sha256sum -c --ignore-missing ../SHA256SUMS.txt
+```
+
+Every `lib/` line must report `OK`. A `FAILED` line is a difference to compare with `cmp -l` as in step 3. The two package lines only verify downloaded release assets: a rebuilt `.nupkg` never matches as a file, because a zip records each entry's pack time.
 
 ### Sharing your verification result
 
