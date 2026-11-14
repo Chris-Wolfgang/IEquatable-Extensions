@@ -108,8 +108,9 @@ authoritative list (kept in sync with source on every release), see the
 ### Overload-set notes
 
 - **Nullable annotations.** Every parameter is declared `T?` in every package
-  asset (`net462`, `netstandard2.0`, `net8.0`, `net10.0`), so nullability flows
-  through the call site the same way whichever asset a consumer binds to. An
+  asset (`net462`, `netstandard2.0`, `net8.0`, `net10.0`, `net11.0`), so
+  nullability flows through the call site the same way whichever asset a
+  consumer binds to. An
   unconstrained `T?` needs only C# 9; the compiler emits the nullable metadata
   itself, so the older frameworks need no runtime support for it.
 - **Collection overload preference.** When the source is already an
@@ -196,8 +197,8 @@ dotnet build -c Release
 dotnet test  -c Release --no-build
 ```
 
-Requires the .NET 10.0 SDK (or newer) — earlier SDKs cannot build the `net10.0`
-target. The tests run against every framework the source supports.
+Requires the .NET 11.0 SDK (or newer, pinned by `global.json`) — earlier SDKs
+cannot build the `net11.0` target. The tests run against every framework the source supports.
 
 ---
 
