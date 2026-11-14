@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net462;net472;net48;net481;net5.0;net6.0;net7.0;net8.0;net9.0;net10.0</TargetFrameworks>
+		<TargetFrameworks>net462;net472;net48;net481;net5.0;net6.0;net7.0;net8.0;net9.0;net10.0;net11.0</TargetFrameworks>
 		<IsPackable>false</IsPackable>
 		<IsTestProject>true</IsTestProject>
 	</PropertyGroup>
@@ -55,8 +55,8 @@
 		</PackageReference>
 	</ItemGroup>
 
-	<!-- .NET 8.0 - 10.0: runner 3.x runs xunit v2 tests too, so this slot takes the current runner, uncapped -->
-	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0' or '$(TargetFramework)' == 'net9.0' or '$(TargetFramework)' == 'net10.0'">
+	<!-- .NET 8.0 - 11.0: runner 3.x runs xunit v2 tests too, so this slot takes the current runner, uncapped -->
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0' or '$(TargetFramework)' == 'net9.0' or '$(TargetFramework)' == 'net10.0' or '$(TargetFramework)' == 'net11.0'">
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="3.0.1">
 			<PrivateAssets>all</PrivateAssets>
