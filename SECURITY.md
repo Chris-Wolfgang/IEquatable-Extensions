@@ -98,7 +98,8 @@ There is no **author signature** yet: that needs a code-signing certificate (tra
 `release.yaml` records a Sigstore-backed [SLSA build-provenance](https://slsa.dev/) attestation for
 each `.nupkg` before it is pushed, signed with the workflow's OIDC identity (no stored key). It binds
 the package's SHA-256 digest to this repository, the tagged commit and the `release.yaml` run.
-Verify it with the GitHub CLI:
+Newer releases also attest `SHA256SUMS.txt` and `reproducible-build-manifest.json` in the same
+attestation (see [REPRODUCIBLE-BUILD.md](REPRODUCIBLE-BUILD.md)). Verify it with the GitHub CLI:
 
 ```bash
 gh attestation verify Wolfgang.Extensions.IEquatable.<version>.nupkg \
