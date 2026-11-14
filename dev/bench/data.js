@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1794666899237,
+  "lastUpdate": 1794693312285,
   "repoUrl": "https://github.com/Chris-Wolfgang/IEquatable-Extensions",
   "entries": {
     "BenchmarkDotNet": [
@@ -990,6 +990,96 @@ window.BENCHMARK_DATA = {
             "value": 25.590696821610134,
             "unit": "ns",
             "range": "± 0.22612455077535845"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "210299580+Chris-Wolfgang@users.noreply.github.com",
+            "name": "Chris Wolfgang",
+            "username": "Chris-Wolfgang"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "0dcbc190e24947d2aa667160849a3536d8ded271",
+          "message": "build: add net11.0 to the package and the unit tests (#819, part 2) (#862)\n\n* ci: install the .NET 11.0.x SDK and keep net11.0 in every test stage (#819)\n\nEvery actions/setup-dotnet step lists 11.0.x next to its existing SDKs\n(22 steps in 16 workflows), so the stacked global.json move to the 11.0\nSDK can resolve everywhere. The pr.yaml Stage 1-3 TFM filters and the\nbuild-pr.ps1 Stage 2 mirror accept net11.0, so a net11.0 target is\ntested and coverage-gated instead of silently skipped. Job names are\nunchanged so required-check entries stay valid.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* build: add net11.0 to the package and the unit tests (#819)\n\nnet11.0 joins the library and Tests.Unit TargetFrameworks (one line\neach) and the net8.0+ test-package ItemGroup. global.json moves to\n11.0.100 with latestFeature, because a 10.0 pin cannot build net11.0.\nREADME and a feature changelog fragment describe the new asset.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* build: compile net11.0 against the NuGet targeting pack\n\nSDK 11.0.100 bundles a different build of Microsoft.NETCore.App.Ref on Linux\nand Windows: the facade reference assemblies carry other MVIDs. The IL is\nidentical, but the PDB's referenced-assembly records differ, so the cross-OS\ncompare failed for net11.0 only. Restore now downloads the pack from NuGet,\nwhich is one artifact for every OS. Same fix as IEnumerable-Extensions#653\n(787521b), where the compare went green.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* build: keep the net11.0 targeting-pack block apart from the trim/AOT comment\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-11-14T16:52:38-05:00",
+          "tree_id": "a18ce916527c87fd42534cd9a6f32b3c3e84ca86",
+          "url": "https://github.com/Chris-Wolfgang/IEquatable-Extensions/commit/0dcbc190e24947d2aa667160849a3536d8ded271"
+        },
+        "date": 1794693311210,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_1",
+            "value": 16.08918820818265,
+            "unit": "ns",
+            "range": "± 0.34565515588610685"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_2",
+            "value": 30.71912165482839,
+            "unit": "ns",
+            "range": "± 0.38558658508449234"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_3",
+            "value": 47.99813505013784,
+            "unit": "ns",
+            "range": "± 0.5783407454651343"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ParamsArray",
+            "value": 1.9974326975643635,
+            "unit": "ns",
+            "range": "± 0.056167561154203224"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_IEnumerable_FromList",
+            "value": 2.518867821743091,
+            "unit": "ns",
+            "range": "± 0.021836410362403136"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_IEnumerable_Iterator",
+            "value": 14.45470749338468,
+            "unit": "ns",
+            "range": "± 0.2167541478515335"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ICollection_List",
+            "value": 2.641009027759234,
+            "unit": "ns",
+            "range": "± 0.0894658576918518"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsInSet_ICollection_HashSet",
+            "value": 1.445507434507211,
+            "unit": "ns",
+            "range": "± 0.008858105666540453"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsNotInSet_1",
+            "value": 15.152598410844803,
+            "unit": "ns",
+            "range": "± 0.05539119881579607"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.IsNotInSet_ParamsArray",
+            "value": 1.9790630837281544,
+            "unit": "ns",
+            "range": "± 0.01886981101052601"
+          },
+          {
+            "name": "Wolfgang.Extensions.IEquatable.Benchmarks.IEquatableExtensionsBenchmarks.NotEqual",
+            "value": 16.186076949040096,
+            "unit": "ns",
+            "range": "± 0.28447340021884315"
           }
         ]
       }
