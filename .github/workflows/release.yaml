@@ -601,6 +601,79 @@ jobs:
           }
 
 
+      # Third-party verification input (REPRODUCIBLE-BUILD.md, #815). Written HERE, in the job that
+      # packed, so the SDK and runner image that built the packages are recorded, and so publish-nuget
+      # can attest both files together with the packages before anything is pushed.
+      # - reproducible-build-manifest.json: tag, commit, SDK, runner image, and the SHA-256 of every
+      #   .nupkg/.snupkg and of every .dll/.pdb inside them.
+      # - SHA256SUMS.txt: the same hashes in `sha256sum -c` format with LF line endings. One line per
+      #   .dll/.pdb keyed by its path inside the package (lib/<tfm>/...), then one line per package
+      #   file. Run `sha256sum -c --ignore-missing SHA256SUMS.txt` from an extracted rebuilt package.
+      - name: Write reproducible-build manifest and SHA256SUMS.txt
+        if: steps.check-packages.outputs.has-packages == 'true'
+        shell: pwsh
+        env:
+          TAG_NAME: ${{ github.event.release.tag_name }}
+          COMMIT_SHA: ${{ github.sha }}
+        run: |
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          $dir = Join-Path $PWD 'nuget-packages'
+          $sha = [System.Security.Cryptography.SHA256]::Create()
+          function Get-Sha([byte[]] $bytes) { ([System.BitConverter]::ToString($sha.ComputeHash($bytes)) -replace '-', '').ToLowerInvariant() }
+
+          $sdk = (& dotnet --version).Trim()
+          if ($LASTEXITCODE -ne 0) { Write-Error "dotnet --version failed"; exit 1 }
+
+          $packages = [System.Collections.Generic.List[object]]::new()
+          $paths = @(Get-ChildItem -Path $dir -File | Where-Object { $_.Extension -in '.nupkg', '.snupkg' } | Sort-Object Name)
+          foreach ($path in $paths) {
+            $files = [ordered]@{}
+            $zip = [System.IO.Compression.ZipFile]::OpenRead($path.FullName)
+            try {
+              foreach ($entry in ($zip.Entries | Sort-Object FullName)) {
+                if ($entry.FullName -notmatch '\.(dll|pdb)$') { continue }
+                $stream = $entry.Open()
+                try { $buffer = [System.IO.MemoryStream]::new(); $stream.CopyTo($buffer) } finally { $stream.Dispose() }
+                $files[$entry.FullName] = Get-Sha $buffer.ToArray()
+              }
+            } finally { $zip.Dispose() }
+            $packages.Add([ordered]@{ file = $path.Name; sha256 = Get-Sha ([System.IO.File]::ReadAllBytes($path.FullName)); files = $files })
+          }
+          if ($packages.Count -eq 0 -or -not ($packages | Where-Object { $_.files.Count -gt 0 })) {
+            Write-Error "No package with a .dll or .pdb was found; refusing to write an empty manifest."
+            exit 1
+          }
+
+          $manifest = [ordered]@{
+            tag          = $env:TAG_NAME
+            commit       = $env:COMMIT_SHA
+            sdk          = $sdk
+            runner_os    = $env:RUNNER_OS
+            runner_image = "$($env:ImageOS) $($env:ImageVersion)".Trim()
+            packages     = $packages
+          }
+          $utf8 = [System.Text.UTF8Encoding]::new($false)
+          $json = ($manifest | ConvertTo-Json -Depth 6) -replace "`r`n", "`n"
+          [System.IO.File]::WriteAllText((Join-Path $dir 'reproducible-build-manifest.json'), "$json`n", $utf8)
+
+          $lines = [System.Collections.Generic.List[string]]::new()
+          $seen = @{}
+          foreach ($package in $packages) {
+            foreach ($key in $package.files.Keys) {
+              if ($seen.ContainsKey($key)) {
+                if ($seen[$key] -ne $package.files[$key]) { Write-Error "Two packages carry '$key' with different hashes."; exit 1 }
+                continue
+              }
+              $seen[$key] = $package.files[$key]
+              $lines.Add("$($package.files[$key])  $key")
+            }
+          }
+          foreach ($package in $packages) { $lines.Add("$($package.sha256)  $($package.file)") }
+          [System.IO.File]::WriteAllText((Join-Path $dir 'SHA256SUMS.txt'), (($lines -join "`n") + "`n"), $utf8)
+
+          Get-Content (Join-Path $dir 'reproducible-build-manifest.json')
+          Get-Content (Join-Path $dir 'SHA256SUMS.txt')
+
       - name: Upload NuGet packages
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
         with:
@@ -753,7 +826,12 @@ jobs:
         id: attest
         uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8  # v4.2.2
         with:
-          subject-path: './packages/*.nupkg'
+          # The packages, plus the hash list and manifest written by pack-and-validate (#815),
+          # so a verifier can prove SHA256SUMS.txt came from this workflow run before trusting it.
+          subject-path: |
+            ./packages/*.nupkg
+            ./packages/SHA256SUMS.txt
+            ./packages/reproducible-build-manifest.json
 
       # The attestation above is recorded in GitHub's attestation store, which is what
       # `gh attestation verify` reads. Tooling that audits the RELEASE PAGE - OpenSSF
@@ -880,43 +958,6 @@ jobs:
           name: provenance-bundle
           path: ./provenance
 
-      # Third-party verification input (REPRODUCIBLE-BUILD.md): the SHA-256 of every file a consumer
-      # can compare a rebuild against, for the exact packages attached to this release. It describes
-      # the published bytes; it is not itself signed (the provenance attestation covers the .nupkg).
-      - name: Write reproducible-build manifest
-        env:
-          TAG_NAME: ${{ github.event.release.tag_name }}
-          COMMIT_SHA: ${{ github.sha }}
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          import glob, hashlib, json, os, zipfile
-
-          def sha(data):
-              return hashlib.sha256(data).hexdigest()
-
-          manifest = {
-              "tag": os.environ["TAG_NAME"],
-              "commit": os.environ["COMMIT_SHA"],
-              "packages": [],
-          }
-          for path in sorted(glob.glob("nuget-packages/*.nupkg") + glob.glob("nuget-packages/*.snupkg")):
-              with open(path, "rb") as f:
-                  package_sha = sha(f.read())
-              files = {}
-              with zipfile.ZipFile(path) as z:
-                  for name in sorted(z.namelist()):
-                      if name.endswith((".dll", ".pdb")):
-                          files[name] = sha(z.read(name))
-              manifest["packages"].append({"file": os.path.basename(path), "sha256": package_sha, "files": files})
-          if not manifest["packages"] or not any(p["files"] for p in manifest["packages"]):
-              raise SystemExit("No package with a .dll or .pdb was found; refusing to write an empty manifest.")
-          with open("nuget-packages/reproducible-build-manifest.json", "w", encoding="utf-8") as out:
-              json.dump(manifest, out, indent=2)
-              out.write("\n")
-          print("Wrote manifest for", len(manifest["packages"]), "package(s)")
-          PY
-
       # `gh` is pre-installed on the runner, so no third-party action is needed
       # to upload release assets (zizmor superfluous-actions).
       - name: Attach artifacts to release
@@ -926,7 +967,7 @@ jobs:
           TAG_NAME: ${{ github.event.release.tag_name }}
         run: |
           shopt -s nullglob
-          files=(./nuget-packages/*.nupkg ./nuget-packages/*.snupkg ./nuget-packages/*.bom.json ./nuget-packages/reproducible-build-manifest.json ./provenance/*.intoto.jsonl)
+          files=(./nuget-packages/*.nupkg ./nuget-packages/*.snupkg ./nuget-packages/*.bom.json ./nuget-packages/reproducible-build-manifest.json ./nuget-packages/SHA256SUMS.txt ./provenance/*.intoto.jsonl)
           # nullglob only drops unmatched *patterns*; a literal name stays and would make
           # `gh release upload` fail, so add the coverage zip only when it exists.
           if [ -f release-coverage.zip ]; then files+=(release-coverage.zip); fi
