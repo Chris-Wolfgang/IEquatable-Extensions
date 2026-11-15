@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1794538926883,
+  "lastUpdate": 1794750241986,
   "repoUrl": "https://github.com/Chris-Wolfgang/IEquatable-Extensions",
   "entries": {
     "Mutation score": [
@@ -156,6 +156,33 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/Chris-Wolfgang/IEquatable-Extensions/commit/0a7a419c1d35b6b956ea192ab80c4ea5a947350d"
         },
         "date": 1794538924061,
+        "tool": "customBiggerIsBetter",
+        "benches": [
+          {
+            "name": "Mutation score (tests/Wolfgang.Extensions.IEquatable.Tests.Unit)",
+            "value": 100,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "Chris Wolfgang",
+            "username": "Chris-Wolfgang",
+            "email": "210299580+Chris-Wolfgang@users.noreply.github.com"
+          },
+          "committer": {
+            "name": "GitHub",
+            "username": "web-flow",
+            "email": "noreply@github.com"
+          },
+          "id": "0dcbc190e24947d2aa667160849a3536d8ded271",
+          "message": "build: add net11.0 to the package and the unit tests (#819, part 2) (#862)\n\n* ci: install the .NET 11.0.x SDK and keep net11.0 in every test stage (#819)\n\nEvery actions/setup-dotnet step lists 11.0.x next to its existing SDKs\n(22 steps in 16 workflows), so the stacked global.json move to the 11.0\nSDK can resolve everywhere. The pr.yaml Stage 1-3 TFM filters and the\nbuild-pr.ps1 Stage 2 mirror accept net11.0, so a net11.0 target is\ntested and coverage-gated instead of silently skipped. Job names are\nunchanged so required-check entries stay valid.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* build: add net11.0 to the package and the unit tests (#819)\n\nnet11.0 joins the library and Tests.Unit TargetFrameworks (one line\neach) and the net8.0+ test-package ItemGroup. global.json moves to\n11.0.100 with latestFeature, because a 10.0 pin cannot build net11.0.\nREADME and a feature changelog fragment describe the new asset.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* build: compile net11.0 against the NuGet targeting pack\n\nSDK 11.0.100 bundles a different build of Microsoft.NETCore.App.Ref on Linux\nand Windows: the facade reference assemblies carry other MVIDs. The IL is\nidentical, but the PDB's referenced-assembly records differ, so the cross-OS\ncompare failed for net11.0 only. Restore now downloads the pack from NuGet,\nwhich is one artifact for every OS. Same fix as IEnumerable-Extensions#653\n(787521b), where the compare went green.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* build: keep the net11.0 targeting-pack block apart from the trim/AOT comment\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-11-14T21:52:38Z",
+          "url": "https://github.com/Chris-Wolfgang/IEquatable-Extensions/commit/0dcbc190e24947d2aa667160849a3536d8ded271"
+        },
+        "date": 1794750238355,
         "tool": "customBiggerIsBetter",
         "benches": [
           {
