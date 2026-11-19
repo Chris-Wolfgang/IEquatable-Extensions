@@ -6,13 +6,12 @@ The copyright line is a literal in `Directory.Build.props` (`Copyright (c) 2026 
 
 ## What CI checks
 
-The [Reproducible Build](.github/workflows/reproducible-build.yaml) workflow checks three things on every pull request and push to `main`:
+The [Reproducible Build](.github/workflows/reproducible-build.yaml) workflow (the canonical repo-template copy) runs on every pull request to `main`:
 
-1. On each of `ubuntu-latest` and `windows-latest` it builds the commit twice from two different directories, hashes every `.dll` and `.pdb` the `src/` project produces, and fails when the two sets of hashes differ.
-2. In the same job it packs both builds and compares the two `.nupkg` files **entry by entry** (each entry's name and the SHA-256 of its content). The `.nupkg` file itself is never byte-identical, because a zip records each entry's pack time; the entries are what must match.
-3. A `cross-os` job compares the Linux hashes with the Windows hashes and fails when any `.dll` or `.pdb` differs.
+1. The `Reproducible build` job finds the packable projects under `src/` (MSBuild `IsPackable`), packs the commit on `ubuntu-latest`, runs `git clean -xffd`, and packs it again. It fails unless every `.dll` and `.pdb` in each project's `bin/Release/<tfm>/` has the same SHA-256 in both packs and every `.nupkg` / `.snupkg` matches **entry by entry** (each entry's name and the SHA-256 of its content). The package file itself is never byte-identical, because a zip records each entry's pack time; the entries are what must match.
+2. The `Reproducible build (Windows report)` job packs the same commit once on `windows-latest` and diffs its hashes against the Ubuntu ones in the job summary. Cross-OS identity is reported there, not gated: this job never fails the workflow.
 
-Both builds of step 1 run in the same job, so the check cannot detect the year dependence described above.
+Both packs of step 1 run in the same job, so the check cannot detect the year dependence described above.
 
 ## Verify a release yourself
 
