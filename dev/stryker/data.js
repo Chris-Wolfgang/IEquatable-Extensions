@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1794750241986,
+  "lastUpdate": 1795357104314,
   "repoUrl": "https://github.com/Chris-Wolfgang/IEquatable-Extensions",
   "entries": {
     "Mutation score": [
@@ -183,6 +183,33 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/Chris-Wolfgang/IEquatable-Extensions/commit/0dcbc190e24947d2aa667160849a3536d8ded271"
         },
         "date": 1794750238355,
+        "tool": "customBiggerIsBetter",
+        "benches": [
+          {
+            "name": "Mutation score (tests/Wolfgang.Extensions.IEquatable.Tests.Unit)",
+            "value": 100,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "Chris Wolfgang",
+            "username": "Chris-Wolfgang",
+            "email": "210299580+Chris-Wolfgang@users.noreply.github.com"
+          },
+          "committer": {
+            "name": "GitHub",
+            "username": "web-flow",
+            "email": "noreply@github.com"
+          },
+          "id": "d354c9a3831f93fd8064dda7a47336a0eff7c24b",
+          "message": "docs(readme): list net11.0 among the supported frameworks (#872)\n\n#862 added net11.0 to the package's TargetFrameworks; the README's\nSupported Frameworks list still said 8.0, 10.0.\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-11-21T20:11:18Z",
+          "url": "https://github.com/Chris-Wolfgang/IEquatable-Extensions/commit/d354c9a3831f93fd8064dda7a47336a0eff7c24b"
+        },
+        "date": 1795357101368,
         "tool": "customBiggerIsBetter",
         "benches": [
           {
